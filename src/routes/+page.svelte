@@ -120,6 +120,6 @@
 	</div>
 
 	<div class="navbar">
-		<p>version a0.5</p>
+		<p>version a0.6</p>
 	</div>
 </body>
