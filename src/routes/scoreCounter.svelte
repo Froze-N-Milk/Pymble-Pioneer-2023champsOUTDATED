@@ -2,7 +2,7 @@
 	export let count: number;
 
 	function increment() {
-		alert(count);
+		count += 1;
 	}
 
 	function decrement() {
