@@ -110,11 +110,11 @@
 
 			<label for="">HIGH CONES: </label>
 			<!-- <div class="placeholder" id="highCones"></div> -->
-			<ScoreCounter />
+			<ScoreCounter count={0} />
 
 			<label for="">MIDDLE CONES: </label>
 			<!-- <div class="placeholder" id="middleCones"></div> -->
-			<ScoreCounter />
+			<ScoreCounter count={0} />
 		</form>
 
 	</div>

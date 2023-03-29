@@ -1,13 +1,11 @@
 <script lang="ts">
-	let count: number;
+	export let count: number;
 
 	function increment() {
-		count += 1;
 		alert(count);
 	}
 
 	function decrement() {
-		alert(count);
 		if(count > 0) {
 			count -= 1;
 		}
