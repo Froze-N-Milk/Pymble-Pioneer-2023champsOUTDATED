@@ -33,6 +33,6 @@
 
 <div class="navbar">
 	<button on:click={decrementPageIndex} >PREV</button>
-	<p class="padded">version a0.6</p>
+	<p class="padded">version a0.7</p>
 	<button on:click={incrementPageIndex} >NEXT</button>
 </div>
