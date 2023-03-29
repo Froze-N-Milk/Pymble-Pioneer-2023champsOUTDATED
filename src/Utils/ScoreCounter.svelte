@@ -20,17 +20,6 @@
 		margin: none;
 	}
 
-	button {
-		padding: none;
-		height: 3rem;
-		border: none;
-		outline: 1px solid #151513;
-		background: #20201D;
-		color: snow;
-		margin: none;
-		aspect-ratio: 1/1;
-	}
-
 	.contents {
 		padding-top: 1rem;
 		padding-bottom: 0;
@@ -43,6 +32,17 @@
 		color: snow;
 		padding: 1rem;
 		text-align: center;
+	}
+
+	button {
+		padding: none;
+		height: calc(3rem + 2px);
+		border: none;
+		outline: 1px solid #151513;
+		background: #20201D;
+		color: snow;
+		margin: none;
+		aspect-ratio: 1/1;
 	}
 </style>
 
