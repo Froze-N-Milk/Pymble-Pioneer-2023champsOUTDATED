@@ -30,9 +30,9 @@
 			
 			urlContent = "data:text/csv;charset=utf-8," + csv;
 			content = csv;
+			href = encodeURI(urlContent);
+			downloadname = "match" + $matchData[1] + "team" + $matchData[2] + "by" + $matchData[0] + ".csv";
 			if (downloader) {
-				href = encodeURI(urlContent);
-				downloadname = "match" + $matchData[1] + "team" + $matchData[2] + "by" + $matchData[0] + ".csv";
 				downloader.click();
 			}
 		}
@@ -40,9 +40,9 @@
 			
 			urlContent = "data:text/json;charset=utf-8," + JSON.stringify($matchData);
 			content = JSON.stringify($matchData);
+			href = encodeURI(urlContent);
+			downloadname = "match" + $matchData[1] + "team" + $matchData[2] + "by" + $matchData[0] + ".json";
 			if (downloader) {
-				href = encodeURI(urlContent);
-				downloadname = "match" + $matchData[1] + "team" + $matchData[2] + "by" + $matchData[0] + ".json";
 				downloader.click();
 			}
 		}
@@ -102,10 +102,16 @@
 	<div class="sectionHeader">
 		<QRCode {content}></QRCode>
 	</div>
+	<div class="sectionHeader">
+		<a id="downloader" {href} download={downloadname} target="_self" >
+			<button>
+				DOWNLOAD
+			</button>
+		</a>
+	</div>
 	<div class="sectionHeader" on:click={reset} on:keypress={reset}>
 		<button>
 			NEW MATCH
 		</button>
 	</div>
 {/if}
-<a id="downloader" {href} download={downloadname} target="_blank" style="display: none;">linkers</a>

@@ -27,8 +27,6 @@
 
 	$:selectedPage = pageOptions[$pageIndex];
 
-	$:console.log($pageIndex);
-
 	function incrementPageIndex() {
 		if($pageIndex < pageOptions.length - 1) {
 			$pageIndex += 1;
