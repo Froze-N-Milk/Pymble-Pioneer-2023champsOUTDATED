@@ -23,3 +23,5 @@ export const matchData = writable([
 		0
 	]
 );
+
+export const submitted = writable(false);

@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { pageIndex } from './../../Utils/stores.js';
 	import { QRCode } from "@bonosoft/sveltekit-qrcode";
     import { onMount } from "svelte";
-    import { matchData } from "../../Utils/stores";
+    import { matchData, pageIndex } from "../../Utils/stores";
 
 	const csv = true;
 
@@ -109,4 +108,4 @@
 		</button>
 	</div>
 {/if}
-<a id="downloader" {href} download={downloadname} target="_blank">linkers</a>
+<a id="downloader" {href} download={downloadname} target="_blank" style="display: none;">linkers</a>
