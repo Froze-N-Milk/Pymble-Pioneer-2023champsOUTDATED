@@ -37,4 +37,7 @@
 
 	<label for="">TEAM #: </label>
 	<input id="teamNumber" {required} inputmode="numeric" placeholder="TEAM NUMBER" bind:value={$matchData[2]} />
+
+	<!-- <label for="">DOWNLOAD AUTOMATICALLY</label>
+	<input {required} type="checkbox" /> -->
 </div>

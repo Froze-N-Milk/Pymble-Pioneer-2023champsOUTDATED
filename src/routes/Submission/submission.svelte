@@ -7,11 +7,11 @@
 
 	let content = "placeholder";
 
-	let submitted = false;
-
 	let href: string;
 
 	let downloadname: string;
+
+	$:submit();
 
 	function submit() {
 		if($matchData[1] === undefined) {
@@ -43,7 +43,6 @@
 			downloadname = "match" + $matchData[1] + "team" + $matchData[2] + "by" + $matchData[0] + ".json";
 		}
 
-		submitted = true;
 	}
 
 	function reset() {
@@ -111,22 +110,15 @@
 	SUBMISSION
 </h2>
 
-{#if !submitted}
-	<div class="sectionHeader" on:click={submit} on:keypress={submit}>
-		<button>
-			SUBMIT && GENERATE
-		</button>
-	</div>
-{:else}
-	<div class="sectionHeader">
-		<QRCode {content} errorCorrection="H" size="550" bgcolor="#151513" color="snow" padding="0"></QRCode>
-	</div>
-	<a class="buttonLookAlike" id="downloader" {href} download={downloadname} target="_blank" use:downloadFile>
-		<p style="padding-top: 1px;">DOWNLOAD</p>
-	</a>
-	<div class="sectionHeader" on:click={reset} on:keypress={reset}>
-		<button>
-			NEW MATCH
-		</button>
-	</div>
-{/if}
+
+<div class="sectionHeader">
+	<QRCode {content} errorCorrection="H" size="550" bgcolor="#151513" color="snow" padding="0"></QRCode>
+</div>
+<a class="buttonLookAlike" id="downloader" {href} download={downloadname} target="_blank" use:downloadFile>
+	<p style="padding-top: 1px;">DOWNLOAD</p>
+</a>
+<div class="sectionHeader" on:click={reset} on:keypress={reset}>
+	<button>
+		NEW MATCH
+	</button>
+</div>
