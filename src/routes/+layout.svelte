@@ -35,6 +35,7 @@
 		background: #20201D;
 		color: snow;
 		padding: 1rem;
+		text-align: center;
 	}
 
 	:global(form input:focus) {
@@ -79,6 +80,11 @@
 		aspect-ratio: 3/1;
 	}
 
+	:global(button:disabled) {
+		background: #20201D;
+		color: rgba(255, 250, 250, 0.341);
+	}
+
 	:global(.padded) {
 		padding-top: none;
 		padding-bottom: none;
@@ -92,8 +98,5 @@
 		<h1 class="padded">PYMBLE PIONEER</h1>
 	</div>
 		
-	<form class="gridForm">
-		<p class="sectionHeader">hiddenBuffer</p>
-		<slot></slot>
-	</form>
+	<slot></slot>
 </body>

@@ -1,41 +1,57 @@
 <script lang="ts">
+    import { pageIndex } from "../Utils/stores";
     import Auto from "./Auto/auto.svelte";
     import Prematch from "./PreMatch/prematch.svelte";
+    import Submission from "./Submission/submission.svelte";
     import Teleop from "./Teleop/teleop.svelte";
 
-	let prematchData: any[] = ["", 0, 0];
-	let autoData = [0, 0, 0, 0, 0, 0];
-	let teleopData = [0, 0, 0, 0, 0, 0];
+	// let prematchData: any[] = ["", , ];
+	// let autoData: any[] = [0, 0, 0, 0, 0, 0];
+	// let teleopData: any[] = [0, 0, 0, 0, 0, 0];
+	// $:submissionData = prematchData.concat(autoData).concat(teleopData);
+	// $: console.log(submissionData);
 
+	// const pageOptions = [
+	// 	{page: Prematch, data: prematchData},
+	// 	{page: Auto, data: autoData},
+	// 	{page: Teleop, data: teleopData},
+	// 	{page: Submission, data: submissionData}
+	// ];
 
 	const pageOptions = [
-		{page: Prematch, data: prematchData},
-		{page: Auto, data: autoData},
-		{page: Teleop, data: teleopData},
+		Prematch,
+		Auto,
+		Teleop,
+		Submission
 	];
 
-	export let pageIndex: number = 0;
-
-	$:selectedPage = pageOptions[pageIndex];
+	$:selectedPage = pageOptions[$pageIndex];
 
 	function incrementPageIndex() {
-		if(pageIndex < pageOptions.length - 1) {
-			pageIndex += 1;
+		if($pageIndex < pageOptions.length - 1) {
+			$pageIndex += 1;
 		}
 	}
+
+	$:onLastPage = $pageIndex === pageOptions.length - 1;
 
 	function decrementPageIndex() {
-		if(pageIndex > 0) {
-			pageIndex -= 1;
+		if($pageIndex > 0) {
+			$pageIndex -= 1;
 		}
 	}
+
+	$:onFirstPage = $pageIndex === 0;
 </script>
 
-<svelte:component this={selectedPage.page} data={selectedPage.data}/>
 
+<form class="gridForm">
+	<p class="sectionHeader">hiddenBuffer</p>
+	<svelte:component this={selectedPage}/>
+</form>
 
 <div class="navbar">
-	<button on:click={decrementPageIndex} >PREV</button>
-	<p class="padded">version a0.7</p>
-	<button on:click={incrementPageIndex} >NEXT</button>
+	<button disabled={onFirstPage} on:click={decrementPageIndex} >PREV</button>
+	<p class="padded">version a0.8</p>
+	<button disabled={onLastPage} on:click={incrementPageIndex} >NEXT</button>
 </div>

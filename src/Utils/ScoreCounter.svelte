@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let count: number;
+	export let count: any;
 
 	function increment() {
 		count += 1;

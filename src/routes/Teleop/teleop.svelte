@@ -1,7 +1,8 @@
 <script lang="ts">
     import ScoringCollector from "../../Utils/ScoringCollector.svelte";
+    import { matchData } from "../../Utils/stores";
 
-	export let data = [0, 0, 0, 0, 0, 0];
+	const data: number = 9;
 
 	const required:boolean = false;
 </script>
