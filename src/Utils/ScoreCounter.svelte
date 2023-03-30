@@ -48,6 +48,6 @@
 
 <div class="wrapper">
 	<button on:click={decrement} >-</button>
-	<input inputmode="numeric" readonly class="contents" value={count} min=0/>
+	<input inputmode="numeric" readonly class="contents" bind:value={count} min=0/>
 	<button on:click={increment} >+</button>
 </div>

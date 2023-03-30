@@ -1,13 +1,17 @@
 <script lang="ts">
-    import { afterUpdate, beforeUpdate, onMount } from 'svelte';
     import Auto from "./Auto/auto.svelte";
     import Prematch from "./PreMatch/prematch.svelte";
     import Teleop from "./Teleop/teleop.svelte";
 
+	let prematchData: any[] = ["", 0, 0];
+	let autoData = [0, 0, 0, 0, 0, 0];
+	let teleopData = [0, 0, 0, 0, 0, 0];
+
+
 	const pageOptions = [
-		Prematch,
-		Auto,
-		Teleop,
+		{page: Prematch, data: prematchData},
+		{page: Auto, data: autoData},
+		{page: Teleop, data: teleopData},
 	];
 
 	export let pageIndex: number = 0;
@@ -27,8 +31,7 @@
 	}
 </script>
 
-
-<svelte:component this={selectedPage} />
+<svelte:component this={selectedPage.page} data={selectedPage.data}/>
 
 
 <div class="navbar">
