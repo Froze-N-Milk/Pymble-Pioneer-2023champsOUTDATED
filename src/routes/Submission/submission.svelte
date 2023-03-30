@@ -20,6 +20,13 @@
 	});
 
 	function submit() {
+		if($matchData[1] === undefined) {
+			$matchData[1] = 0;
+		}
+		if($matchData[2] === undefined) {
+			$matchData[2] = 0;
+		}
+
 		let urlContent;
 		if(csv) {
 			
@@ -54,8 +61,8 @@
 		$matchData = [
 			//prematch 0-2
 			$matchData[0],
-			0,
-			0,
+			,
+			,
 			//auto 3-9
 			0,
 			0,
