@@ -52,6 +52,6 @@
 
 <div class="navbar">
 	<button disabled={onFirstPage} on:click={decrementPageIndex} >PREV</button>
-	<p class="padded">version a0.8</p>
+	<p class="padded">version b0.90</p>
 	<button disabled={onLastPage} on:click={incrementPageIndex} >NEXT</button>
 </div>
