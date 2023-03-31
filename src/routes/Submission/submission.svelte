@@ -14,12 +14,8 @@
 	$:submit();
 
 	function submit() {
-		if($matchData[1] === undefined) {
-			$matchData[1] = 0;
-		}
-		if($matchData[2] === undefined) {
-			$matchData[2] = 0;
-		}
+		$matchData[1] = Number($matchData[1]);
+		$matchData[2] = Number($matchData[2]);
 
 		console.log("working!");
 		let urlContent;
@@ -107,8 +103,10 @@
 
 	.qrcodewrapper {
 		width: 35rem;
+		max-width: 80%;
 		aspect-ratio: 1/1;
-		margin-left: calc(50% - 18.5rem);
+		/* margin-left: calc(50% - 18.5rem); */
+		margin: auto;
 	}
 </style>
 
@@ -120,10 +118,11 @@
 <div class="sectionHeader qrcodewrapper">
 	<QRCode {content} errorCorrection="H" responsive="true" bgcolor="#151513" color="snow" padding="0"></QRCode>
 </div>
-<a class="buttonLookAlike" id="downloader" {href} download={downloadname} target="_blank" use:downloadFile>
+<a class="buttonLookAlike" id="downloader" {href} download={downloadname} target="_blank" use:downloadFile on:click|preventDefault >
 	<p style="padding-top: 1px;">DOWNLOAD</p>
 </a>
-<div class="sectionHeader" on:click={reset} on:keypress={reset}>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div class="sectionHeader" on:click={reset}>
 	<button>
 		NEW MATCH
 	</button>
