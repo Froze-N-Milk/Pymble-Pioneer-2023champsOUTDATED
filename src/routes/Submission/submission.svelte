@@ -104,6 +104,12 @@
 		text-align: center;
 		font-family: "Roboto";
 	}
+
+	.qrcodewrapper {
+		width: 35rem;
+		aspect-ratio: 1/1;
+		margin-left: calc(50% - 18.5rem);
+	}
 </style>
 
 <h2 class="sectionHeader">
@@ -111,8 +117,8 @@
 </h2>
 
 
-<div class="sectionHeader">
-	<QRCode {content} errorCorrection="H" size="550" bgcolor="#151513" color="snow" padding="0"></QRCode>
+<div class="sectionHeader qrcodewrapper">
+	<QRCode {content} errorCorrection="H" responsive="true" bgcolor="#151513" color="snow" padding="0"></QRCode>
 </div>
 <a class="buttonLookAlike" id="downloader" {href} download={downloadname} target="_blank" use:downloadFile>
 	<p style="padding-top: 1px;">DOWNLOAD</p>
