@@ -1,12 +1,14 @@
 <script lang="ts">
 	export let count: any;
 
+	let div: HTMLDivElement;
+
 	function increment() {
 		count += 1;
 	}
 
 	function decrement() {
-		if(count > 0) {
+		if(count > 0){
 			count -= 1;
 		}
 	}
@@ -46,8 +48,9 @@
 	}
 </style>
 
-<div class="wrapper">
-	<button on:click={decrement} >-</button>
+
+<div class="wrapper" bind:this={div}>
+	<button on:click|preventDefault={decrement} >-</button>
 	<input inputmode="numeric" readonly class="contents" bind:value={count} min=0/>
-	<button on:click={increment} >+</button>
+	<button on:click|preventDefault={increment} >+</button>
 </div>
