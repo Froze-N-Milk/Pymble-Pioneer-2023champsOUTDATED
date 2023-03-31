@@ -27,7 +27,4 @@
 	<p class="sectionHeader">COMMENTS:</p>
 
 	<textarea class="sectionHeader" rows="8"></textarea>
-
-	<div class="sectionHeader"></div>
-	<div class="sectionHeader"></div>
 </div>
