@@ -29,7 +29,7 @@
 	});
 
 	let formError: string;
-	$:allowAdvance = $matchData[0] !== "" && $matchData[1] !== undefined && $matchData[1] !== "" && $matchData[2] !== undefined && $matchData[2] !== "";
+	$:allowAdvance = $matchData[31] !== "" && $matchData[0] !== undefined && $matchData[0] !== "" && $matchData[1] !== undefined && $matchData[1] !== ""  && $matchData[30] !== 0 && $matchData[30] !== undefined && $matchData[30] !== "";
 	$: {
 		if(!allowAdvance){
 			formError = "FORM UNFILLED";
@@ -65,16 +65,16 @@
 	<h2 class="sectionHeader">PRE MATCH INFORMATION</h2>
 
 	<label for="">SCOUT NAME:</label>
-	<input  class="hoverSelfAnnounce" inputmode="text" type="text" placeholder="SCOUT NAME" bind:value={$matchData[0]} />
+	<input  class="hoverSelfAnnounce" inputmode="text" type="text" placeholder="SCOUT NAME" bind:value={$matchData[31]} />
 
 	<label for="">MATCH #:</label>
 	<input id="matchNumber" class="hoverSelfAnnounce" type="text" inputmode="numeric" placeholder="MATCH NUMBER" bind:value={$matchData[1]} />
 
 	<label for="">TEAM #:</label>
-	<input id="teamNumber" class="hoverSelfAnnounce" type="text" inputmode="numeric" placeholder="TEAM NUMBER" bind:value={$matchData[2]} />
+	<input id="teamNumber" class="hoverSelfAnnounce" type="text" inputmode="numeric" placeholder="TEAM NUMBER" bind:value={$matchData[0]} />
 
 	<label for="">STARTING POSITION:</label>
-	<Selector options={startingPositions} />
+	<Selector options={startingPositions} bind:value={$matchData[30]} />
 
 	<div class="sectionHeader error">
 		{#key formError}

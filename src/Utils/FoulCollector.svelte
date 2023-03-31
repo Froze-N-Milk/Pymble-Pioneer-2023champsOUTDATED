@@ -6,7 +6,7 @@
 <p class="sectionHeader">FOULS:</p>
 
 <label for="">FOULS:</label>
-<ScoreCounter bind:count={$matchData[999999]} />
+<ScoreCounter bind:count={$matchData[27]} />
 
 <label for="">TECH FOULS:</label>
-<ScoreCounter bind:count={$matchData[999999]} />
+<ScoreCounter bind:count={$matchData[28]} />

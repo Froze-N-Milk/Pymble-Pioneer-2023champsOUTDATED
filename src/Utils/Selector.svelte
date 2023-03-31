@@ -1,5 +1,6 @@
 <script lang="ts">
 	export let options: any[];
+	export let value: any;
 </script>
 
 <style>
@@ -16,7 +17,7 @@
 		overflow: hidden;
 		border: none;
 		height: calc(3rem + 2px);
-		width: calc(14rem + 4px);
+		width: calc(14rem);
 	}
 
 	.hoverSelfAnnounce:hover {
@@ -24,7 +25,7 @@
 	}
 </style>
 
-<select class="buttonLookAlike hoverSelfAnnounce">
+<select class="buttonLookAlike hoverSelfAnnounce" bind:value={value}>
 	{#each options as option}
 		<option value={option}>
 			{option}

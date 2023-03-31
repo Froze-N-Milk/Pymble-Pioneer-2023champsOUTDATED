@@ -1,14 +1,15 @@
 <script lang="ts">
+	import { matchData, teleopParkOption } from './../../Utils/stores.js';
     import FoulCollector from "../../Utils/FoulCollector.svelte";
     import PickupCollector from "../../Utils/PickupCollector.svelte";
 	import ScoringCollector from "../../Utils/ScoringCollector.svelte";
     import Selector from "../../Utils/Selector.svelte";
 
-	const scoringRangeStart: number = 9;
+	const scoringRangeStart: number = 12;
 
-	const pickupRangeStart: number = 9;
+	const pickupRangeStart: number = 18;
 
-	const options = ["DOCKED", "ENGAGED", "PARKED"];
+	const options = ["", "DOCKED", "ENGAGED", "PARKED"];
 
 </script>
 
@@ -40,9 +41,9 @@
 
 	<p class="sectionHeader">PARKING:</p>
 	<label for="">PARKING:</label>
-	<Selector {options} />
+	<Selector {options} bind:value={$teleopParkOption}/>
 
 	<p class="sectionHeader">COMMENTS:</p>
 
-	<textarea class="sectionHeader hoverSelfAnnounce" rows="8"></textarea>
+	<textarea class="sectionHeader hoverSelfAnnounce" rows="8" bind:value={$matchData[33]}></textarea>
 </div>

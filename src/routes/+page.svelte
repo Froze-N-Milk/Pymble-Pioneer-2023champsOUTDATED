@@ -23,7 +23,7 @@
 	}
 
 	$:onLastPage = $pageIndex === pageOptions.length - 1;
-	$:allowAdvance = $matchData[0] !== "" && $matchData[1] !== undefined && $matchData[1] !== "" && $matchData[2] !== undefined && $matchData[2] !== "";
+	$:allowAdvance = $matchData[31] !== "" && $matchData[0] !== undefined && $matchData[0] !== "" && $matchData[1] !== undefined && $matchData[1] !== "" && $matchData[30] !== 0 && $matchData[30] !== undefined  && $matchData[30] !== "";
 
 	function decrementPageIndex() {
 		if($pageIndex > 0) {
@@ -78,6 +78,6 @@
 
 <div class="navbar">
 	<button disabled={onFirstPage} on:click={decrementPageIndex} >PREV</button>
-	<p class="padded">version b0.92</p>
+	<p class="padded">version 1.0</p>
 	<button disabled={onLastPage || !allowAdvance} on:click={incrementPageIndex} >NEXT</button>
 </div>
