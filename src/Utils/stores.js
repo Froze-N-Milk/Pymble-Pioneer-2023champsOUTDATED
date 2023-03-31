@@ -24,4 +24,4 @@ export const matchData = writable([
 	]
 );
 
-export const submitted = writable(false);
+export const downloadToggle = writable(true);

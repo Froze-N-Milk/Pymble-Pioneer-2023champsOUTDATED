@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { downloadToggle } from './../../Utils/stores.js';
 	import { QRCode } from "@bonosoft/sveltekit-qrcode";
-    import { beforeUpdate, onMount } from "svelte";
     import { matchData, pageIndex } from "../../Utils/stores";
 
 	const csv = true;
@@ -16,8 +16,6 @@
 	function submit() {
 		$matchData[1] = Number($matchData[1]);
 		$matchData[2] = Number($matchData[2]);
-
-		console.log("working!");
 		let urlContent;
 		if(csv) {
 			
@@ -66,25 +64,18 @@
 	}
 
 	export function downloadFile(node: HTMLAnchorElement) {
-		node.click();
+		if($downloadToggle) {
+			node.click();
+		}
 	}	
 </script>
 
 <style>
-	button {
-		padding: none;
-		height: calc(3rem + 2px);
-		border: none;
-		outline: 1px solid #151513;
-		background: #20201D;
-		color: snow;
-		margin: none;
-		aspect-ratio: 5/1;
-	}
 
 	a {
 		text-decoration: none;
 		color: snow;
+		font-family: "Roboto";
 	}
 
 	.buttonLookAlike {
@@ -92,13 +83,14 @@
 		outline: 1px solid #151513;
 		background: #20201D;
 		color: snow;
-		margin: none;
 		height: calc(3rem + 2px);
 		aspect-ratio: 5/1;
 		align-items: center;
-		margin-left: calc(50% - 7.5rem - 5px);
+		margin: auto;
 		text-align: center;
-		font-family: "Roboto";
+		overflow: hidden;
+		padding-top: none;
+		padding-bottom: none;
 	}
 
 	.qrcodewrapper {
@@ -119,11 +111,9 @@
 	<QRCode {content} errorCorrection="H" responsive="true" bgcolor="#151513" color="snow" padding="0"></QRCode>
 </div>
 <a class="buttonLookAlike" id="downloader" {href} download={downloadname} target="_blank" use:downloadFile on:click|preventDefault >
-	<p style="padding-top: 1px;">DOWNLOAD</p>
+	<div style="padding-top: calc(1rem + 1px);">DOWNLOAD</div>
 </a>
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="sectionHeader" on:click={reset}>
-	<button>
-		NEW MATCH
-	</button>
+<div class="buttonLookAlike" on:click={reset}>
+	<div style="padding-top: calc(1rem + 1px);">NEW MATCH</div>
 </div>

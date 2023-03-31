@@ -1,11 +1,14 @@
 <style>
 	body {
-		width: 1fr;
-		height: 1fr;
 		text-align: center;
 		font-family: "Roboto";
 		color: snow;
 		background-color: #151513;
+
+	}
+
+	:global(*) {
+		font-family: "Roboto";
 	}
 
 	:global(form) {
@@ -23,11 +26,10 @@
 		text-align: right;
 		grid-column: 1/2;
 		height: auto;
-		padding: 1rem;
 		vertical-align: auto;
 	}
 
-	:global(form input) {
+	:global(form input[type=text]) {
 		width: 12rem;
 		grid-column: 2/3;
 		border: 0px;
@@ -35,6 +37,7 @@
 		background: #20201D;
 		color: snow;
 		padding: 1rem;
+		margin: none;
 		text-align: center;
 	}
 
@@ -69,22 +72,6 @@
 		width: 100%;
 	}
 
-	:global(button) {
-		padding: none;
-		height: calc(3rem + 2px);
-		border: none;
-		outline: 1px solid #20201D;
-		background: #151513;
-		color: snow;
-		margin: none;
-		aspect-ratio: 3/1;
-	}
-
-	:global(button:disabled) {
-		background: #20201D;
-		color: rgba(255, 250, 250, 0.341);
-	}
-
 	:global(.padded) {
 		padding-top: none;
 		padding-bottom: none;
@@ -95,7 +82,7 @@
 
 <body>
 	<div class="titlebar">
-		<h1 class="padded">PYMBLE PIONEER</h1>
+		<h1>PYMBLE PIONEER</h1>
 	</div>
 		
 	<slot></slot>

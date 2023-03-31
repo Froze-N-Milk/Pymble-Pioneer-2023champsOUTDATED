@@ -10,8 +10,9 @@
 <style>
 	textarea {
 		resize: none;
-		width: 35rem;
-		margin-left: calc(50% - 18.5rem);
+		width: 80%;
+		max-width: 35rem;
+		margin: auto;
 		background-color: #20201D;
 		color: snow;
 		border: none;

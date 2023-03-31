@@ -7,19 +7,6 @@
     import Teleop from "./Teleop/teleop.svelte";
     import { fade } from 'svelte/transition';
 
-	// let prematchData: any[] = ["", , ];
-	// let autoData: any[] = [0, 0, 0, 0, 0, 0];
-	// let teleopData: any[] = [0, 0, 0, 0, 0, 0];
-	// $:submissionData = prematchData.concat(autoData).concat(teleopData);
-	// $: console.log(submissionData);
-
-	// const pageOptions = [
-	// 	{page: Prematch, data: prematchData},
-	// 	{page: Auto, data: autoData},
-	// 	{page: Teleop, data: teleopData},
-	// 	{page: Submission, data: submissionData}
-	// ];
-
 	const pageOptions = [
 		Prematch,
 		Auto,
@@ -47,9 +34,6 @@
 	let formError: string;
 
 	$: {
-		console.log($matchData[1]);
-		console.log($matchData[2]);
-
 		if(!allowAdvance){
 			formError = "FORM UNFILLED";
 		}
@@ -62,24 +46,37 @@
 </script>
 
 <style>
-	.error {
-		color: red;
+	button {
+		padding: none;
+		height: calc(3rem + 2px);
+		border: none;
+		outline: 1px solid #20201D;
+		background: #151513;
+		color: snow;
+		margin: none;
+		aspect-ratio: 3/1;
+	}
+
+	button:hover {
+		background: #D62246;
+	}
+
+	button:disabled {
+		background: #20201D;
+		color: rgba(255, 250, 250, 0);
 	}
 </style>
 
 <form class="gridForm">
 	<p class="sectionHeader">hiddenBuffer</p>
 	<svelte:component this={selectedPage}/>
-
-	{#if !allowAdvance}
-		<p class="sectionHeader error" transition:fade>{formError}</p>
-	{/if}
-
+	<div class="sectionHeader"></div>
+	<div class="sectionHeader"></div>
 	<div class="sectionHeader"></div>
 </form>
 
 <div class="navbar">
 	<button disabled={onFirstPage} on:click={decrementPageIndex} >PREV</button>
-	<p class="padded">version b0.90</p>
+	<p class="padded">version b0.92</p>
 	<button disabled={onLastPage || !allowAdvance} on:click={incrementPageIndex} >NEXT</button>
 </div>
