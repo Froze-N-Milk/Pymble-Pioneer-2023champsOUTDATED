@@ -1,13 +1,16 @@
 <script lang="ts">
-	import { downloadToggle, matchData } from '../../Utils/stores.js';
-    import { onMount, prevent_default } from "svelte/internal";
+	import { downloadToggle, fileType, matchData } from '../../Utils/stores.js';
+    import { onMount } from "svelte/internal";
     import { fade } from 'svelte/transition';
+    import Selector from '../../Utils/Selector.svelte';
 
 	const required: boolean = true;
 	let settingsToggle: boolean = false;
 
-	$:downloadToggleColour = $downloadToggle ? "#D62246" : "#20201D"
-	$:settingsToggleColour = settingsToggle ? "#D62246" : "#20201D"
+	$:downloadToggleColour = $downloadToggle ? "#D62246" : "#20201D";
+	$:settingsToggleColour = settingsToggle ? "#D62246" : "#20201D";
+	$:fileTypeColour = $fileType ? "#20201D" : "#D62246";
+
 
 	const regex = new RegExp("^[0-9]*$");
 
@@ -36,6 +39,8 @@
 		}
 	}
 
+	const startingPositions = [1, 2, 3, 4, 5];
+
 </script>
 
 <style>
@@ -60,13 +65,16 @@
 	<h2 class="sectionHeader">PRE MATCH INFORMATION</h2>
 
 	<label for="">SCOUT NAME:</label>
-	<input {required} inputmode="text" type="text" placeholder="SCOUT NAME" bind:value={$matchData[0]} />
+	<input  class="hoverSelfAnnounce" inputmode="text" type="text" placeholder="SCOUT NAME" bind:value={$matchData[0]} />
 
 	<label for="">MATCH #:</label>
-	<input id="matchNumber" {required} type="text" inputmode="numeric" placeholder="MATCH NUMBER" bind:value={$matchData[1]} />
+	<input id="matchNumber" class="hoverSelfAnnounce" type="text" inputmode="numeric" placeholder="MATCH NUMBER" bind:value={$matchData[1]} />
 
 	<label for="">TEAM #:</label>
-	<input id="teamNumber" {required} type="text" inputmode="numeric" placeholder="TEAM NUMBER" bind:value={$matchData[2]} />
+	<input id="teamNumber" class="hoverSelfAnnounce" type="text" inputmode="numeric" placeholder="TEAM NUMBER" bind:value={$matchData[2]} />
+
+	<label for="">STARTING POSITION:</label>
+	<Selector options={startingPositions} />
 
 	<div class="sectionHeader error">
 		{#key formError}
@@ -76,11 +84,13 @@
 	
 
 	<label for="">{settingsToggle ? "HIDE" : "SHOW"} SETTINGS</label>
-	<button style:--background={settingsToggleColour} on:click|preventDefault={() => {settingsToggle = !settingsToggle;}}></button>
+	<button class="hoverSelfAnnounce" style:--background={settingsToggleColour} on:click|preventDefault={() => {settingsToggle = !settingsToggle;}}></button>
 
 
 	{#if settingsToggle}
 	<label for="">DOWNLOAD AUTOMATICALLY</label>
-	<button style:--background={downloadToggleColour} on:click|preventDefault={() => {$downloadToggle = !$downloadToggle;}}></button>
+	<button class="hoverSelfAnnounce" style:--background={downloadToggleColour} on:click|preventDefault={() => {$downloadToggle = !$downloadToggle;}}></button>
+	<label for="">{$fileType ? "CSV" : "JSON"}</label>
+	<button class="hoverSelfAnnounce" style:--background={fileTypeColour} on:click|preventDefault={() => {$fileType = !$fileType;}}></button>
 	{/if}
 </div>

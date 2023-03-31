@@ -1,10 +1,15 @@
 <script lang="ts">
-    import ScoringCollector from "../../Utils/ScoringCollector.svelte";
-    import { matchData } from "../../Utils/stores";
+    import FoulCollector from "../../Utils/FoulCollector.svelte";
+    import PickupCollector from "../../Utils/PickupCollector.svelte";
+	import ScoringCollector from "../../Utils/ScoringCollector.svelte";
+    import Selector from "../../Utils/Selector.svelte";
 
-	const data: number = 9;
+	const scoringRangeStart: number = 9;
 
-	const required:boolean = false;
+	const pickupRangeStart: number = 9;
+
+	const options = ["DOCKED", "ENGAGED", "PARKED"];
+
 </script>
 
 <style>
@@ -23,9 +28,21 @@
 <div style="display: contents;">
 	<h2 class="sectionHeader">TELEOP</h2>
 
-	<ScoringCollector {data} />
+	<p class="sectionHeader">SCORING:</p>
+
+	<ScoringCollector data={scoringRangeStart} />
+
+	<p class="sectionHeader">COLLECTING:</p>
+
+	<PickupCollector data={pickupRangeStart} />
+
+	<FoulCollector />
+
+	<p class="sectionHeader">PARKING:</p>
+	<label for="">PARKING:</label>
+	<Selector {options} />
 
 	<p class="sectionHeader">COMMENTS:</p>
 
-	<textarea class="sectionHeader" rows="8"></textarea>
+	<textarea class="sectionHeader hoverSelfAnnounce" rows="8"></textarea>
 </div>

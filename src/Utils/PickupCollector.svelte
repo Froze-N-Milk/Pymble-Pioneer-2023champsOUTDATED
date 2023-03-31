@@ -5,22 +5,22 @@
     export let data: number;
 </script>
 
-<label for="">HIGH CONES:</label>
+<label for="">DOUBLE SUBSTATION CONES:</label>
 <ScoreCounter bind:count={$matchData[data]} />
 
-<label for="">MIDDLE CONES:</label>
+<label for="">SINGLE SUBSTATION CONES:</label>
 <ScoreCounter bind:count={$matchData[data+1]} />
 
-<label for="">LOW CONES:</label>
+<label for="">FLOOR CONES:</label>
 <ScoreCounter bind:count={$matchData[data+2]} />
 
 <div class="sectionHeader"></div>
 
-<label for="">HIGH CUBES:</label>
+<label for="">DOUBLE SUBSTATION CUBES:</label>
 <ScoreCounter bind:count={$matchData[data+3]} />
 
-<label for="">MIDDLE CUBES:</label>
+<label for="">SINGLE SUBSTATION CUBES:</label>
 <ScoreCounter bind:count={$matchData[data+4]} />
 
-<label for="">LOW CUBES:</label>
+<label for="">FLOOR CUBES:</label>
 <ScoreCounter bind:count={$matchData[data+5]} />

@@ -38,7 +38,7 @@
 		color: snow;
 		padding: 1rem;
 		margin: none;
-		text-align: center;
+		text-align: left;
 	}
 
 	:global(form input:focus) {
@@ -77,6 +77,11 @@
 		padding-bottom: none;
 		padding-left: 3rem;
 		padding-right: 3rem;
+	}
+
+	:global(.hoverSelfAnnounce:hover) {
+		outline: 2px solid #D62246;
+		cursor: pointer;
 	}
 </style>
 

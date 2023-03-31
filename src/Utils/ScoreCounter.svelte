@@ -49,6 +49,7 @@
 
 	button:hover {
 		background: #D62246;
+		cursor: pointer;
 	}
 
 	button:disabled {

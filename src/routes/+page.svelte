@@ -59,6 +59,7 @@
 
 	button:hover {
 		background: #D62246;
+		cursor: pointer;
 	}
 
 	button:disabled {
@@ -68,7 +69,7 @@
 </style>
 
 <form class="gridForm">
-	<p class="sectionHeader">hiddenBuffer</p>
+	<p class="sectionHeader"></p>
 	<svelte:component this={selectedPage}/>
 	<div class="sectionHeader"></div>
 	<div class="sectionHeader"></div>

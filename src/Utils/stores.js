@@ -25,3 +25,5 @@ export const matchData = writable([
 );
 
 export const downloadToggle = writable(true);
+
+export const fileType = writable(true);

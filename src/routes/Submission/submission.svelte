@@ -1,9 +1,7 @@
 <script lang="ts">
-	import { downloadToggle } from './../../Utils/stores.js';
+	import { downloadToggle, fileType } from './../../Utils/stores.js';
 	import { QRCode } from "@bonosoft/sveltekit-qrcode";
     import { matchData, pageIndex } from "../../Utils/stores";
-
-	const csv = true;
 
 	let content = "placeholder";
 
@@ -17,7 +15,7 @@
 		$matchData[1] = Number($matchData[1]);
 		$matchData[2] = Number($matchData[2]);
 		let urlContent;
-		if(csv) {
+		if($fileType) {
 			
 			let csv = "";
 			$matchData.forEach(column => {
@@ -83,7 +81,7 @@
 		outline: 1px solid #151513;
 		background: #20201D;
 		color: snow;
-		height: calc(3rem + 2px);
+		height: calc(3rem);
 		aspect-ratio: 5/1;
 		align-items: center;
 		margin: auto;
@@ -94,7 +92,7 @@
 	}
 
 	.qrcodewrapper {
-		width: 35rem;
+		width: 22rem;
 		max-width: 80%;
 		aspect-ratio: 1/1;
 		/* margin-left: calc(50% - 18.5rem); */
@@ -111,9 +109,9 @@
 	<QRCode {content} errorCorrection="H" responsive="true" bgcolor="#151513" color="snow" padding="0"></QRCode>
 </div>
 <a class="buttonLookAlike" id="downloader" {href} download={downloadname} target="_blank" use:downloadFile on:click|preventDefault >
-	<div style="padding-top: calc(1rem + 1px);">DOWNLOAD</div>
+	<div style="padding-top: calc(1rem);">DOWNLOAD</div>
 </a>
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="buttonLookAlike" on:click={reset}>
-	<div style="padding-top: calc(1rem + 1px);">NEW MATCH</div>
+	<div style="padding-top: calc(1rem);">NEW MATCH</div>
 </div>
