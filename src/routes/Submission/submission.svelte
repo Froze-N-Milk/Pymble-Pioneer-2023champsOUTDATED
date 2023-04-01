@@ -40,14 +40,14 @@
 			urlContent = "data:text/csv;charset=utf-8," + csv;
 			content = csv;
 			href = urlContent;
-			downloadname = "match" + $matchData[1] + "team" + $matchData[2] + "by" + $matchData[0] + ".csv";
+			downloadname = "match" + $matchData[1] + "team" + $matchData[0] + "by" + $matchData[31] + ".csv";
 		}
 		else {
 			
 			urlContent = "data:text/json;charset=utf-8," + JSON.stringify($matchData);
 			content = JSON.stringify($matchData);
 			href = urlContent;
-			downloadname = "match" + $matchData[1] + "team" + $matchData[2] + "by" + $matchData[0] + ".json";
+			downloadname = "match" + $matchData[1] + "team" + $matchData[0] + "by" + $matchData[31] + ".json";
 		}
 
 	}
