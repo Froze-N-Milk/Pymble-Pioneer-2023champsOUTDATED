@@ -1,11 +1,10 @@
 <script lang="ts">
-	import { matchData } from './../Utils/stores.js';
+	import { MatchDataArray } from './../Utils/stores.js';
     import { pageIndex } from "../Utils/stores";
     import Auto from "./Auto/auto.svelte";
     import Prematch from "./PreMatch/prematch.svelte";
     import Submission from "./Submission/submission.svelte";
     import Teleop from "./Teleop/teleop.svelte";
-    import { fade } from 'svelte/transition';
 
 	const pageOptions = [
 		Prematch,
@@ -14,6 +13,7 @@
 		Submission
 	];
 
+
 	$:selectedPage = pageOptions[$pageIndex];
 
 	function incrementPageIndex() {
@@ -21,9 +21,8 @@
 			$pageIndex += 1;
 		}
 	}
-
 	$:onLastPage = $pageIndex === pageOptions.length - 1;
-	$:allowAdvance = $matchData[31] !== "" && $matchData[0] !== undefined && $matchData[0] !== "" && $matchData[1] !== undefined && $matchData[1] !== "" && $matchData[30] !== 0 && $matchData[30] !== undefined  && $matchData[30] !== "";
+	$:allowAdvance = $MatchDataArray[$MatchDataArray.length - 1].scouterName !== "" && $MatchDataArray[$MatchDataArray.length - 1].teamNumber !== null && $MatchDataArray[$MatchDataArray.length - 1].matchNumber !== null && $MatchDataArray[$MatchDataArray.length - 1].startingPosition !== 0;
 
 	function decrementPageIndex() {
 		if($pageIndex > 0) {
@@ -65,6 +64,7 @@
 	button:disabled {
 		background: #20201D;
 		color: rgba(255, 250, 250, 0);
+		cursor: default;
 	}
 </style>
 

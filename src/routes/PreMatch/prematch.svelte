@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { downloadToggle, fileType, matchData } from '../../Utils/stores.js';
+	import { downloadToggle, fileType, MatchDataArray } from '../../Utils/stores.js';
     import { onMount } from "svelte/internal";
     import { fade } from 'svelte/transition';
     import Selector from '../../Utils/Selector.svelte';
@@ -29,7 +29,9 @@
 	});
 
 	let formError: string;
-	$:allowAdvance = $matchData[31] !== "" && $matchData[0] !== undefined && $matchData[0] !== "" && $matchData[1] !== undefined && $matchData[1] !== ""  && $matchData[30] !== 0 && $matchData[30] !== undefined && $matchData[30] !== "";
+
+	$:allowAdvance = $MatchDataArray[$MatchDataArray.length - 1].scouterName !== "" && $MatchDataArray[$MatchDataArray.length - 1].teamNumber !== null && $MatchDataArray[$MatchDataArray.length - 1].matchNumber !== null && $MatchDataArray[$MatchDataArray.length - 1].startingPosition !== 0;
+	
 	$: {
 		if(!allowAdvance){
 			formError = "FORM UNFILLED";
@@ -65,16 +67,16 @@
 	<h2 class="sectionHeader">PRE MATCH INFORMATION</h2>
 
 	<label for="">SCOUT NAME:</label>
-	<input  class="hoverSelfAnnounce" inputmode="text" type="text" placeholder="SCOUT NAME" bind:value={$matchData[31]} />
+	<input autocomplete="off" class="hoverSelfAnnounce" inputmode="text" type="text" placeholder="SCOUT NAME" bind:value={$MatchDataArray[$MatchDataArray.length - 1].scouterName} />
 
 	<label for="">MATCH #:</label>
-	<input id="matchNumber" class="hoverSelfAnnounce" type="text" inputmode="numeric" placeholder="MATCH NUMBER" bind:value={$matchData[1]} />
+	<input autocomplete="off" id="matchNumber" class="hoverSelfAnnounce" type="text" inputmode="numeric" placeholder="MATCH NUMBER" bind:value={$MatchDataArray[$MatchDataArray.length - 1].matchNumber} />
 
 	<label for="">TEAM #:</label>
-	<input id="teamNumber" class="hoverSelfAnnounce" type="text" inputmode="numeric" placeholder="TEAM NUMBER" bind:value={$matchData[0]} />
+	<input autocomplete="off" id="teamNumber" class="hoverSelfAnnounce" type="text" inputmode="numeric" placeholder="TEAM NUMBER" bind:value={$MatchDataArray[$MatchDataArray.length - 1].teamNumber} />
 
 	<label for="">STARTING POSITION:</label>
-	<Selector options={startingPositions} bind:value={$matchData[30]} />
+	<Selector options={startingPositions} bind:value={$MatchDataArray[$MatchDataArray.length - 1].startingPosition} />
 
 	<div class="sectionHeader error">
 		{#key formError}

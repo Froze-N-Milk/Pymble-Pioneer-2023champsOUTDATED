@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { downloadToggle, fileType, autoParkOption, teleopParkOption } from './../../Utils/stores.js';
+	import { downloadToggle, fileType, MatchDataArray, pageIndex } from './../../Utils/stores.js';
 	import { QRCode } from "@bonosoft/sveltekit-qrcode";
-    import { matchData, pageIndex } from "../../Utils/stores";
 
-	let content = "placeholder";
+	let content = "";
 
 	let href: string;
 
@@ -12,108 +11,109 @@
 	$:submit();
 
 	function submit() {
-		$matchData[1] = Number($matchData[1]);
-		$matchData[2] = Number($matchData[2]);
+		$MatchDataArray[$MatchDataArray.length - 1].teamNumber = Number($MatchDataArray[$MatchDataArray.length - 1].teamNumber);
+		$MatchDataArray[$MatchDataArray.length - 1].matchNumber = Number($MatchDataArray[$MatchDataArray.length - 1].matchNumber);
 
-		$matchData[9] = $autoParkOption === "ENGAGED" ? 1 : 0;
-		$matchData[10] = $autoParkOption === "DOCKED" ? 1 : 0;
-		$matchData[11] = $autoParkOption === "MOBILITY" ? 1 : 0;
+		// old logic for truthy and falsy values for separeate storage of this stuff
+		// matchData[9] = $autoParkOption === "ENGAGED" ? 1 : 0;
+		// matchData[10] = $autoParkOption === "DOCKED" ? 1 : 0;
+		// matchData[11] = $autoParkOption === "MOBILITY" ? 1 : 0;
 
-		$matchData[24] = $teleopParkOption === "ENGAGED" ? 1 : 0;
-		$matchData[25] = $teleopParkOption === "DOCKED" ? 1 : 0;
-		$matchData[26] = $teleopParkOption === "PARKED" ? 1 : 0;
+		// matchData[24] = $teleopParkOption === "ENGAGED" ? 1 : 0;
+		// matchData[25] = $teleopParkOption === "DOCKED" ? 1 : 0;
+		// matchData[26] = $teleopParkOption === "PARKED" ? 1 : 0;
 
-		let cyclesSum = 0;
-		$matchData.slice(3, 9).concat($matchData.slice(12, 18)).forEach(value => {
-			cyclesSum += Number(value);
-		}); 
-		$matchData[29] = cyclesSum;
+		// old cylce sum logic
+		// matchData.slice(3, 9).concat(matchData.slice(12, 18)).forEach(value => {
+		// 	cyclesSum += Number(value);
+		// }); 
+		$MatchDataArray[$MatchDataArray.length - 1].cycles = 
+			$MatchDataArray[$MatchDataArray.length - 1].autoTopCones + $MatchDataArray[$MatchDataArray.length - 1].autoMiddleCones + $MatchDataArray[$MatchDataArray.length - 1].autoLowCones + 
+			$MatchDataArray[$MatchDataArray.length - 1].autoTopCubes + $MatchDataArray[$MatchDataArray.length - 1].autoMiddleCubes + $MatchDataArray[$MatchDataArray.length - 1].autoLowCubes + 
+			
+			$MatchDataArray[$MatchDataArray.length - 1].teleopTopCones + $MatchDataArray[$MatchDataArray.length - 1].teleopMiddleCones + $MatchDataArray[$MatchDataArray.length - 1].teleopLowCones + 
+			$MatchDataArray[$MatchDataArray.length - 1].teleopTopCubes + $MatchDataArray[$MatchDataArray.length - 1].teleopMiddleCubes + $MatchDataArray[$MatchDataArray.length - 1].teleopLowCubes;
 
 		let urlContent;
+
 		if($fileType) {
 			
-			let csv = "";
-			$matchData.forEach(column => {
-				csv += column + ",";
+			let csv: string = "";
+			// Object($MatchDataArray).array.forEach((element: string) => {
+			// 	csv += element + ",";
+			// });
+
+			let keys = Object.keys($MatchDataArray[0]);
+
+			// Build header
+			csv += keys.join(",") + "\n";
+
+			// Add the rows
+			$MatchDataArray.forEach((obj: any) => {
+				csv += keys.map(k => obj[k]).join(",") + "\n";
 			});
 			
 			urlContent = "data:text/csv;charset=utf-8," + csv;
 			content = csv;
 			href = urlContent;
-			downloadname = "match" + $matchData[1] + "team" + $matchData[0] + "by" + $matchData[31] + ".csv";
+			downloadname = Date.now() + "ScoutingBy" + $MatchDataArray[$MatchDataArray.length - 1].scouterName + ".csv";
 		}
 		else {
-			
-			urlContent = "data:text/json;charset=utf-8," + JSON.stringify($matchData);
-			content = JSON.stringify($matchData);
+			urlContent = "data:text/json;charset=utf-8," + JSON.stringify($MatchDataArray);
+			content = JSON.stringify($MatchDataArray[$MatchDataArray.length - 1]);
 			href = urlContent;
-			downloadname = "match" + $matchData[1] + "team" + $matchData[0] + "by" + $matchData[31] + ".json";
+			downloadname = Date.now() + "ScoutingBy" + $MatchDataArray[$MatchDataArray.length - 1].scouterName + ".json";
 		}
 
 	}
 
 	function reset() {
-		$matchData = [
-			,//team number [0]
-			,//match number [1]
+		$MatchDataArray.push({
+			teamNumber: null,
+			matchNumber: ($MatchDataArray[$MatchDataArray.length - 1].matchNumber ?? 0) + 1,
 
-			//auto:
+			//auto
+			autoTopCones: 0,
+			autoMiddleCones: 0,
+			autoLowCones: 0,
+			autoTopCubes: 0,
+			autoMiddleCubes: 0,
+			autoLowCubes: 0,
+		
+			autoParking: "",
+		
+			//teleop
+			teleopTopCones: 0,
+			teleopMiddleCones: 0,
+			teleopLowCones: 0,
+			teleopTopCubes: 0,
+			teleopMiddleCubes: 0,
+			teleopLowCubes: 0,
 
-			//scoring:
-			//cones:
-			0,//top [3]
-			0,//mid [4]
-			0,//low [5]
-			//cubes:
-			0,//top [6]
-			0,//mid [7]
-			0,//low [8]
-			
-			//parking: (calculated at the end, 1/0 for true/false)
-			0,//engaged [9]
-			0,//docked [10]
-			0,//mobility [11]
+			teleopDoubleCones: 0,
+			teleopSingleCones: 0,
+			teleopFloorCones: 0,
+			teleopDoubleCubes: 0,
+			teleopSingleCubes: 0,
+			teleopFloorCubes: 0,
+		
+			teleopParking: "",
+		
+			//fouls
+			fouls: 0,
+			techFouls: 0,
+		
+			//cycles
+			cycles: 0,
+		
+			//other
+			startingPosition: 0,
 
-			//teleop:
-
-			//scoring:
-			//cones:
-			0,//top [12]
-			0,//mid [13]
-			0,//low [14]
-			//cubes:
-			0,//top [15]
-			0,//mid [16]
-			0,//low [17]
-
-			//collecting:
-			//double:
-			0,//cones [18]
-			0,//cubes [19]
-			//single
-			0,//cones [20]
-			0,//cubes [21]
-			//floor
-			0,//cones [22]
-			0,//cubes [23]
-
-			//parking: (calculated at the end, 1/0 for true/false)
-			0,//engaged [24]
-			0,//docked [25]
-			0,//parked [26]
-
-			//fouls:
-			0,//fouls [27]
-			0,//tech fouls [28]
-
-			0,//cycles (calculated at the end) [29]
-
-			0,//starting position [30]
-
-			"",//scouter's name [31]
-			"",//auto comment [32]
-			"" //teleop comment[33]
-		];
+			scouterName: $MatchDataArray[$MatchDataArray.length - 1].scouterName,
+			autoComment: "",
+			teleopComment: ""
+		});
+		
 
 		$pageIndex = 0;
 	}
@@ -163,10 +163,11 @@
 	SUBMISSION
 </h2>
 
-
-<div class="sectionHeader qrcodewrapper">
-	<QRCode {content} errorCorrection="H" responsive="true" bgcolor="#151513" color="snow" padding="0"></QRCode>
-</div>
+{#if content.length < 3000}
+	<div class="sectionHeader qrcodewrapper">
+		<QRCode {content} errorCorrection="L" responsive="true" bgcolor="#151513" color="snow" padding="0"></QRCode>
+	</div>
+{/if}
 <a class="buttonLookAlike" id="downloader" {href} download={downloadname} target="_self" use:downloadFile >
 	<div style="padding-top: calc(1rem);">DOWNLOAD</div>
 </a>

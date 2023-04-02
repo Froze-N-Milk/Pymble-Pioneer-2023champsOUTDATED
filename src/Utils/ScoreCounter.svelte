@@ -54,12 +54,11 @@
 
 	button:disabled {
 		color: rgba(255, 250, 250, 0);
-	}
-
-	button:disabled:hover {
 		background: #20201D;
+		cursor: default;
 
 	}
+
 </style>
 
 

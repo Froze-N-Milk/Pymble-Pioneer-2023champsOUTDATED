@@ -1,38 +1,13 @@
-# create-svelte
+# Pymble Pionner
+A match scouting data collection platform for FRC team 6510 Pymble Pride, hosted on github pages.
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Currently owned and maintained by Oscar Chevalier <oscar.chevalier@pymblelc.nsw.edu.au>
+Contact me for information regarding the team or this app.
 
-## Creating a project
+Progressively develops JSON or csv outputs of collected data, also attempting to produce a QR code of the most recent match for quick collection or analysis if desired.
 
-If you're seeing this, you've probably already done this step. Congrats!
+Functions offline once loaded.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+Note that inputs are not sanitised, nor do I currently wish to put the time into doing so, the assumption is that users will not attempt to break the system. Sanitisation will likely later be implemented for commas as their presence in the comments boxes will likely cause issues for the outputs.
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Check the github sites deployment for the app itself.

@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { matchData } from './stores.js';
+	import { MatchDataArray } from './stores.js';
     import ScoreCounter from "./ScoreCounter.svelte";
 </script>
 
 <p class="sectionHeader">FOULS:</p>
 
 <label for="">FOULS:</label>
-<ScoreCounter bind:count={$matchData[27]} />
+<ScoreCounter bind:count={$MatchDataArray[$MatchDataArray.length - 1].fouls} />
 
 <label for="">TECH FOULS:</label>
-<ScoreCounter bind:count={$matchData[28]} />
+<ScoreCounter bind:count={$MatchDataArray[$MatchDataArray.length - 1].techFouls} />

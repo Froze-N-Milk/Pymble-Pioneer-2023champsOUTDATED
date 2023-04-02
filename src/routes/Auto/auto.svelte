@@ -1,10 +1,17 @@
 <script lang="ts">
-	import { autoParkOption, matchData } from './../../Utils/stores.js';
+	import { MatchDataArray, type MatchDataEntry } from './../../Utils/stores.js';
     import ScoringCollector from "../../Utils/ScoringCollector.svelte";
     import Selector from "../../Utils/Selector.svelte";
     import FoulCollector from '../../Utils/FoulCollector.svelte';
 
-	const data: number = 3;
+	const data: (keyof MatchDataEntry)[] = [
+		"autoTopCones",
+		"autoMiddleCones",
+		"autoLowCones",
+		"autoTopCubes",
+		"autoMiddleCubes",
+		"autoLowCubes"
+	];
 
 	const options = ["", "DOCKED", "ENGAGED", "MOBILITY"];
 </script>
@@ -30,11 +37,11 @@
 
 	<p class="sectionHeader">PARKING:</p>
 	<label for="">PARKING:</label>
-	<Selector {options} bind:value={$autoParkOption} />
+	<Selector {options} bind:value={$MatchDataArray[$MatchDataArray.length - 1].autoParking} />
 
 	<FoulCollector />
 
 	<p class="sectionHeader">COMMENTS:</p>
 
-	<textarea class="sectionHeader hoverSelfAnnounce" rows="8" bind:value={$matchData[32]}></textarea>
+	<textarea class="sectionHeader hoverSelfAnnounce" rows="8" bind:value={$MatchDataArray[$MatchDataArray.length - 1].autoComment}></textarea>
 </div>

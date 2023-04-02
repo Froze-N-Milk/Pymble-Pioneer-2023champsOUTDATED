@@ -1,13 +1,27 @@
 <script lang="ts">
-	import { matchData, teleopParkOption } from './../../Utils/stores.js';
+	import { MatchDataArray, type MatchDataEntry } from './../../Utils/stores.js';
     import FoulCollector from "../../Utils/FoulCollector.svelte";
     import PickupCollector from "../../Utils/PickupCollector.svelte";
 	import ScoringCollector from "../../Utils/ScoringCollector.svelte";
     import Selector from "../../Utils/Selector.svelte";
 
-	const scoringRangeStart: number = 12;
+	const scoringRangeStart: (keyof MatchDataEntry)[] = [
+		"teleopTopCones",
+		"teleopMiddleCones",
+		"teleopLowCones",
+		"teleopTopCubes",
+		"teleopMiddleCubes",
+		"teleopLowCubes"
+	];
 
-	const pickupRangeStart: number = 18;
+	const pickupRangeStart: (keyof MatchDataEntry)[] = [
+		"teleopDoubleCones",
+		"teleopDoubleCubes",
+		"teleopSingleCones",
+		"teleopSingleCubes",
+		"teleopFloorCones",
+		"teleopFloorCubes"
+	];
 
 	const options = ["", "DOCKED", "ENGAGED", "PARKED"];
 
@@ -41,9 +55,9 @@
 
 	<p class="sectionHeader">PARKING:</p>
 	<label for="">PARKING:</label>
-	<Selector {options} bind:value={$teleopParkOption}/>
+	<Selector {options} bind:value={$MatchDataArray[$MatchDataArray.length - 1].teleopParking}/>
 
 	<p class="sectionHeader">COMMENTS:</p>
 
-	<textarea class="sectionHeader hoverSelfAnnounce" rows="8" bind:value={$matchData[33]}></textarea>
+	<textarea class="sectionHeader hoverSelfAnnounce" rows="8" bind:value={$MatchDataArray[$MatchDataArray.length - 1].teleopComment}></textarea>
 </div>
