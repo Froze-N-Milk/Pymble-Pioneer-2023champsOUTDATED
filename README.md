@@ -1,8 +1,11 @@
-# Pymble Pionner
+# Pymble Pioneer
 A match scouting data collection platform for FRC team 6510 Pymble Pride, hosted on github pages.
 
 Currently owned and maintained by Oscar Chevalier <oscar.chevalier@pymblelc.nsw.edu.au>
+
 Contact me for information regarding the team or this app.
+
+---
 
 Progressively develops JSON or csv outputs of collected data, also attempting to produce a QR code of the most recent match for quick collection or analysis if desired.
 
