@@ -116,12 +116,12 @@
 		<h1 class="sectionHeader"></h1>
 
 		<label for="">PIT SCOUTING</label>
-		<a href={"/PitScouting"}>
+		<a href={"/Pymble-Pioneer/PitScouting"}>
 			<button class="hoverSelfAnnounce" style:--background="#20201D"></button>
 		</a>
 
 		<label for="">MATCH SCOUTING</label>
-		<a href={"/MatchScouting"}>
+		<a href={"/Pymble-Pioneer/MatchScouting"}>
 			<button class="hoverSelfAnnounce" style:--background="#20201D"></button>
 		</a>
 
