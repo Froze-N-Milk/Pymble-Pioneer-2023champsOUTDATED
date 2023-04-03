@@ -4,6 +4,8 @@ import adapter from '@sveltejs/adapter-static';
 export default {
   preprocess: preprocess(),
 
+  
+
   kit: {
     adapter: adapter({
       // default options are shown. On some platforms
@@ -12,7 +14,10 @@ export default {
       assets: 'build',
       fallback: null,
       precompress: false,
-      strict: true
+      strict: true,
+      paths: {
+        base: "/Pymble-Pioneer"
+      },
     })
   }
 };

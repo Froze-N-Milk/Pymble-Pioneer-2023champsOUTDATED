@@ -96,8 +96,8 @@
 </style>
 
 <script lang="ts">
+    import { page } from "$app/stores";
     import { downloadToggle, fileType } from "../Utils/stores";
-
 
     let settingsToggle: boolean = false;
 
@@ -116,12 +116,12 @@
 		<h1 class="sectionHeader"></h1>
 
 		<label for="">PIT SCOUTING</label>
-		<a href="/PitScouting">
+		<a href={"/PitScouting"}>
 			<button class="hoverSelfAnnounce" style:--background="#20201D"></button>
 		</a>
 
 		<label for="">MATCH SCOUTING</label>
-		<a href="/MatchScouting">
+		<a href={"/MatchScouting"}>
 			<button class="hoverSelfAnnounce" style:--background="#20201D"></button>
 		</a>
 
