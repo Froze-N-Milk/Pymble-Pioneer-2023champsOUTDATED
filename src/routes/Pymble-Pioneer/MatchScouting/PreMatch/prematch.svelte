@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { downloadToggle, fileType, MatchDataArray } from '../../../Utils/stores.js';
+	import { downloadToggle, fileType, MatchDataArray } from '../../../../Utils/stores.js';
     import { onMount } from "svelte/internal";
     import { fade } from 'svelte/transition';
-    import Selector from '../../../Utils/Selector.svelte';
+    import Selector from '../../../../Utils/Selector.svelte';
 
 	const required: boolean = true;
 

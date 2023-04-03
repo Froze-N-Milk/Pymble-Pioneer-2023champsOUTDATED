@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { MatchDataArray } from '../../Utils/stores.js';
-    import { pageIndex } from "../../Utils/stores";
+	import { MatchDataArray } from '../../../Utils/stores.js';
+    import { pageIndex } from "../../../Utils/stores";
     import Auto from "./Auto/auto.svelte";
     import Prematch from "./PreMatch/prematch.svelte";
     import Submission from "./Submission/submission.svelte";
