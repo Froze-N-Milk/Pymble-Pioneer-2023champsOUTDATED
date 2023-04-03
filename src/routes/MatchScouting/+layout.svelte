@@ -83,12 +83,36 @@
 		outline: 2px solid #D62246;
 		cursor: pointer;
 	}
+
+	button {
+		padding: none;
+		height: 4.7rem;
+		border: none;
+		background: #151513;
+		color: snow;
+		margin: none;
+		aspect-ratio: 3/1;
+		position: fixed;
+		left: 0;
+		top: 0;
+	}
+
+	button:hover {
+		background: #D62246;
+		cursor: pointer;
+	}
 </style>
 
 <body>
+
 	<div class="titlebar">
+		<a href="/" style="display: contents;">
+			<button>RETURN</button>
+		</a>
+
 		<h1>PYMBLE PIONEER</h1>
 	</div>
-		
+	
+
 	<slot></slot>
 </body>

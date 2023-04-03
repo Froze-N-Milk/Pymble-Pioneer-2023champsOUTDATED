@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { MatchDataArray, type MatchDataEntry } from './../../Utils/stores.js';
-    import FoulCollector from "../../Utils/FoulCollector.svelte";
-    import PickupCollector from "../../Utils/PickupCollector.svelte";
-	import ScoringCollector from "../../Utils/ScoringCollector.svelte";
-    import Selector from "../../Utils/Selector.svelte";
+	import { MatchDataArray, type MatchDataEntry } from '../../../Utils/stores.js';
+    import FoulCollector from "../../../Utils/FoulCollector.svelte";
+    import PickupCollector from "../../../Utils/PickupCollector.svelte";
+	import ScoringCollector from "../../../Utils/ScoringCollector.svelte";
+    import Selector from "../../../Utils/Selector.svelte";
 
 	const scoringRangeStart: (keyof MatchDataEntry)[] = [
 		"teleopTopCones",

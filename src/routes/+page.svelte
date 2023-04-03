@@ -1,83 +1,141 @@
-<script lang="ts">
-	import { MatchDataArray } from './../Utils/stores.js';
-    import { pageIndex } from "../Utils/stores";
-    import Auto from "./Auto/auto.svelte";
-    import Prematch from "./PreMatch/prematch.svelte";
-    import Submission from "./Submission/submission.svelte";
-    import Teleop from "./Teleop/teleop.svelte";
-
-	const pageOptions = [
-		Prematch,
-		Auto,
-		Teleop,
-		Submission
-	];
-
-
-	$:selectedPage = pageOptions[$pageIndex];
-
-	function incrementPageIndex() {
-		if($pageIndex < pageOptions.length - 1) {
-			$pageIndex += 1;
-		}
-	}
-	$:onLastPage = $pageIndex === pageOptions.length - 1;
-	$:allowAdvance = $MatchDataArray[$MatchDataArray.length - 1].scouterName !== "" && $MatchDataArray[$MatchDataArray.length - 1].teamNumber !== null && $MatchDataArray[$MatchDataArray.length - 1].matchNumber !== null && $MatchDataArray[$MatchDataArray.length - 1].startingPosition !== 0;
-
-	function decrementPageIndex() {
-		if($pageIndex > 0) {
-			$pageIndex -= 1;
-		}
-	}
-
-	let formError: string;
-
-	$: {
-		if(!allowAdvance){
-			formError = "FORM UNFILLED";
-		}
-		else {
-			formError = "";
-		}
-	}
-
-	$:onFirstPage = $pageIndex === 0;
-</script>
-
 <style>
-	button {
-		padding: none;
-		height: calc(3rem + 2px);
-		border: none;
-		outline: 1px solid #20201D;
-		background: #151513;
+	body {
+		text-align: center;
+		font-family: "Roboto";
 		color: snow;
-		margin: none;
-		aspect-ratio: 3/1;
+		background-color: #151513;
+
 	}
 
-	button:hover {
-		background: #D62246;
+	form {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		column-gap: 20px;
+		row-gap: 4px;
+		justify-content: center;
+		align-items: center;
+	}
+
+	form label {
+		justify-content: right;
+		align-items: right;
+		text-align: right;
+		grid-column: 1/2;
+		height: auto;
+		vertical-align: auto;
+	}
+
+	form input[type=text] {
+		width: 12rem;
+		grid-column: 2/3;
+		border: 0px;
+  		outline: 1px solid #151513;
+		background: #20201D;
+		color: snow;
+		padding: 1rem;
+		margin: none;
+		text-align: left;
+	}
+
+	form input:focus {
+		outline: 2px solid #D62246;
+	}
+
+	.sectionHeader {
+		grid-column: 1/3;
+		padding: 1rem;
+	}
+
+	.navbar {
+		background-color: #20201D;
+		overflow: hidden;
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		display: inline-flex;
+		text-align: center;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.titlebar {
+		background-color: #20201D;
+		overflow: hidden;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+	}
+
+	.padded {
+		padding-top: none;
+		padding-bottom: none;
+		padding-left: 3rem;
+		padding-right: 3rem;
+	}
+
+	.hoverSelfAnnounce:hover {
+		outline: 2px solid #D62246;
 		cursor: pointer;
 	}
 
-	button:disabled {
-		background: #20201D;
-		color: rgba(255, 250, 250, 0);
-		cursor: default;
+	button {
+		padding: none;
+		height: calc(3rem);
+		width: 14rem;
+		border: none;
+		background: var(--background);
+		color: snow;
+		margin: none;
+		outline: 1px solid #151513;
+	}
+	a {
+		display: contents;
 	}
 </style>
 
-<form class="gridForm">
-	<p class="sectionHeader"></p>
-	<svelte:component this={selectedPage}/>
-	<div class="sectionHeader"></div>
-	<div class="sectionHeader"></div>
-	<div class="sectionHeader"></div>
-</form>
+<script lang="ts">
+    import { downloadToggle, fileType } from "../Utils/stores";
 
-<div class="navbar">
-	<button disabled={onFirstPage} on:click={decrementPageIndex} >PREV</button>
-	<p class="padded">version 1.0</p>
-	<button disabled={onLastPage || !allowAdvance} on:click={incrementPageIndex} >NEXT</button>
-</div>
+
+    let settingsToggle: boolean = false;
+
+    $:downloadToggleColour = $downloadToggle ? "#D62246" : "#20201D";
+    $:settingsToggleColour = settingsToggle ? "#D62246" : "#20201D";
+    $:fileTypeColour = $fileType ? "#20201D" : "#D62246";
+</script>
+
+<body>
+	<div class="titlebar">
+		<h1>PYMBLE PIONEER</h1>
+	</div>
+
+	<form>
+		<!-- svelte-ignore a11y-missing-content -->
+		<h1 class="sectionHeader"></h1>
+
+		<label for="">PIT SCOUTING</label>
+		<a href="/PitScouting">
+			<button class="hoverSelfAnnounce" style:--background="#20201D"></button>
+		</a>
+
+		<label for="">MATCH SCOUTING</label>
+		<a href="/MatchScouting">
+			<button class="hoverSelfAnnounce" style:--background="#20201D"></button>
+		</a>
+
+		<p class="sectionHeader">SETTINGS</p>
+			
+		<label for="">{settingsToggle ? "HIDE" : "SHOW"} SETTINGS</label>
+		<button class="hoverSelfAnnounce" style:--background={settingsToggleColour} on:click|preventDefault={() => {settingsToggle = !settingsToggle;}}></button>
+
+
+		{#if settingsToggle}
+		<label for="">DOWNLOAD AUTOMATICALLY</label>
+		<button class="hoverSelfAnnounce" style:--background={downloadToggleColour} on:click|preventDefault={() => {$downloadToggle = !$downloadToggle;}}></button>
+		<label for="">{$fileType ? "CSV" : "JSON"}</label>
+		<button class="hoverSelfAnnounce" style:--background={fileTypeColour} on:click|preventDefault={() => {$fileType = !$fileType;}}></button>
+		{/if}
+	</form>
+</body>

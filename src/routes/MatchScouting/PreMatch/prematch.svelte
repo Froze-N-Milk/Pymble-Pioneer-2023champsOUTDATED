@@ -1,16 +1,10 @@
 <script lang="ts">
-	import { downloadToggle, fileType, MatchDataArray } from '../../Utils/stores.js';
+	import { downloadToggle, fileType, MatchDataArray } from '../../../Utils/stores.js';
     import { onMount } from "svelte/internal";
     import { fade } from 'svelte/transition';
-    import Selector from '../../Utils/Selector.svelte';
+    import Selector from '../../../Utils/Selector.svelte';
 
 	const required: boolean = true;
-	let settingsToggle: boolean = false;
-
-	$:downloadToggleColour = $downloadToggle ? "#D62246" : "#20201D";
-	$:settingsToggleColour = settingsToggle ? "#D62246" : "#20201D";
-	$:fileTypeColour = $fileType ? "#20201D" : "#D62246";
-
 
 	const regex = new RegExp("^[0-9]*$");
 
@@ -50,17 +44,6 @@
 		color: #D62246;
 		height: 1rem;
 	}
-
-	button {
-		padding: none;
-		height: calc(3rem);
-		width: 14rem;
-		border: none;
-		background: var(--background);
-		color: snow;
-		margin: none;
-		outline: 1px solid #151513;
-	}
 </style>
 
 <div style="display: contents;">
@@ -83,16 +66,4 @@
 			<div transition:fade|local>{formError}</div>
 		{/key}
 	</div>
-	
-
-	<label for="">{settingsToggle ? "HIDE" : "SHOW"} SETTINGS</label>
-	<button class="hoverSelfAnnounce" style:--background={settingsToggleColour} on:click|preventDefault={() => {settingsToggle = !settingsToggle;}}></button>
-
-
-	{#if settingsToggle}
-	<label for="">DOWNLOAD AUTOMATICALLY</label>
-	<button class="hoverSelfAnnounce" style:--background={downloadToggleColour} on:click|preventDefault={() => {$downloadToggle = !$downloadToggle;}}></button>
-	<label for="">{$fileType ? "CSV" : "JSON"}</label>
-	<button class="hoverSelfAnnounce" style:--background={fileTypeColour} on:click|preventDefault={() => {$fileType = !$fileType;}}></button>
-	{/if}
 </div>
