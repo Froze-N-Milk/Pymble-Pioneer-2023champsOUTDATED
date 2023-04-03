@@ -16,7 +16,7 @@ export default {
       precompress: false,
       strict: true,
       paths: {
-        base: "/froze-n-milk.github.io/Pymble-Pioneer"
+        base: "/Pymble-Pioneer"
       },
     })
   }

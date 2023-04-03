@@ -96,7 +96,7 @@
 </style>
 
 <script lang="ts">
-    import { page } from "$app/stores";
+    import { base } from "$app/paths";
     import { downloadToggle, fileType } from "../Utils/stores";
 
     let settingsToggle: boolean = false;
