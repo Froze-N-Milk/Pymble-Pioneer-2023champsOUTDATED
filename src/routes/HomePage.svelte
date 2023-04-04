@@ -37,6 +37,7 @@
 		top: 0;
 		left: 0;
 		width: 100%;
+		height: 5rem;
 	}
 
 	.hoverSelfAnnounce:hover {
@@ -54,6 +55,11 @@
 		margin: none;
 		outline: 1px solid #151513;
 	}
+
+	.content {
+		padding: 1.5rem;
+		font-size: 2rem;
+	}
 </style>
 
 <script lang="ts">
@@ -70,13 +76,10 @@
 
 <body>
 	<div class="titlebar">
-		<h1>PYMBLE PIONEER</h1>
+		<div class="content">PYMBLE PIONEER</div>
 	</div>
 
 	<form>
-		<!-- svelte-ignore a11y-missing-content -->
-		<h1 class="sectionHeader"></h1>
-
 		<label for="">PIT SCOUTING:</label>
 		<button class="hoverSelfAnnounce" style:--background="#20201D" on:click={() => $ScoutingPage = PitScouting}></button>
 
@@ -96,4 +99,8 @@
 		<button class="hoverSelfAnnounce" style:--background={fileTypeColour} on:click|preventDefault={() => {$fileType = !$fileType;}}></button>
 		{/if}
 	</form>
+
+	<div class="navbar">
+		<p class="padded">version 1.0</p>
+	</div>
 </body>

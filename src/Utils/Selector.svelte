@@ -18,7 +18,9 @@
 		border: none;
 		height: calc(3rem + 2px);
 		width: calc(14rem);
+		max-width: 40%;
 	}
+	
 
 	.hoverSelfAnnounce:hover {
 		outline: 2px solid #D62246;

@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { MatchDataArray } from '../../Utils/stores.js';
+	import { MatchDataArray, ScoutingPage } from '../../Utils/stores.js';
     import { pageIndex } from "../../Utils/stores";
     import Auto from "./Auto/auto.svelte";
     import Prematch from "./PreMatch/prematch.svelte";
     import Submission from "./Submission/submission.svelte";
     import Teleop from "./Teleop/teleop.svelte";
+    import HomePage from '../HomePage.svelte';
 
 	const pageOptions = [
 		Prematch,
@@ -56,6 +57,7 @@
 		color: snow;
 		margin: none;
 		aspect-ratio: 3/1;
+		max-width: 40%;
 	}
 
 	button:hover {
@@ -71,7 +73,6 @@
 </style>
 
 <form>
-	<p class="sectionHeader"></p>
 	<svelte:component this={selectedPage}/>
 	<div class="sectionHeader"></div>
 	<div class="sectionHeader"></div>
@@ -80,6 +81,6 @@
 
 <div class="navbar">
 	<button disabled={onFirstPage} on:click={decrementPageIndex} >PREV</button>
-	<p class="padded">version 1.0</p>
+	
 	<button disabled={onLastPage || !allowAdvance} on:click={incrementPageIndex} >NEXT</button>
 </div>

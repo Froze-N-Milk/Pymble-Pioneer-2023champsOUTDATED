@@ -34,7 +34,10 @@
 		background: #20201D;
 		color: snow;
 		text-align: center;
+		
+		max-width: 10%;
 	}
+	
 
 	button {
 		padding: none;

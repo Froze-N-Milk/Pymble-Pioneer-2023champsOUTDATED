@@ -10,7 +10,6 @@
 		font-family: "Roboto";
 		color: snow;
 		background-color: #151513;
-
 	}
 
 	:global(*) {
@@ -24,6 +23,15 @@
 		row-gap: 4px;
 		justify-content: center;
 		align-items: center;
+		overflow: auto;
+	}
+
+	:global(form input) {
+		max-width: 40%;
+	}
+
+	:global(button) {
+		max-width: 40%;
 	}
 
 	:global(form label) {
@@ -76,6 +84,7 @@
 		top: 0;
 		left: 0;
 		width: 100%;
+		height: 5rem;
 	}
 
 	:global(.padded) {
@@ -91,13 +100,13 @@
 	}
 
 	button {
-		padding: none;
-		height: 4.7rem;
+		padding: 1rem;
+		height: 5rem;
 		border: none;
 		background: #151513;
 		color: snow;
 		margin: none;
-		aspect-ratio: 3/1;
+		width: auto;
 		position: fixed;
 		left: 0;
 		top: 0;
@@ -107,15 +116,22 @@
 		background: #D62246;
 		cursor: pointer;
 	}
+
+	.content {
+		padding: 1.5rem;
+		font-size: 2rem;
+	}
 </style>
 
 <body>
 
 	<div class="titlebar">
-		<button on:click={() => $ScoutingPage = HomePage}>RETURN</button>
+		<button class="return" on:click={() => $ScoutingPage = HomePage}>RETURN</button>
 
-		<h1>PYMBLE PIONEER</h1>
+		<div class="content">PYMBLE PIONEER</div>
 	</div>
+
+	<div class="sectionHeader" style="height: 3rem;"></div>
 	
 
 	<slot></slot>
