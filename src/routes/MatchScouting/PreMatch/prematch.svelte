@@ -1,14 +1,12 @@
 <script lang="ts">
-	import { downloadToggle, fileType, MatchDataArray } from '../../../Utils/stores.js';
+	import { MatchDataArray } from '../../../Utils/stores.js';
     import { onMount } from "svelte/internal";
     import { fade } from 'svelte/transition';
     import Selector from '../../../Utils/Selector.svelte';
 
-	const required: boolean = true;
-
 	const regex = new RegExp("^[0-9]*$");
 
-	// enables input validation for these two form inputs, 👍
+	// enables input validation for these two form inputs
 	onMount(() => {
 		document.getElementById("matchNumber")?.addEventListener("beforeinput", (event) => {
 			if (event.data != null && !regex.test(event.data)) {
@@ -35,7 +33,7 @@
 		}
 	}
 
-	const startingPositions = [1, 2, 3, 4, 5];
+	const startingPositions = [1, 2, 3, 4];
 
 </script>
 

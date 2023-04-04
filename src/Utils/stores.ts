@@ -24,6 +24,7 @@ export type MatchDataEntry = {
 	autoMiddleCubes: number;
 	autoLowCubes: number;
 
+	autoEngageAttempt: boolean;
 	autoParking: string;
 
 	//teleop
@@ -41,6 +42,7 @@ export type MatchDataEntry = {
 	teleopSingleCubes: number;
 	teleopFloorCubes: number;
 
+	teleopEngageAttempt: boolean;
 	teleopParking: string;
 
 	//fouls
@@ -69,6 +71,7 @@ export const MatchDataArray = writable<MatchDataEntry[]>([{
 	autoMiddleCubes: 0,
 	autoLowCubes: 0,
 
+	autoEngageAttempt: false,
 	autoParking: "",
 
 	//teleop
@@ -86,6 +89,7 @@ export const MatchDataArray = writable<MatchDataEntry[]>([{
 	teleopSingleCubes: 0,
 	teleopFloorCubes: 0,
 
+	teleopEngageAttempt: false,
 	teleopParking: "",
 
 	//fouls

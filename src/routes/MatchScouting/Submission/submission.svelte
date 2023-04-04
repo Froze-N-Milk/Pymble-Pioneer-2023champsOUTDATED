@@ -80,6 +80,7 @@
 			autoMiddleCubes: 0,
 			autoLowCubes: 0,
 		
+			autoEngageAttempt: false,
 			autoParking: "",
 		
 			//teleop
@@ -97,6 +98,7 @@
 			teleopSingleCubes: 0,
 			teleopFloorCubes: 0,
 		
+			teleopEngageAttempt: false,
 			teleopParking: "",
 		
 			//fouls

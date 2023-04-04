@@ -25,38 +25,9 @@
 		vertical-align: auto;
 	}
 
-	form input[type=text] {
-		width: 12rem;
-		grid-column: 2/3;
-		border: 0px;
-  		outline: 1px solid #151513;
-		background: #20201D;
-		color: snow;
-		padding: 1rem;
-		margin: none;
-		text-align: left;
-	}
-
-	form input:focus {
-		outline: 2px solid #D62246;
-	}
-
 	.sectionHeader {
 		grid-column: 1/3;
 		padding: 1rem;
-	}
-
-	.navbar {
-		background-color: #20201D;
-		overflow: hidden;
-		position: fixed;
-		bottom: 0;
-		left: 0;
-		width: 100%;
-		display: inline-flex;
-		text-align: center;
-		justify-content: center;
-		align-items: center;
 	}
 
 	.titlebar {
@@ -66,13 +37,6 @@
 		top: 0;
 		left: 0;
 		width: 100%;
-	}
-
-	.padded {
-		padding-top: none;
-		padding-bottom: none;
-		padding-left: 3rem;
-		padding-right: 3rem;
 	}
 
 	.hoverSelfAnnounce:hover {
@@ -89,9 +53,6 @@
 		color: snow;
 		margin: none;
 		outline: 1px solid #151513;
-	}
-	a {
-		display: contents;
 	}
 </style>
 
@@ -116,10 +77,10 @@
 		<!-- svelte-ignore a11y-missing-content -->
 		<h1 class="sectionHeader"></h1>
 
-		<label for="">PIT SCOUTING</label>
+		<label for="">PIT SCOUTING:</label>
 		<button class="hoverSelfAnnounce" style:--background="#20201D" on:click={() => $ScoutingPage = PitScouting}></button>
 
-		<label for="">MATCH SCOUTING</label>
+		<label for="">MATCH SCOUTING:</label>
 		<button class="hoverSelfAnnounce" style:--background="#20201D" on:click={() => $ScoutingPage = MatchScouting}></button>
 
 		<p class="sectionHeader">SETTINGS</p>
