@@ -56,13 +56,13 @@
 			urlContent = "data:text/csv;charset=utf-8," + csv;
 			content = csv;
 			href = urlContent;
-			downloadname = Date.now() + "ScoutingBy" + $MatchDataArray[$MatchDataArray.length - 1].scouterName + ".csv";
+			downloadname = "Matches" + $MatchDataArray[0].matchNumber + "To" + $MatchDataArray[$MatchDataArray.length - 1].matchNumber + "ScoutedBy" + $MatchDataArray[$MatchDataArray.length - 1].scouterName + ".csv";
 		}
 		else {
 			urlContent = "data:text/json;charset=utf-8," + JSON.stringify($MatchDataArray);
 			content = JSON.stringify($MatchDataArray[$MatchDataArray.length - 1]);
 			href = urlContent;
-			downloadname = Date.now() + "ScoutingBy" + $MatchDataArray[$MatchDataArray.length - 1].scouterName + ".json";
+			downloadname = "Matches" + $MatchDataArray[0].matchNumber + "To" + $MatchDataArray[$MatchDataArray.length - 1].matchNumber + "ScoutedBy" + $MatchDataArray[$MatchDataArray.length - 1].scouterName + ".json";
 		}
 
 	}
