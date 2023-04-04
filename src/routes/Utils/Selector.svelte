@@ -5,11 +5,9 @@
 
 <style>
 	.buttonLookAlike {
-		grid-column: 2/3;
 		outline: 1px solid #151513;
 		background: #20201D;
 		color: snow;
-		align-items: left;
 		margin: none;
 		text-align: left;
 		padding-left: 1rem;
@@ -17,13 +15,7 @@
 		overflow: hidden;
 		border: none;
 		height: calc(3rem + 2px);
-		width: calc(14rem);
-		max-width: 40%;
-	}
-	
-
-	.hoverSelfAnnounce:hover {
-		outline: 2px solid #D62246;
+		max-width: 14rem;
 	}
 </style>
 

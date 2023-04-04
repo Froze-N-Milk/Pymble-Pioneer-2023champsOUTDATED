@@ -1,51 +1,43 @@
-<script>
-
-    import { ScoutingPage } from "../Utils/stores";
+<script lang="ts">
+    import { ScoutingPage } from "./Utils/stores";
     import HomePage from "./HomePage.svelte";
 
+	let screenWidth: number;
 </script>
 <style>
 	body {
-		text-align: center;
-		font-family: "Roboto";
 		color: snow;
 		background-color: #151513;
+		margin: 20px;
+		box-sizing: border-box;
+
 	}
 
 	:global(*) {
 		font-family: "Roboto";
+		text-align: center;
 	}
 
 	:global(form) {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		column-gap: 20px;
-		row-gap: 4px;
-		justify-content: center;
-		align-items: center;
-		overflow: auto;
+		display: contents;
+		overflow: scroll;
 	}
 
-	:global(form input) {
-		max-width: 40%;
+	:global(.left-column) {
+		align-self: center;
+		justify-self: end;
+		min-width: 5rem;
+		overflow: scroll;
 	}
 
-	:global(button) {
-		max-width: 40%;
-	}
-
-	:global(form label) {
-		justify-content: right;
-		align-items: right;
-		text-align: right;
-		grid-column: 1/2;
-		height: auto;
-		vertical-align: auto;
+	:global(.right-column) {
+		align-self: center;
+		justify-self: start;
+		max-width: 14rem;
+		min-width: 5rem;
 	}
 
 	:global(form input[type=text]) {
-		width: 12rem;
-		grid-column: 2/3;
 		border: 0px;
   		outline: 1px solid #151513;
 		background: #20201D;
@@ -55,15 +47,21 @@
 		text-align: left;
 	}
 
+	:global(form input) {
+		max-width: 12rem;
+		min-width: 5rem;
+	}
+
 	:global(form input:focus) {
 		outline: 2px solid #D62246;
 	}
 
 	:global(.sectionHeader) {
 		grid-column: 1/3;
-		padding: 1rem;
+		padding: none;
 	}
 
+	
 	:global(.navbar) {
 		background-color: #20201D;
 		overflow: hidden;
@@ -71,11 +69,13 @@
 		bottom: 0;
 		left: 0;
 		width: 100%;
+		height: 3rem;
 		display: inline-flex;
 		text-align: center;
 		justify-content: center;
 		align-items: center;
 	}
+	
 
 	.titlebar {
 		background-color: #20201D;
@@ -95,24 +95,46 @@
 	}
 
 	:global(.hoverSelfAnnounce:hover) {
-		outline: 2px solid #D62246;
+		/* outline: 2px solid #D62246; */
+		background: #D62246;
 		cursor: pointer;
 	}
 
-	button {
-		padding: 1rem;
+	@media(min-width: 500px) {
+		.return {
+		padding: none;
 		height: 5rem;
 		border: none;
 		background: #151513;
 		color: snow;
 		margin: none;
-		width: auto;
+		width: 8rem;
 		position: fixed;
 		left: 0;
 		top: 0;
+		}
+
+		.variable-buffer {
+			height: 5rem;
+		}
 	}
 
-	button:hover {
+	@media(max-width: 500px) {
+		.return {
+		padding: none;
+		height: 3rem;
+		border: none;
+		background: #151513;
+		color: snow;
+		margin: none;
+		width: 100%;
+		position: fixed;
+		left: 0;
+		top: 5rem;
+		}
+	}
+
+	.return:hover {
 		background: #D62246;
 		cursor: pointer;
 	}
@@ -121,18 +143,37 @@
 		padding: 1.5rem;
 		font-size: 2rem;
 	}
+
+	.grid-container {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		column-gap: 1rem;
+		row-gap: 0.2rem;
+		justify-content: center;
+		overflow: scroll;
+		grid-auto-flow: row;
+	}
+
+	.variable-buffer {
+		height: var(--height);
+	}
 </style>
+
+
+<svelte:window bind:innerWidth={screenWidth} />
 
 <body>
 
 	<div class="titlebar">
-		<button class="return" on:click={() => $ScoutingPage = HomePage}>RETURN</button>
-
+		{#if $ScoutingPage !== HomePage}
+			<button class="return" on:click={() => $ScoutingPage = HomePage}>RETURN</button>
+		{/if}
 		<div class="content">PYMBLE PIONEER</div>
 	</div>
-
-	<div class="sectionHeader" style="height: 3rem;"></div>
 	
-
-	<slot></slot>
+	<div class="grid-container">
+		<div class="sectionHeader variable-buffer" style:--height={screenWidth <= 500 && $ScoutingPage !== HomePage ?  "7rem" : "5rem"} ></div>
+		<slot></slot>
+		<div class="sectionHeader" style="height: 5rem;"></div>
+	</div>
 </body>

@@ -5,22 +5,24 @@
     export let data: (keyof MatchDataEntry)[];
 </script>
 
-<label for="">HIGH CONES:</label>
+<label for="" class="left-column">DOUBLE SUBSTATION CONES:</label>
 <ScoreCounter bind:count={$MatchDataArray[$MatchDataArray.length - 1][data[0]]} />
 
-<label for="">MIDDLE CONES:</label>
+<label for="" class="left-column">DOUBLE SUBSTATION CUBES:</label>
 <ScoreCounter bind:count={$MatchDataArray[$MatchDataArray.length - 1][data[1]]} />
-
-<label for="">LOW CONES:</label>
-<ScoreCounter bind:count={$MatchDataArray[$MatchDataArray.length - 1][data[2]]} />
 
 <div class="sectionHeader"></div>
 
-<label for="">HIGH CUBES:</label>
+<label for="" class="left-column">SINGLE SUBSTATION CONES:</label>
+<ScoreCounter bind:count={$MatchDataArray[$MatchDataArray.length - 1][data[2]]} />
+
+<label for="" class="left-column">SINGLE SUBSTATION CUBES:</label>
 <ScoreCounter bind:count={$MatchDataArray[$MatchDataArray.length - 1][data[3]]} />
 
-<label for="">MIDDLE CUBES:</label>
+<div class="sectionHeader"></div>
+
+<label for="" class="left-column">FLOOR CONES:</label>
 <ScoreCounter bind:count={$MatchDataArray[$MatchDataArray.length - 1][data[4]]} />
 
-<label for="">LOW CUBES:</label>
+<label for="" class="left-column">FLOOR CUBES:</label>
 <ScoreCounter bind:count={$MatchDataArray[$MatchDataArray.length - 1][data[5]]} />

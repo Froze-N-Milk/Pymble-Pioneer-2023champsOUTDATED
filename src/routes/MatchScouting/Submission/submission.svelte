@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { downloadToggle, fileType, MatchDataArray, pageIndex } from '../../../Utils/stores.js';
+	import { downloadToggle, fileType, MatchDataArray, pageIndex } from '../../Utils/stores.js';
 	import { QRCode } from "@bonosoft/sveltekit-qrcode";
 
 	let content = "";
@@ -69,8 +69,8 @@
 
 	function reset() {
 		$MatchDataArray.push({
-			teamNumber: null,
-			matchNumber: ($MatchDataArray[$MatchDataArray.length - 1].matchNumber ?? 0) + 1,
+			teamNumber: "",
+			matchNumber: Number($MatchDataArray[$MatchDataArray.length - 1].matchNumber ?? 0) + 1,
 
 			//auto
 			autoTopCones: 0,

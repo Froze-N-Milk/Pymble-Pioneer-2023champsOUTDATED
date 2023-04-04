@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { MatchDataArray, type MatchDataEntry } from '../../../Utils/stores.js';
-    import ScoringCollector from "../../../Utils/ScoringCollector.svelte";
-    import Selector from "../../../Utils/Selector.svelte";
-    import FoulCollector from '../../../Utils/FoulCollector.svelte';
+	import { MatchDataArray, type MatchDataEntry } from '../../Utils/stores.js';
+    import ScoringCollector from "../../Utils/ScoringCollector.svelte";
+    import Selector from "../../Utils/Selector.svelte";
+    import FoulCollector from '../../Utils/FoulCollector.svelte';
 
 	const data: (keyof MatchDataEntry)[] = [
 		"autoTopCones",
@@ -51,11 +51,11 @@
 	<p class="sectionHeader">SCORING:</p>
 	<ScoringCollector {data} />
 
-	<p class="sectionHeader">PARKING:</p>
-	<label for="">ATTEMPED TO ENAGAGE:</label>
+	<p class="sectionHeader" >PARKING:</p>
+	<label for="" class="left-column">ATTEMPED TO ENAGAGE:</label>
 	<button class="hoverSelfAnnounce" style:--background={$MatchDataArray[$MatchDataArray.length - 1].autoEngageAttempt ? "#D62246" : "#20201D"} on:click|preventDefault={() => $MatchDataArray[$MatchDataArray.length - 1].autoEngageAttempt = !$MatchDataArray[$MatchDataArray.length - 1].autoEngageAttempt}></button>
 
-	<label for="">PARKING:</label>
+	<label for="" class="left-column">PARKING:</label>
 	<Selector {options} bind:value={$MatchDataArray[$MatchDataArray.length - 1].autoParking} />
 
 	<FoulCollector />

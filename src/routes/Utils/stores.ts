@@ -1,7 +1,7 @@
 import { writable } from "svelte/store";
-import type HomePage from "../routes/HomePage.svelte";
-import type PitScouting from "../routes/PitScouting/PitScouting.svelte";
-import type MatchScouting from "../routes/MatchScouting/MatchScouting.svelte";
+import type HomePage from "../HomePage.svelte";
+import type PitScouting from "../PitScouting/PitScouting.svelte";
+import type MatchScouting from "../MatchScouting/MatchScouting.svelte";
 
 export const pageIndex = writable(0);
 
@@ -14,8 +14,8 @@ export type ScoutingPageOptions =
 export const ScoutingPage = writable<typeof HomePage>();
 
 export type MatchDataEntry = {
-	teamNumber: number | null;
-	matchNumber: number | null;
+	teamNumber: number | string;
+	matchNumber: number | string;
 	//auto
 	autoTopCones: number;
 	autoMiddleCones: number;
@@ -61,8 +61,8 @@ export type MatchDataEntry = {
 }
 
 export const MatchDataArray = writable<MatchDataEntry[]>([{
-	teamNumber: null,
-	matchNumber: null,
+	teamNumber: "",
+	matchNumber: "",
 	//auto
 	autoTopCones: 0,
 	autoMiddleCones: 0,

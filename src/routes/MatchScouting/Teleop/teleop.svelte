@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { MatchDataArray, type MatchDataEntry } from '../../../Utils/stores.js';
-    import FoulCollector from "../../../Utils/FoulCollector.svelte";
-    import PickupCollector from "../../../Utils/PickupCollector.svelte";
-	import ScoringCollector from "../../../Utils/ScoringCollector.svelte";
-    import Selector from "../../../Utils/Selector.svelte";
+	import { MatchDataArray, type MatchDataEntry } from '../../Utils/stores.js';
+    import FoulCollector from "../../Utils/FoulCollector.svelte";
+    import PickupCollector from "../../Utils/PickupCollector.svelte";
+	import ScoringCollector from "../../Utils/ScoringCollector.svelte";
+    import Selector from '../../Utils/Selector.svelte';
 
 	const scoringRangeStart: (keyof MatchDataEntry)[] = [
 		"teleopTopCones",
@@ -70,10 +70,10 @@
 	<FoulCollector />
 
 	<p class="sectionHeader">PARKING:</p>
-	<label for="">ATTEMPED TO ENAGAGE:</label>
+	<label for="" class="left-column">ATTEMPED TO ENAGAGE:</label>
 	<button class="hoverSelfAnnounce" style:--background={$MatchDataArray[$MatchDataArray.length - 1].teleopEngageAttempt ? "#D62246" : "#20201D"} on:click|preventDefault={() => $MatchDataArray[$MatchDataArray.length - 1].teleopEngageAttempt = !$MatchDataArray[$MatchDataArray.length - 1].teleopEngageAttempt}></button>
 
-	<label for="">PARKING:</label>
+	<label for="" class="left-column">PARKING:</label>
 	<Selector {options} bind:value={$MatchDataArray[$MatchDataArray.length - 1].teleopParking}/>
 
 	<p class="sectionHeader">COMMENTS:</p>

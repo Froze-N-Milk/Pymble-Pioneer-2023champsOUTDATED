@@ -5,8 +5,8 @@
 
 <p class="sectionHeader">FOULS:</p>
 
-<label for="">FOULS:</label>
+<label for="" class="left-column">FOULS:</label>
 <ScoreCounter bind:count={$MatchDataArray[$MatchDataArray.length - 1].fouls} />
 
-<label for="">TECH FOULS:</label>
+<label for="" class="left-column">TECH FOULS:</label>
 <ScoreCounter bind:count={$MatchDataArray[$MatchDataArray.length - 1].techFouls} />

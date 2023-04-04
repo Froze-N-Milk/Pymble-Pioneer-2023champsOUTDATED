@@ -20,7 +20,10 @@
 		display: inline-flex;
 		border: none;
 		margin: none;
-		overflow: visible;
+		overflow: hidden;
+		max-width: 14rem;
+		min-width: none;
+		max-height: calc(3rem + 2px);
 	}
 
 	.contents {
@@ -28,16 +31,14 @@
 		padding-bottom: 0;
 		padding-left: 1rem;
 		padding-right: 1rem;
-		width: 6rem;
+		max-width: 8rem;
+		min-width: calc(3rem + 2px);;
 		border: none;
   		outline: 1px solid #151513;
 		background: #20201D;
 		color: snow;
 		text-align: center;
-		
-		max-width: 10%;
 	}
-	
 
 	button {
 		padding: none;
@@ -59,7 +60,6 @@
 		color: rgba(255, 250, 250, 0);
 		background: #20201D;
 		cursor: default;
-
 	}
 
 </style>
