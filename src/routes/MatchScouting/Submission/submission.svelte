@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { downloadToggle, fileType, MatchDataArray, pageIndex } from '../../../../Utils/stores.js';
+	import { downloadToggle, fileType, MatchDataArray, pageIndex } from '../../../Utils/stores.js';
 	import { QRCode } from "@bonosoft/sveltekit-qrcode";
 
 	let content = "";

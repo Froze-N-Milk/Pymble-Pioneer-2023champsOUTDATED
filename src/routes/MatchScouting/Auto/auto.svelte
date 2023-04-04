@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { MatchDataArray, type MatchDataEntry } from '../../../../Utils/stores.js';
-    import ScoringCollector from "../../../../Utils/ScoringCollector.svelte";
-    import Selector from "../../../../Utils/Selector.svelte";
-    import FoulCollector from '../../../../Utils/FoulCollector.svelte';
+	import { MatchDataArray, type MatchDataEntry } from '../../../Utils/stores.js';
+    import ScoringCollector from "../../../Utils/ScoringCollector.svelte";
+    import Selector from "../../../Utils/Selector.svelte";
+    import FoulCollector from '../../../Utils/FoulCollector.svelte';
 
 	const data: (keyof MatchDataEntry)[] = [
 		"autoTopCones",

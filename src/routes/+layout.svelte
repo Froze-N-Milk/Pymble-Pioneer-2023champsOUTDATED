@@ -1,3 +1,9 @@
+<script>
+
+    import { ScoutingPage } from "../Utils/stores";
+    import HomePage from "./HomePage.svelte";
+
+</script>
 <style>
 	body {
 		text-align: center;
@@ -106,9 +112,7 @@
 <body>
 
 	<div class="titlebar">
-		<a href="/" style="display: contents;">
-			<button>RETURN</button>
-		</a>
+		<button on:click={() => $ScoutingPage = HomePage}>RETURN</button>
 
 		<h1>PYMBLE PIONEER</h1>
 	</div>

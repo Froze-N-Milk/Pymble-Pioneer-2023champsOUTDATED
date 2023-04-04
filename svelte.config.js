@@ -14,10 +14,7 @@ export default {
       assets: 'build',
       fallback: null,
       precompress: false,
-      strict: true,
-      paths: {
-        base: "/Pymble-Pioneer"
-      },
+      strict: true
     })
   }
 };
