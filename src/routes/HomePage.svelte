@@ -1,5 +1,4 @@
 <style>
-
 	button {
 		padding: none;
 		height: calc(3rem + 2px);
@@ -19,12 +18,7 @@
     import PitScouting from "./PitScouting/PitScouting.svelte";
 
     let settingsToggle: boolean = false;
-
-    $:downloadToggleColour = $downloadToggle ? "#D62246" : "#20201D";
-    $:settingsToggleColour = settingsToggle ? "#D62246" : "#20201D";
-    $:fileTypeColour = $fileType ? "#20201D" : "#D62246";
 </script>
-
 
 <form>
 	<label for="" class="left-column">PIT SCOUTING:</label>
@@ -36,17 +30,17 @@
 	<p class="sectionHeader">SETTINGS</p>
 		
 	<label for="" class="left-column">{settingsToggle ? "HIDE" : "SHOW"} SETTINGS:</label>
-	<button class="hoverSelfAnnounce" style:--background={settingsToggleColour} on:click|preventDefault={() => {settingsToggle = !settingsToggle;}}></button>
+	<button class="hoverSelfAnnounce" style:--background={settingsToggle ? "#D62246" : "#20201D"} on:click|preventDefault={() => {settingsToggle = !settingsToggle;}}></button>
 
 
 	{#if settingsToggle}
 	<label for="">DOWNLOAD AUTOMATICALLY:</label>
-	<button class="hoverSelfAnnounce" style:--background={downloadToggleColour} on:click|preventDefault={() => {$downloadToggle = !$downloadToggle;}}></button>
+	<button class="hoverSelfAnnounce" style:--background={$downloadToggle ? "#D62246" : "#20201D"} on:click|preventDefault={() => {$downloadToggle = !$downloadToggle;}}></button>
 	<label for="">{$fileType ? "CSV" : "JSON"}</label>
-	<button class="hoverSelfAnnounce" style:--background={fileTypeColour} on:click|preventDefault={() => {$fileType = !$fileType;}}></button>
+	<button class="hoverSelfAnnounce" style:--background={$fileType ? "#20201D" : "#D62246"} on:click|preventDefault={() => {$fileType = !$fileType;}}></button>
 	{/if}
 </form>
 
 <div class="navbar">
-	<p class="padded">version 1.0</p>
+	<p class="padded">version 1.2</p>
 </div>

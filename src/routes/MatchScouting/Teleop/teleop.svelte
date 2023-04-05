@@ -7,7 +7,7 @@
 	import { SelectedMatchDataEntry } from "../../Utils/stores";
 
 
-	const scoringRangeStart: (keyof MatchDataEntry)[] = [
+	const scoringRange: (keyof MatchDataEntry)[] = [
 		"teleopTopCones",
 		"teleopMiddleCones",
 		"teleopLowCones",
@@ -16,7 +16,7 @@
 		"teleopLowCubes"
 	];
 
-	const pickupRangeStart: (keyof MatchDataEntry)[] = [
+	const pickupRange: (keyof MatchDataEntry)[] = [
 		"teleopDoubleCones",
 		"teleopDoubleCubes",
 		"teleopSingleCones",
@@ -53,11 +53,11 @@
 
 	<p class="sectionHeader">SCORING:</p>
 
-	<ScoringCollector data={scoringRangeStart} />
+	<ScoringCollector data={scoringRange} />
 
 	<p class="sectionHeader">COLLECTING:</p>
 
-	<PickupCollector data={pickupRangeStart} />
+	<PickupCollector data={pickupRange} />
 
 	<FoulCollector />
 

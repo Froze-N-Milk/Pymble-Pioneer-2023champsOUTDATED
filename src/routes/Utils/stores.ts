@@ -134,3 +134,7 @@ export const PitScoutingArray = writable<PitScoutingEntry[]>([{
 	autoPaths: "",
 	comments: ""
 }])
+
+export const PitScoutingPhotosTaken = writable<boolean[]>([
+	false
+])

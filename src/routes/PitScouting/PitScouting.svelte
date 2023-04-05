@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fileType, PitScoutingArray } from './../Utils/stores.js';
+	import { fileType, PitScoutingArray, PitScoutingPhotosTaken } from './../Utils/stores.js';
     import { onMount } from "svelte";
     import Selector from '../Utils/Selector.svelte';
 
@@ -98,7 +98,8 @@
 			robotWeight: "",
 			autoPaths: "",
 			comments: ""
-		})
+		});
+		$PitScoutingPhotosTaken.push(false);
 
 		selectedIndex = $PitScoutingArray.length - 1;
 	}
@@ -162,6 +163,9 @@
 	
 	<p class="sectionHeader">COMMENTS:</p>
 	<textarea class="sectionHeader hoverSelfAnnounce" rows="8" bind:value={SelectedPitScoutingEntry.comments}></textarea>
+
+	<label for="" class="left-column">TAKEN PHOTOS:</label>
+	<button class="hoverSelfAnnounce" style:--background={$PitScoutingPhotosTaken[selectedIndex] ? "#D62246" : "#20201D"} on:click={() => $PitScoutingPhotosTaken[selectedIndex] = !$PitScoutingPhotosTaken[selectedIndex]}></button>
 
 	{#if allowAdvance}
 		<div class="sectionHeader" style="height: 1rem;"></div>
