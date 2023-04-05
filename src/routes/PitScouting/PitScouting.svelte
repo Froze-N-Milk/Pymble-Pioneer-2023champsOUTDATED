@@ -48,7 +48,8 @@
 	let content = "";
 	let href: string;
 	let downloadname: string;
-	function submit() {
+
+	function prepDownload() {
 		$PitScoutingArray.forEach(array => {
 			array.teamNumber = Number(array.teamNumber);
 			array.teamNumber = Number(array.teamNumber);
@@ -85,10 +86,10 @@
 	}
 
 	$: if(allowAdvance) {
-		submit();
+		prepDownload();
 	}
 
-	function newMatch() {
+	function newTeam() {
 		$PitScoutingArray.push({
 			teamNumber: "",
 			scouterName: $PitScoutingArray[$PitScoutingArray.length - 1].scouterName,
@@ -102,8 +103,9 @@
 		$PitScoutingPhotosTaken.push(false);
 
 		selectedIndex = $PitScoutingArray.length - 1;
-
 	}
+
+	$: arrayIndexes = Array.from(Array($PitScoutingArray.length),(x,i)=>i);
 </script>
 
 <style>
@@ -184,12 +186,12 @@
 
 	{#if allowAdvance}
 		<div class="sectionHeader" style="height: 1rem;"></div>
-		<a class="buttonLookAlike" id="downloader" {href} download={downloadname} target="_self" on:click={submit}>
+		<a class="buttonLookAlike" id="downloader" {href} download={downloadname} target="_self" on:click={prepDownload}>
 			<div style="padding-top: calc(1rem);">DOWNLOAD</div>
 		</a>
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<div class="buttonLookAlike" on:click={newMatch}>
-			<div style="padding-top: calc(1rem);">NEW MATCH</div>
+		<div class="buttonLookAlike" on:click={newTeam}>
+			<div style="padding-top: calc(1rem);">NEW TEAM</div>
 		</div>
 	{:else}
 		<div class="sectionHeader error">{formError}</div>
@@ -199,7 +201,7 @@
 <div class="navbar">
 	
 	<select class="buttonLookAlike hoverSelfAnnounce" bind:value={selectedIndex}>
-		{#each Array.from(Array($PitScoutingArray.length),(x,i)=>i) as option}
+		{#each arrayIndexes as option}
 			<option value={option}>
 				{$PitScoutingArray[option].teamNumber}
 			</option>

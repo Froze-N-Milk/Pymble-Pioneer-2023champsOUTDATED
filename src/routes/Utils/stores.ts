@@ -11,7 +11,7 @@ export type ScoutingPageOptions =
 	PitScouting;
 
 
-export const ScoutingPage = writable<typeof HomePage>();
+export const ScoutingPage = writable<typeof HomePage | typeof MatchScouting | typeof PitScouting>();
 
 export type MatchDataEntry = {
 	teamNumber: number | string;
@@ -60,6 +60,8 @@ export type MatchDataEntry = {
 };
 
 export const selectedIndex = writable<number>(0);
+
+export const matchDataArrayIndexes = writable<number[]>([0]);
 
 export const MatchDataArray = writable<MatchDataEntry[]>([{
 	teamNumber: "",

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { SelectedMatchDataEntry } from '../../Utils/stores.js';
+	import { MatchDataArray, SelectedMatchDataEntry, matchDataArrayIndexes } from '../../Utils/stores.js';
     import { onMount } from "svelte/internal";
     import { fade } from 'svelte/transition';
     import Selector from '../../Utils/Selector.svelte';
@@ -52,7 +52,7 @@
 <input autocomplete="off" class="hoverSelfAnnounce" inputmode="text" type="text" placeholder="SCOUT NAME" bind:value={$SelectedMatchDataEntry.scouterName} />
 
 <label for="" class="left-column">MATCH #:</label>
-<input autocomplete="off" id="matchNumber" class="hoverSelfAnnounce" type="text" inputmode="numeric" placeholder="MATCH NUMBER" bind:value={$SelectedMatchDataEntry.matchNumber} />
+<input autocomplete="off" id="matchNumber" class="hoverSelfAnnounce" type="text" inputmode="numeric" placeholder="MATCH NUMBER" bind:value={$SelectedMatchDataEntry.matchNumber} on:keypress={() => $matchDataArrayIndexes = Array.from(Array($MatchDataArray.length),(x,i)=>i)}/>
 
 <label for="" class="left-column">TEAM #:</label>
 <input autocomplete="off" id="teamNumber" class="hoverSelfAnnounce" type="text" inputmode="numeric" placeholder="TEAM NUMBER" bind:value={$SelectedMatchDataEntry.teamNumber} />

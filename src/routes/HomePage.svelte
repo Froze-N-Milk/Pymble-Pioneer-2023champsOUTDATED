@@ -48,27 +48,30 @@
 	let pitScoutingFile: FileList;
 
 	async function importMatchData() {
+		if(!matchDataFile) {
+			return;
+		}
 		let fileJSON = JSON.parse(await matchDataFile[0].text());
-		if (fileJSON){
+		if (fileJSON && Array.from(fileJSON).length >= $MatchDataArray.length) {
 			$MatchDataArray = fileJSON;
 		}
 	}
 
 	async function importPitScouting() {
+		if(!pitScoutingFile) {
+			return;
+		}
 		let fileJSON = JSON.parse(await pitScoutingFile[0].text());
-		if (fileJSON){
+		if (fileJSON && Array.from(fileJSON).length >= $PitScoutingArray.length) {
 			$PitScoutingArray = fileJSON;
 		}
 	}
-
-	$: matchDataFile ? importMatchData() : null;
-	$: pitScoutingFile ? importPitScouting() : null;
 </script>
 
-<form>
+<form on:submit|preventDefault>
 	<label for="" class="left-column">PIT SCOUTING:</label>
 	<div class="line-wrapper">
-		<button class="hoverSelfAnnounce" style:--background="#20201D" on:click={() => $ScoutingPage = PitScouting}></button>
+		<button class="hoverSelfAnnounce" style:--background="#20201D" on:click={() => {$ScoutingPage = PitScouting; importPitScouting();}}></button>
 		
 		<div style="width: 2px;"/>
 		<input type="file" name="pit-uploader" id="pit-uploader" bind:files={pitScoutingFile}>
@@ -77,7 +80,7 @@
 
 	<label for="" class="left-column">MATCH SCOUTING:</label>
 	<div class="line-wrapper">
-		<button class="hoverSelfAnnounce" style:--background="#20201D" on:click={() => $ScoutingPage = MatchScouting}></button>
+		<button class="hoverSelfAnnounce" style:--background="#20201D" on:click={() => {$ScoutingPage = MatchScouting; importMatchData();}}></button>
 		
 		<div style="width: 2px;"/>
 		<input type="file" name="match-uploader" id="match-uploader" bind:files={matchDataFile}>

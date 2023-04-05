@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { MatchDataArray, selectedIndex, SelectedMatchDataEntry } from '../Utils/stores.js';
+	import { MatchDataArray, matchDataArrayIndexes, selectedIndex, SelectedMatchDataEntry } from '../Utils/stores.js';
     import { pageIndex } from "../Utils/stores";
     import Auto from "./Auto/auto.svelte";
     import Prematch from "./PreMatch/prematch.svelte";
@@ -15,9 +15,6 @@
 
 	$: selectedPage = pageOptions[$pageIndex];
 	$: $SelectedMatchDataEntry = $MatchDataArray.filter(array => array.matchNumber === $MatchDataArray[$selectedIndex].matchNumber)[0] ?? $MatchDataArray[0];
-	
-	$: console.log($SelectedMatchDataEntry);
-	$: console.log($selectedIndex);
 
 
 	function incrementPageIndex() {
@@ -46,7 +43,10 @@
 		}
 	}
 
-	$:onFirstPage = $pageIndex === 0;
+	$: onFirstPage = $pageIndex === 0;
+
+	$: $matchDataArrayIndexes = Array.from(Array($MatchDataArray.length),(x,i)=>i);
+
 </script>
 
 <style>
@@ -98,7 +98,7 @@
 	<button disabled={onFirstPage} on:click={decrementPageIndex} >PREV</button>
 	<div style="width: 1rem;" />
 	<select class="buttonLookAlike hoverSelfAnnounce" bind:value={$selectedIndex}>
-		{#each Array.from(Array($MatchDataArray.length),(x,i)=>i) as option}
+		{#each $matchDataArrayIndexes as option}
 			<option value={option}>
 				{$MatchDataArray[option].matchNumber}
 			</option>

@@ -9,9 +9,9 @@
 
 	let downloadname: string;
 
-	$:submit();
+	$:prepDownload();
 
-	function submit() {
+	function prepDownload() {
 		$MatchDataArray.forEach(array => {
 			array.teamNumber = Number(array.teamNumber);
 			array.matchNumber = Number(array.matchNumber);
@@ -50,7 +50,7 @@
 
 	}
 
-	function reset() {
+	function newMatch() {
 		$MatchDataArray.push({
 			teamNumber: "",
 			matchNumber: Number($MatchDataArray[$MatchDataArray.length - 1].matchNumber ?? 0) + 1,
@@ -105,8 +105,8 @@
 
 	}
 
-	export function downloadFile(node: HTMLAnchorElement) {
-		submit();
+	function downloadFile(node: HTMLAnchorElement) {
+		prepDownload();
 		if($downloadToggle) {
 			node.click();
 		}
@@ -159,6 +159,6 @@
 	<div style="padding-top: calc(1rem);">DOWNLOAD</div>
 </a>
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="buttonLookAlike" on:click={reset}>
+<div class="buttonLookAlike" on:click={newMatch}>
 	<div style="padding-top: calc(1rem);">NEW MATCH</div>
 </div>
