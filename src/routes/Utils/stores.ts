@@ -115,9 +115,9 @@ export type PitScoutingEntry = {
 	teamNumber: number | string;
 	scouterName: string;
 	driveTrainType: string;
-	driveTrainSizeWidth: number;
-	driveTrainSizeLength: number;
-	robotWeight: number;
+	driveTrainSizeWidth: number | string;
+	driveTrainSizeLength: number | string;
+	robotWeight: number | string;
 	autoPaths: string;
 	comments: string;
 }
@@ -126,9 +126,9 @@ export const PitScoutingArray = writable<PitScoutingEntry[]>([{
 	teamNumber: "",
 	scouterName: "",
 	driveTrainType: "",
-	driveTrainSizeWidth: 0,
-	driveTrainSizeLength: 0,
-	robotWeight: 0,
+	driveTrainSizeWidth: "",
+	driveTrainSizeLength: "",
+	robotWeight: "",
 	autoPaths: "",
 	comments: ""
 }])

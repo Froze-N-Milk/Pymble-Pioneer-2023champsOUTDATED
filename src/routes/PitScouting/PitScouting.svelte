@@ -75,16 +75,16 @@
 	<label for="" class="left-column">TEAM #:</label>
 	<input autocomplete="off" id="teamNumber" class="hoverSelfAnnounce" type="text" inputmode="numeric" placeholder="TEAM NUMBER" bind:value={SelectedPitScoutingEntry.teamNumber} />
 
-	<label for="" class="left-column">DRIVE TRAIN TYPE:</label>
+	<label for="" class="left-column">DRIVE TRAIN TYPE :</label>
 	<Selector options={["TANK", "SWERVE", "MECANUM", "OTHER"]} bind:value={SelectedPitScoutingEntry.driveTrainType} />
 
-	<label for="" class="left-column">DRIVE TRAIN WIDTH:</label>
+	<label for="" class="left-column">DRIVE TRAIN WIDTH (in):</label>
 	<input autocomplete="off" id="width" class="hoverSelfAnnounce" type="text" inputmode="numeric" placeholder="WIDTH" bind:value={SelectedPitScoutingEntry.driveTrainSizeWidth} />
 
-	<label for="" class="left-column">DRIVE TRAIN LENGTH:</label>
+	<label for="" class="left-column">DRIVE TRAIN LENGTH (in):</label>
 	<input autocomplete="off" id="length" class="hoverSelfAnnounce" type="text" inputmode="numeric" placeholder="LENGTH" bind:value={SelectedPitScoutingEntry.driveTrainSizeLength} />
 
-	<label for="" class="left-column">ROBOT WEIGHT:</label>
+	<label for="" class="left-column">ROBOT WEIGHT INCL. BATTERY (lb):</label>
 	<input autocomplete="off" id="weight" class="hoverSelfAnnounce" type="text" inputmode="numeric" placeholder="WEIGHT" bind:value={SelectedPitScoutingEntry.robotWeight} />
 
 	<p class="sectionHeader">AUTO PATHS:</p>
