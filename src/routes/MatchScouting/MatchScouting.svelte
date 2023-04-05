@@ -73,18 +73,20 @@
 	}
 
 	.buttonLookAlike {
-		/* outline: 1px solid #151513; */
-		background: #151513;
-		/* background: #20201D; */
-		color: snow;
-		margin: none;
-		text-align: left;
-		padding-left: 2rem;
-		padding-right: 2rem;
-		overflow: hidden;
+		grid-column: 1/3;
+		outline: none;
 		border: none;
+		background: #20201D;
+		color: snow;
 		height: calc(3rem);
-		width: 5rem;
+		aspect-ratio: 5/1;
+		align-items: center;
+		margin: auto;
+		text-align: center;
+		overflow: hidden;
+		padding-top: none;
+		padding-bottom: none;
+		cursor: pointer;
 	}
 </style>
 
