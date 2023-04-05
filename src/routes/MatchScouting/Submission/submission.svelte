@@ -95,8 +95,7 @@
 			startingPosition: 0,
 
 			scouterName: $MatchDataArray[$MatchDataArray.length - 1].scouterName,
-			autoComment: "",
-			teleopComment: ""
+			comments: ""
 		});
 		
 

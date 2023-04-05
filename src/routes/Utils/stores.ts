@@ -56,8 +56,7 @@ export type MatchDataEntry = {
 	startingPosition: number;
 
 	scouterName: string;
-	autoComment: string;
-	teleopComment: string;
+	comments: string;
 };
 
 export const selectedIndex = writable<number>(0);
@@ -105,8 +104,7 @@ export const MatchDataArray = writable<MatchDataEntry[]>([{
 	startingPosition: 0,
 
 	scouterName: "",
-	autoComment: "",
-	teleopComment: ""
+	comments: ""
 },])
 
 export const SelectedMatchDataEntry = writable<MatchDataEntry>();
