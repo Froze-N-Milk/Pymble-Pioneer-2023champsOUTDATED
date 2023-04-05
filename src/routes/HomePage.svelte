@@ -10,7 +10,7 @@
 		margin: none;
 	}
 
-	/* input[type = "file"] {
+	input[type = "file"] {
 		border: 0;
 		clip: rect(0, 0, 0, 0);
 		height: 1px;
@@ -29,7 +29,7 @@
 		color: snow;
 		margin: none;
 		text-align: center;
-	} */
+	}
 
 	.line-wrapper {
 		display: inline-flex;
@@ -38,14 +38,31 @@
 </style>
 
 <script lang="ts">
-    import { downloadToggle, fileType, MatchDataArray, ScoutingPage } from "./Utils/stores";
+    import { downloadToggle, fileType, MatchDataArray, PitScoutingArray, ScoutingPage } from "./Utils/stores";
     import MatchScouting from "./MatchScouting/MatchScouting.svelte";
     import PitScouting from "./PitScouting/PitScouting.svelte";
 
     let settingsToggle: boolean = false;
 
-	let matchDataFile: any;
-	let pitScoutingFile: any;
+	let matchDataFile: FileList;
+	let pitScoutingFile: FileList;
+
+	async function importMatchData() {
+		let fileJSON = JSON.parse(await matchDataFile[0].text());
+		if (fileJSON){
+			$MatchDataArray = fileJSON;
+		}
+	}
+
+	async function importPitScouting() {
+		let fileJSON = JSON.parse(await pitScoutingFile[0].text());
+		if (fileJSON){
+			$PitScoutingArray = fileJSON;
+		}
+	}
+
+	$: matchDataFile ? importMatchData() : null;
+	$: pitScoutingFile ? importPitScouting() : null;
 </script>
 
 <form>
@@ -54,7 +71,7 @@
 		<button class="hoverSelfAnnounce" style:--background="#20201D" on:click={() => $ScoutingPage = PitScouting}></button>
 		
 		<div style="width: 2px;"/>
-		<input type="file" name="pit-uploader" id="pit-uploader" >
+		<input type="file" name="pit-uploader" id="pit-uploader" bind:files={pitScoutingFile}>
 		<label for="pit-uploader" class="uploader hoverSelfAnnounce"> ^ </label>
 	</div>
 

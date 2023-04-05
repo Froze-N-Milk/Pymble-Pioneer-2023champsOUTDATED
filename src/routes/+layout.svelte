@@ -23,6 +23,8 @@
 		color: snow;
 		border: none;
 		outline: 1px solid #20201D;
+		text-align: start;
+		padding: 1rem;
 	}
 
 	:global(*) {

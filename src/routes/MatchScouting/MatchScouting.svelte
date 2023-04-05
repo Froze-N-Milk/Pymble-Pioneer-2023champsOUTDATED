@@ -81,7 +81,7 @@
 		height: calc(3rem);
 		aspect-ratio: 5/1;
 		align-items: center;
-		margin: auto;
+		margin: none;
 		text-align: center;
 		overflow: hidden;
 		padding-top: none;
