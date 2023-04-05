@@ -20,8 +20,6 @@
 
     let settingsToggle: boolean = false;
 
-	onMount(() => alert("Watch us change the world!"));
-
 </script>
 
 <form>

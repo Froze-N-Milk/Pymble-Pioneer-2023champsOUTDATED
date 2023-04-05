@@ -103,7 +103,6 @@
 
 		$selectedIndex = $MatchDataArray.length - 1;
 
-		alert("Watch us change the world!");
 	}
 
 	export function downloadFile(node: HTMLAnchorElement) {
