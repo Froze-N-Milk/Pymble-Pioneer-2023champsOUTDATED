@@ -39,9 +39,6 @@
 		if($fileType) {
 			
 			let csv: string = "";
-			// Object($MatchDataArray).array.forEach((element: string) => {
-			// 	csv += element + ",";
-			// });
 
 			let keys = Object.keys($MatchDataArray[0]);
 

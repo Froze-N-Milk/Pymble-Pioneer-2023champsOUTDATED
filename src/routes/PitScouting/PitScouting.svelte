@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { PitScoutingArray } from './../Utils/stores.js';
+	import { fileType, PitScoutingArray } from './../Utils/stores.js';
     import { onMount } from "svelte";
     import Selector from '../Utils/Selector.svelte';
 
@@ -30,12 +30,11 @@
 
 	let formError: string;
 	let selectedIndex = 0;
-	$: console.log("selected" + selectedIndex);
-	$: console.log("initial" + $PitScoutingArray[0].teamNumber);
 
 	$: SelectedPitScoutingEntry = $PitScoutingArray.filter(array => array.teamNumber === $PitScoutingArray[selectedIndex].teamNumber)[0] ?? $PitScoutingArray[0];
 
-	$:allowAdvance = SelectedPitScoutingEntry.scouterName !== "" && SelectedPitScoutingEntry.teamNumber !== "" && SelectedPitScoutingEntry.teamNumber !== "";
+	$: allowAdvance = SelectedPitScoutingEntry.scouterName !== "" && SelectedPitScoutingEntry.teamNumber !== "" && SelectedPitScoutingEntry.driveTrainType !== "" && SelectedPitScoutingEntry.driveTrainSizeLength !== "" && SelectedPitScoutingEntry.driveTrainSizeWidth !== "" && SelectedPitScoutingEntry.robotWeight !== "";
+	$: console.log(allowAdvance);
 	
 	$: {
 		if(!allowAdvance){
@@ -45,25 +44,97 @@
 			formError = "";
 		}
 	}
+
+	let urlContent;
+	let content = "";
+	let href: string;
+	let downloadname: string;
+	function submit() {
+		$PitScoutingArray.forEach(array => {
+			array.teamNumber = Number(array.teamNumber);
+			array.teamNumber = Number(array.teamNumber);
+			array.teamNumber = Number(array.teamNumber);
+			array.teamNumber = Number(array.teamNumber);
+
+		});
+
+		if($fileType) {
+			
+			let csv: string = "";
+
+			let keys = Object.keys($PitScoutingArray[0]);
+
+			// Build header
+			csv += keys.join(",") + "\n";
+
+			// Add the rows
+			$PitScoutingArray.forEach((obj: any) => {
+				csv += keys.map(k => obj[k]).join(",") + "\n";
+			});
+			
+			urlContent = "data:text/csv;charset=utf-8," + csv;
+			content = csv;
+			href = urlContent;
+			downloadname = "Matches" + $PitScoutingArray[0].teamNumber + "To" + $PitScoutingArray[$PitScoutingArray.length - 1].teamNumber + "ScoutedBy" + $PitScoutingArray[$PitScoutingArray.length - 1].scouterName + ".csv";
+		}
+		else {
+			urlContent = "data:text/json;charset=utf-8," + JSON.stringify($PitScoutingArray);
+			content = JSON.stringify($PitScoutingArray[$PitScoutingArray.length - 1]);
+			href = urlContent;
+			downloadname = "Matches" + $PitScoutingArray[0].teamNumber + "To" + $PitScoutingArray[$PitScoutingArray.length - 1].teamNumber + "ScoutedBy" + $PitScoutingArray[$PitScoutingArray.length - 1].scouterName + ".json";
+		}
+	}
+
+	$: if(allowAdvance) {
+		submit();
+	}
+
+	function newMatch() {
+		$PitScoutingArray.push({
+			teamNumber: "",
+			scouterName: "",
+			driveTrainType: "",
+			driveTrainSizeWidth: "",
+			driveTrainSizeLength: "",
+			robotWeight: "",
+			autoPaths: "",
+			comments: ""
+		})
+
+		selectedIndex = $PitScoutingArray.length - 1;
+	}
 </script>
 
 <style>
 
-	.buttonLookAlike {
-		/* outline: 1px solid #151513; */
-		background: #151513;
-		/* background: #20201D; */
+	a {
+		text-decoration: none;
 		color: snow;
-		margin: none;
-		text-align: center;
-		padding-left: 2rem;
-		padding-right: 2rem;
-		overflow: hidden;
+		font-family: "Roboto";
+	}
+
+	.buttonLookAlike {
+		grid-column: 1/3;
+		outline: none;
 		border: none;
+		background: #20201D;
+		color: snow;
 		height: calc(3rem);
-		width: 10rem;
+		aspect-ratio: 5/1;
+		align-items: center;
+		margin: auto;
+		text-align: center;
+		overflow: hidden;
+		padding-top: none;
+		padding-bottom: none;
+		cursor: pointer;
 	}
 	
+	.error {
+		color: #D62246;
+		height: 1rem;
+		padding: 1rem;
+	}
 </style>
 
 <h2 class="sectionHeader">PIT SCOUTING</h2>
@@ -93,8 +164,20 @@
 	<p class="sectionHeader">COMMENTS:</p>
 	<textarea class="sectionHeader hoverSelfAnnounce" rows="8" bind:value={SelectedPitScoutingEntry.comments}></textarea>
 
-
+	{#if allowAdvance}
+		<div class="sectionHeader" style="height: 1rem;"></div>
+		<a class="buttonLookAlike" id="downloader" {href} download={downloadname} target="_self" on:click={submit}>
+			<div style="padding-top: calc(1rem);">DOWNLOAD</div>
+		</a>
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<div class="buttonLookAlike" on:click={newMatch}>
+			<div style="padding-top: calc(1rem);">NEW MATCH</div>
+		</div>
+	{:else}
+		<div class="sectionHeader error">{formError}</div>
+	{/if}
 </form>
+
 <div class="navbar">
 	
 	<select class="buttonLookAlike hoverSelfAnnounce" bind:value={selectedIndex}>
