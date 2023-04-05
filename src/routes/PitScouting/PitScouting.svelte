@@ -33,7 +33,7 @@
 
 	$: SelectedPitScoutingEntry = $PitScoutingArray.filter(array => array.teamNumber === $PitScoutingArray[selectedIndex].teamNumber)[0] ?? $PitScoutingArray[0];
 
-	$: allowAdvance = SelectedPitScoutingEntry.scouterName !== "" && SelectedPitScoutingEntry.teamNumber !== "" && SelectedPitScoutingEntry.driveTrainType !== "" && SelectedPitScoutingEntry.driveTrainSizeLength !== "" && SelectedPitScoutingEntry.driveTrainSizeWidth !== "" && SelectedPitScoutingEntry.robotWeight !== "";
+	$: allowAdvance = SelectedPitScoutingEntry.scouterName !== "" && SelectedPitScoutingEntry.teamNumber !== "" && SelectedPitScoutingEntry.driveTrainType !== "" && SelectedPitScoutingEntry.driveTrainSizeLength !== "" && SelectedPitScoutingEntry.driveTrainSizeWidth !== "" && SelectedPitScoutingEntry.robotWeight !== "" && $PitScoutingPhotosTaken[selectedIndex] === true;
 	
 	$: {
 		if(!allowAdvance){
@@ -135,6 +135,18 @@
 		height: 1rem;
 		padding: 1rem;
 	}
+
+	button {
+		padding: none;
+		height: calc(3rem + 2px);
+		max-width: 14rem;
+		min-width: 5rem;
+		border: none;
+		background: var(--background);
+		color: snow;
+		margin: none;
+		outline: 1px solid #151513;
+	}
 </style>
 
 <h2 class="sectionHeader">PIT SCOUTING</h2>
@@ -164,7 +176,9 @@
 	<p class="sectionHeader">COMMENTS:</p>
 	<textarea class="sectionHeader hoverSelfAnnounce" rows="8" bind:value={SelectedPitScoutingEntry.comments}></textarea>
 
-	<label for="" class="left-column">TAKEN PHOTOS:</label>
+	<div class="sectionHeader" style="height: 1rem;"></div>
+
+	<label for="" class="left-column">PHOTOS:</label>
 	<button class="hoverSelfAnnounce" style:--background={$PitScoutingPhotosTaken[selectedIndex] ? "#D62246" : "#20201D"} on:click={() => $PitScoutingPhotosTaken[selectedIndex] = !$PitScoutingPhotosTaken[selectedIndex]}></button>
 
 	{#if allowAdvance}

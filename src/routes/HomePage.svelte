@@ -34,10 +34,11 @@
 
 
 	{#if settingsToggle}
-	<label for="">DOWNLOAD AUTOMATICALLY:</label>
+	<label for="" class="left-column">DOWNLOAD AUTOMATICALLY:</label>
 	<button class="hoverSelfAnnounce" style:--background={$downloadToggle ? "#D62246" : "#20201D"} on:click|preventDefault={() => {$downloadToggle = !$downloadToggle;}}></button>
-	<label for="">{$fileType ? "CSV" : "JSON"}</label>
-	<button class="hoverSelfAnnounce" style:--background={$fileType ? "#20201D" : "#D62246"} on:click|preventDefault={() => {$fileType = !$fileType;}}></button>
+	<label for="" class="left-column">{$fileType ? "CSV" : "JSON"}</label>
+	<!-- $fileType = !$fileType; for the next one -->
+	<button class="hoverSelfAnnounce" style:--background={$fileType ? "#20201D" : "#D62246"} on:click|preventDefault={() => {}}></button> 
 	{/if}
 </form>
 
