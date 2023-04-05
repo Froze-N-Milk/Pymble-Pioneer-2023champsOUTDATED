@@ -16,8 +16,12 @@
     import { downloadToggle, fileType, ScoutingPage } from "./Utils/stores";
     import MatchScouting from "./MatchScouting/MatchScouting.svelte";
     import PitScouting from "./PitScouting/PitScouting.svelte";
+    import { onMount } from "svelte";
 
     let settingsToggle: boolean = false;
+
+	onMount(() => alert("Watch us change the world!"));
+
 </script>
 
 <form>
