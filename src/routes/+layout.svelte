@@ -31,14 +31,14 @@
 
 	:global(form) {
 		display: contents;
-		overflow: scroll;
+		overflow: hidden;
 	}
 
 	:global(.left-column) {
 		align-self: center;
 		justify-self: end;
 		min-width: 5rem;
-		overflow: scroll;
+		overflow: hidden;
 	}
 
 	:global(.right-column) {
@@ -161,7 +161,7 @@
 		column-gap: 1rem;
 		row-gap: 0.2rem;
 		justify-content: center;
-		overflow: scroll;
+		overflow: hidden;
 		grid-auto-flow: row;
 	}
 
