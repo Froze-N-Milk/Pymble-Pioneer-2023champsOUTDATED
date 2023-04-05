@@ -1,11 +1,10 @@
 <script lang="ts">
-	import { MatchDataArray, ScoutingPage } from '../Utils/stores.js';
+	import { MatchDataArray } from '../Utils/stores.js';
     import { pageIndex } from "../Utils/stores";
     import Auto from "./Auto/auto.svelte";
     import Prematch from "./PreMatch/prematch.svelte";
     import Submission from "./Submission/submission.svelte";
     import Teleop from "./Teleop/teleop.svelte";
-    import Selector from '../Utils/Selector.svelte';
 
 	const pageOptions = [
 		Prematch,

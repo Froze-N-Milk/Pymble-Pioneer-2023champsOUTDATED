@@ -28,16 +28,6 @@
 </script>
 
 <style>
-	textarea {
-		resize: none;
-		width: 80%;
-		max-width: 35rem;
-		margin: auto;
-		background-color: #20201D;
-		color: snow;
-		border: none;
-		outline: 1px solid #20201D;
-	}
 
 	.hoverSelfAnnounce:hover {
 		outline: 2px solid #D62246;

@@ -110,3 +110,25 @@ export const MatchDataArray = writable<MatchDataEntry[]>([{
 export const downloadToggle = writable(true);
 
 export const fileType = writable(false);
+
+export type PitScoutingEntry = {
+	teamNumber: number | string;
+	scouterName: string;
+	driveTrainType: string;
+	driveTrainSizeWidth: number;
+	driveTrainSizeLength: number;
+	robotWeight: number;
+	autoPaths: string;
+	comments: string;
+}
+
+export const PitScoutingArray = writable<PitScoutingEntry[]>([{
+	teamNumber: "",
+	scouterName: "",
+	driveTrainType: "",
+	driveTrainSizeWidth: 0,
+	driveTrainSizeLength: 0,
+	robotWeight: 0,
+	autoPaths: "",
+	comments: ""
+}])
