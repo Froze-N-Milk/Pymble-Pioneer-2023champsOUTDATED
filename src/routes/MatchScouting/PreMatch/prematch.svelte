@@ -6,6 +6,8 @@
 	
 	const regex = new RegExp("^[0-9]*$");
 
+	export let SelectedMatchDataEntry;
+
 	// enables input validation for these two form inputs
 	onMount(() => {
 		document.getElementById("matchNumber")?.addEventListener("beforeinput", (event) => {

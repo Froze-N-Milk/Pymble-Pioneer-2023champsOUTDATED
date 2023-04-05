@@ -1,9 +1,11 @@
 <script lang="ts">
-	import { MatchDataArray, type MatchDataEntry } from '../../Utils/stores.js';
-    import FoulCollector from "../../Utils/FoulCollector.svelte";
+	import FoulCollector from "../../Utils/FoulCollector.svelte";
     import PickupCollector from "../../Utils/PickupCollector.svelte";
 	import ScoringCollector from "../../Utils/ScoringCollector.svelte";
     import Selector from '../../Utils/Selector.svelte';
+    import type { MatchDataEntry } from "../../Utils/stores";
+
+	export let SelectedMatchDataEntry: MatchDataEntry;
 
 	const scoringRangeStart: (keyof MatchDataEntry)[] = [
 		"teleopTopCones",
@@ -51,22 +53,22 @@
 
 	<p class="sectionHeader">SCORING:</p>
 
-	<ScoringCollector data={scoringRangeStart} />
+	<ScoringCollector {SelectedMatchDataEntry} data={scoringRangeStart} />
 
 	<p class="sectionHeader">COLLECTING:</p>
 
-	<PickupCollector data={pickupRangeStart} />
+	<PickupCollector {SelectedMatchDataEntry} data={pickupRangeStart} />
 
-	<FoulCollector />
+	<FoulCollector {SelectedMatchDataEntry} />
 
 	<p class="sectionHeader">PARKING:</p>
 	<label for="" class="left-column">ATTEMPED TO ENAGAGE:</label>
-	<button class="hoverSelfAnnounce" style:--background={$MatchDataArray[$MatchDataArray.length - 1].teleopEngageAttempt ? "#D62246" : "#20201D"} on:click|preventDefault={() => $MatchDataArray[$MatchDataArray.length - 1].teleopEngageAttempt = !$MatchDataArray[$MatchDataArray.length - 1].teleopEngageAttempt}></button>
+	<button class="hoverSelfAnnounce" style:--background={SelectedMatchDataEntry.teleopEngageAttempt ? "#D62246" : "#20201D"} on:click|preventDefault={() => SelectedMatchDataEntry.teleopEngageAttempt = !SelectedMatchDataEntry.teleopEngageAttempt}></button>
 
 	<label for="" class="left-column">PARKING:</label>
-	<Selector {options} bind:value={$MatchDataArray[$MatchDataArray.length - 1].teleopParking}/>
+	<Selector {options} bind:value={SelectedMatchDataEntry.teleopParking}/>
 
 	<p class="sectionHeader">COMMENTS:</p>
 
-	<textarea class="sectionHeader hoverSelfAnnounce" rows="8" bind:value={$MatchDataArray[$MatchDataArray.length - 1].teleopComment}></textarea>
+	<textarea class="sectionHeader hoverSelfAnnounce" rows="8" bind:value={SelectedMatchDataEntry.teleopComment}></textarea>
 </div>

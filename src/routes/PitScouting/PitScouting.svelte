@@ -34,7 +34,6 @@
 	$: SelectedPitScoutingEntry = $PitScoutingArray.filter(array => array.teamNumber === $PitScoutingArray[selectedIndex].teamNumber)[0] ?? $PitScoutingArray[0];
 
 	$: allowAdvance = SelectedPitScoutingEntry.scouterName !== "" && SelectedPitScoutingEntry.teamNumber !== "" && SelectedPitScoutingEntry.driveTrainType !== "" && SelectedPitScoutingEntry.driveTrainSizeLength !== "" && SelectedPitScoutingEntry.driveTrainSizeWidth !== "" && SelectedPitScoutingEntry.robotWeight !== "";
-	$: console.log(allowAdvance);
 	
 	$: {
 		if(!allowAdvance){

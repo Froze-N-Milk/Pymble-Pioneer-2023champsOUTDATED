@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { downloadToggle, fileType, MatchDataArray, pageIndex } from '../../Utils/stores.js';
+	import { downloadToggle, fileType, MatchDataArray, pageIndex, selectedIndex } from '../../Utils/stores.js';
 	import { QRCode } from "@bonosoft/sveltekit-qrcode";
 
 	let content = "";
@@ -8,31 +8,18 @@
 
 	let downloadname: string;
 
+	export let SelectedMatchDataEntry;
+
 	$:submit();
 
 	function submit() {
-		$MatchDataArray[$MatchDataArray.length - 1].teamNumber = Number($MatchDataArray[$MatchDataArray.length - 1].teamNumber);
-		$MatchDataArray[$MatchDataArray.length - 1].matchNumber = Number($MatchDataArray[$MatchDataArray.length - 1].matchNumber);
+		$MatchDataArray.forEach(array => {
+			array.teamNumber = Number(array.teamNumber);
+			array.matchNumber = Number(array.matchNumber);
 
-		// old logic for truthy and falsy values for separeate storage of this stuff
-		// matchData[9] = $autoParkOption === "ENGAGED" ? 1 : 0;
-		// matchData[10] = $autoParkOption === "DOCKED" ? 1 : 0;
-		// matchData[11] = $autoParkOption === "MOBILITY" ? 1 : 0;
-
-		// matchData[24] = $teleopParkOption === "ENGAGED" ? 1 : 0;
-		// matchData[25] = $teleopParkOption === "DOCKED" ? 1 : 0;
-		// matchData[26] = $teleopParkOption === "PARKED" ? 1 : 0;
-
-		// old cylce sum logic
-		// matchData.slice(3, 9).concat(matchData.slice(12, 18)).forEach(value => {
-		// 	cyclesSum += Number(value);
-		// }); 
-		$MatchDataArray[$MatchDataArray.length - 1].cycles = 
-			$MatchDataArray[$MatchDataArray.length - 1].autoTopCones + $MatchDataArray[$MatchDataArray.length - 1].autoMiddleCones + $MatchDataArray[$MatchDataArray.length - 1].autoLowCones + 
-			$MatchDataArray[$MatchDataArray.length - 1].autoTopCubes + $MatchDataArray[$MatchDataArray.length - 1].autoMiddleCubes + $MatchDataArray[$MatchDataArray.length - 1].autoLowCubes + 
-			
-			$MatchDataArray[$MatchDataArray.length - 1].teleopTopCones + $MatchDataArray[$MatchDataArray.length - 1].teleopMiddleCones + $MatchDataArray[$MatchDataArray.length - 1].teleopLowCones + 
-			$MatchDataArray[$MatchDataArray.length - 1].teleopTopCubes + $MatchDataArray[$MatchDataArray.length - 1].teleopMiddleCubes + $MatchDataArray[$MatchDataArray.length - 1].teleopLowCubes;
+			array.cycles = array.autoTopCones + array.autoMiddleCones + array.autoLowCones + array.autoTopCubes + array.autoMiddleCubes + array.autoLowCubes + 
+				array.teleopTopCones + array.teleopMiddleCones + array.teleopLowCones + array.teleopTopCubes + array.teleopMiddleCubes + array.teleopLowCubes;
+		});
 
 		let urlContent;
 
@@ -115,6 +102,8 @@
 		
 
 		$pageIndex = 0;
+
+		$selectedIndex = $MatchDataArray.length - 1;
 	}
 
 	export function downloadFile(node: HTMLAnchorElement) {

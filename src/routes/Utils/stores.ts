@@ -13,6 +13,8 @@ export type ScoutingPageOptions =
 
 export const ScoutingPage = writable<typeof HomePage>();
 
+export const selectedIndex = writable(0);
+
 export type MatchDataEntry = {
 	teamNumber: number | string;
 	matchNumber: number | string;
