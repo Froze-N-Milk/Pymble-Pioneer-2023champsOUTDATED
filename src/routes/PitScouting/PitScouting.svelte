@@ -75,13 +75,13 @@
 			urlContent = "data:text/csv;charset=utf-8," + csv;
 			content = csv;
 			href = urlContent;
-			downloadname = "Teams" + $PitScoutingArray[0].teamNumber + "To" + $PitScoutingArray[$PitScoutingArray.length - 1].teamNumber + "PitScoutedBy" + $PitScoutingArray[$PitScoutingArray.length - 1].scouterName + ".csv";
+			downloadname = $PitScoutingArray.length + "Teams" + $PitScoutingArray[0].teamNumber + "To" + $PitScoutingArray[$PitScoutingArray.length - 1].teamNumber + "PitScoutedBy" + $PitScoutingArray[$PitScoutingArray.length - 1].scouterName + ".csv";
 		}
 		else {
 			urlContent = "data:text/json;charset=utf-8," + JSON.stringify($PitScoutingArray);
 			content = JSON.stringify($PitScoutingArray[$PitScoutingArray.length - 1]);
 			href = urlContent;
-			downloadname = "Teams" + $PitScoutingArray[0].teamNumber + "To" + $PitScoutingArray[$PitScoutingArray.length - 1].teamNumber + "PitScoutedBy" + $PitScoutingArray[$PitScoutingArray.length - 1].scouterName + ".json";
+			downloadname = $PitScoutingArray.length + "Teams" + $PitScoutingArray[0].teamNumber + "To" + $PitScoutingArray[$PitScoutingArray.length - 1].teamNumber + "PitScoutedBy" + $PitScoutingArray[$PitScoutingArray.length - 1].scouterName + ".json";
 		}
 	}
 
