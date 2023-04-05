@@ -8,6 +8,7 @@
 	body {
 		color: snow;
 		background-color: #151513;
+		/* background-color: #002F67; */
 		margin: 20px;
 		box-sizing: border-box;
 
@@ -106,7 +107,6 @@
 	}
 
 	:global(.hoverSelfAnnounce:hover) {
-		/* outline: 2px solid #D62246; */
 		background: #D62246;
 		cursor: pointer;
 	}
