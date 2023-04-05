@@ -3,7 +3,7 @@
     import { onMount } from "svelte";
     import Selector from '../Utils/Selector.svelte';
 
-	const regex = new RegExp("^[0-9]*$");
+	const regex = new RegExp("[0-9]");
 
 	onMount(() => {
 		document.getElementById("matchNumber")?.addEventListener("beforeinput", (event) => {

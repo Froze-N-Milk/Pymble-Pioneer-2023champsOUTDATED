@@ -4,7 +4,7 @@
     import { fade } from 'svelte/transition';
     import Selector from '../../Utils/Selector.svelte';
 	
-	const regex = new RegExp("^[0-9]*$");
+	const regex = new RegExp("[0-9]");
 
 	// enables input validation for these two form inputs
 	onMount(() => {
