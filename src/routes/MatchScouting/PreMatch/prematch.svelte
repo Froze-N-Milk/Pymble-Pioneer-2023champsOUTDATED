@@ -39,7 +39,7 @@
 
 <style>
 	.error {
-		color: #D62246;
+		color: #5386E4;
 		height: 1rem;
 		padding: 1rem;
 	}

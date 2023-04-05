@@ -62,7 +62,7 @@
 	}
 
 	button:hover {
-		background: #D62246;
+		background: #5386E4;
 		cursor: pointer;
 	}
 

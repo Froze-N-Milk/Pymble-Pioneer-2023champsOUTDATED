@@ -32,15 +32,15 @@
 	<p class="sectionHeader">SETTINGS</p>
 		
 	<label for="" class="left-column">{settingsToggle ? "HIDE" : "SHOW"} SETTINGS:</label>
-	<button class="hoverSelfAnnounce" style:--background={settingsToggle ? "#D62246" : "#20201D"} on:click|preventDefault={() => {settingsToggle = !settingsToggle;}}></button>
+	<button class="hoverSelfAnnounce" style:--background={settingsToggle ? "#5386E4" : "#20201D"} on:click|preventDefault={() => {settingsToggle = !settingsToggle;}}></button>
 
 
 	{#if settingsToggle}
 	<label for="" class="left-column">DOWNLOAD AUTOMATICALLY:</label>
-	<button class="hoverSelfAnnounce" style:--background={$downloadToggle ? "#D62246" : "#20201D"} on:click|preventDefault={() => {$downloadToggle = !$downloadToggle;}}></button>
+	<button class="hoverSelfAnnounce" style:--background={$downloadToggle ? "#5386E4" : "#20201D"} on:click|preventDefault={() => {$downloadToggle = !$downloadToggle;}}></button>
 	<label for="" class="left-column">{$fileType ? "CSV" : "JSON"}</label>
 	<!-- $fileType = !$fileType; for the next one -->
-	<button class="hoverSelfAnnounce" style:--background={$fileType ? "#20201D" : "#D62246"} on:click|preventDefault={() => {}}></button> 
+	<button class="hoverSelfAnnounce" style:--background={$fileType ? "#20201D" : "#5386E4"} on:click|preventDefault={() => {}}></button> 
 	{/if}
 </form>
 

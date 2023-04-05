@@ -65,7 +65,7 @@
 	}
 
 	:global(form input:focus) {
-		outline: 2px solid #D62246;
+		outline: 2px solid #5386E4;
 	}
 
 	:global(.sectionHeader) {
@@ -107,7 +107,7 @@
 	}
 
 	:global(.hoverSelfAnnounce:hover) {
-		background: #D62246;
+		background: #5386E4;
 		cursor: pointer;
 	}
 
@@ -146,7 +146,7 @@
 	}
 
 	.return:hover {
-		background: #D62246;
+		background: #5386E4;
 		cursor: pointer;
 	}
 

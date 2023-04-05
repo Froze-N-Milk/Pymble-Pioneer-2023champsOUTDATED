@@ -30,7 +30,7 @@
 	}
 
 	.hoverSelfAnnounce:hover {
-		outline: 2px solid #D62246;
+		outline: 2px solid #5386E4;
 		cursor: pointer;
 	}
 
@@ -54,7 +54,7 @@
 
 	<p class="sectionHeader" >PARKING:</p>
 	<label for="" class="left-column">ATTEMPED TO ENAGAGE:</label>
-	<button class="hoverSelfAnnounce" style:--background={$SelectedMatchDataEntry.autoEngageAttempt ? "#D62246" : "#20201D"} on:click|preventDefault={() => $SelectedMatchDataEntry.autoEngageAttempt = !$SelectedMatchDataEntry.autoEngageAttempt}></button>
+	<button class="hoverSelfAnnounce" style:--background={$SelectedMatchDataEntry.autoEngageAttempt ? "#5386E4" : "#20201D"} on:click|preventDefault={() => $SelectedMatchDataEntry.autoEngageAttempt = !$SelectedMatchDataEntry.autoEngageAttempt}></button>
 
 	<label for="" class="left-column">PARKING:</label>
 	<Selector {options} bind:value={$SelectedMatchDataEntry.autoParking} />

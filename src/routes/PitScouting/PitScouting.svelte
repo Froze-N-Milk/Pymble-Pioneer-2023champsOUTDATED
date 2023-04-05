@@ -132,7 +132,7 @@
 	}
 	
 	.error {
-		color: #D62246;
+		color: #5386E4;
 		height: 1rem;
 		padding: 1rem;
 	}
@@ -180,7 +180,7 @@
 	<div class="sectionHeader" style="height: 1rem;"></div>
 
 	<label for="" class="left-column">PHOTOS:</label>
-	<button class="hoverSelfAnnounce" style:--background={$PitScoutingPhotosTaken[selectedIndex] ? "#D62246" : "#20201D"} on:click={() => $PitScoutingPhotosTaken[selectedIndex] = !$PitScoutingPhotosTaken[selectedIndex]}></button>
+	<button class="hoverSelfAnnounce" style:--background={$PitScoutingPhotosTaken[selectedIndex] ? "#5386E4" : "#20201D"} on:click={() => $PitScoutingPhotosTaken[selectedIndex] = !$PitScoutingPhotosTaken[selectedIndex]}></button>
 
 	{#if allowAdvance}
 		<div class="sectionHeader" style="height: 1rem;"></div>
