@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { downloadToggle, fileType, MatchDataArray, pageIndex, selectedIndex } from '../../Utils/stores.js';
+	import { selectedIndex } from '../../Utils/stores.js';
+	import { downloadToggle, fileType, MatchDataArray, pageIndex } from '../../Utils/stores.js';
 	import { QRCode } from "@bonosoft/sveltekit-qrcode";
 
 	let content = "";
@@ -7,8 +8,6 @@
 	let href: string;
 
 	let downloadname: string;
-
-	export let SelectedMatchDataEntry;
 
 	$:submit();
 

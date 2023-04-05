@@ -91,7 +91,7 @@
 	function newMatch() {
 		$PitScoutingArray.push({
 			teamNumber: "",
-			scouterName: "",
+			scouterName: $PitScoutingArray[$PitScoutingArray.length - 1].scouterName,
 			driveTrainType: "",
 			driveTrainSizeWidth: "",
 			driveTrainSizeLength: "",

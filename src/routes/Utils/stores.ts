@@ -13,8 +13,6 @@ export type ScoutingPageOptions =
 
 export const ScoutingPage = writable<typeof HomePage>();
 
-export const selectedIndex = writable(0);
-
 export type MatchDataEntry = {
 	teamNumber: number | string;
 	matchNumber: number | string;
@@ -60,7 +58,9 @@ export type MatchDataEntry = {
 	scouterName: string;
 	autoComment: string;
 	teleopComment: string;
-}
+};
+
+export const selectedIndex = writable<number>(0);
 
 export const MatchDataArray = writable<MatchDataEntry[]>([{
 	teamNumber: "",
@@ -108,6 +108,8 @@ export const MatchDataArray = writable<MatchDataEntry[]>([{
 	autoComment: "",
 	teleopComment: ""
 },])
+
+export const SelectedMatchDataEntry = writable<MatchDataEntry>();
 
 export const downloadToggle = writable(true);
 

@@ -3,8 +3,7 @@
     import Selector from "../../Utils/Selector.svelte";
     import FoulCollector from '../../Utils/FoulCollector.svelte';
     import type { MatchDataEntry } from "../../Utils/stores";
-
-	export let SelectedMatchDataEntry: MatchDataEntry;
+	import { SelectedMatchDataEntry } from "../../Utils/stores";
 
 	const data: (keyof MatchDataEntry)[] = [
 		"autoTopCones",
@@ -51,18 +50,18 @@
 	<h2 class="sectionHeader">AUTO</h2>
 
 	<p class="sectionHeader">SCORING:</p>
-	<ScoringCollector {SelectedMatchDataEntry} {data} />
+	<ScoringCollector {data} />
 
 	<p class="sectionHeader" >PARKING:</p>
 	<label for="" class="left-column">ATTEMPED TO ENAGAGE:</label>
-	<button class="hoverSelfAnnounce" style:--background={SelectedMatchDataEntry.autoEngageAttempt ? "#D62246" : "#20201D"} on:click|preventDefault={() => SelectedMatchDataEntry.autoEngageAttempt = !SelectedMatchDataEntry.autoEngageAttempt}></button>
+	<button class="hoverSelfAnnounce" style:--background={$SelectedMatchDataEntry.autoEngageAttempt ? "#D62246" : "#20201D"} on:click|preventDefault={() => $SelectedMatchDataEntry.autoEngageAttempt = !$SelectedMatchDataEntry.autoEngageAttempt}></button>
 
 	<label for="" class="left-column">PARKING:</label>
-	<Selector {options} bind:value={SelectedMatchDataEntry.autoParking} />
+	<Selector {options} bind:value={$SelectedMatchDataEntry.autoParking} />
 
-	<FoulCollector {SelectedMatchDataEntry} />
+	<FoulCollector />
 
 	<p class="sectionHeader">COMMENTS:</p>
 
-	<textarea class="sectionHeader hoverSelfAnnounce" rows="8" bind:value={SelectedMatchDataEntry.autoComment}></textarea>
+	<textarea class="sectionHeader hoverSelfAnnounce" rows="8" bind:value={$SelectedMatchDataEntry.autoComment}></textarea>
 </div>

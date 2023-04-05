@@ -1,12 +1,10 @@
 <script lang="ts">
-	import { MatchDataArray } from '../../Utils/stores.js';
+	import { SelectedMatchDataEntry } from '../../Utils/stores.js';
     import { onMount } from "svelte/internal";
     import { fade } from 'svelte/transition';
     import Selector from '../../Utils/Selector.svelte';
 	
 	const regex = new RegExp("^[0-9]*$");
-
-	export let SelectedMatchDataEntry;
 
 	// enables input validation for these two form inputs
 	onMount(() => {
@@ -24,7 +22,7 @@
 
 	let formError: string;
 
-	$:allowAdvance = $MatchDataArray[$MatchDataArray.length - 1].scouterName !== "" && $MatchDataArray[$MatchDataArray.length - 1].teamNumber !== "" && $MatchDataArray[$MatchDataArray.length - 1].teamNumber !== "" && $MatchDataArray[$MatchDataArray.length - 1].matchNumber !== 0 && $MatchDataArray[$MatchDataArray.length - 1].matchNumber !== "" && $MatchDataArray[$MatchDataArray.length - 1].startingPosition !== 0;
+	$:allowAdvance = $SelectedMatchDataEntry.scouterName !== "" && $SelectedMatchDataEntry.teamNumber !== "" && $SelectedMatchDataEntry.teamNumber !== "" && $SelectedMatchDataEntry.matchNumber !== 0 && $SelectedMatchDataEntry.matchNumber !== "" && $SelectedMatchDataEntry.startingPosition !== 0;
 	
 	$: {
 		if(!allowAdvance){
@@ -51,16 +49,16 @@
 <h2 class="sectionHeader">PRE MATCH INFORMATION</h2>
 
 <label for="" class="left-column">SCOUT NAME:</label>
-<input autocomplete="off" class="hoverSelfAnnounce" inputmode="text" type="text" placeholder="SCOUT NAME" bind:value={$MatchDataArray[$MatchDataArray.length - 1].scouterName} />
+<input autocomplete="off" class="hoverSelfAnnounce" inputmode="text" type="text" placeholder="SCOUT NAME" bind:value={$SelectedMatchDataEntry.scouterName} />
 
 <label for="" class="left-column">MATCH #:</label>
-<input autocomplete="off" id="matchNumber" class="hoverSelfAnnounce" type="text" inputmode="numeric" placeholder="MATCH NUMBER" bind:value={$MatchDataArray[$MatchDataArray.length - 1].matchNumber} />
+<input autocomplete="off" id="matchNumber" class="hoverSelfAnnounce" type="text" inputmode="numeric" placeholder="MATCH NUMBER" bind:value={$SelectedMatchDataEntry.matchNumber} />
 
 <label for="" class="left-column">TEAM #:</label>
-<input autocomplete="off" id="teamNumber" class="hoverSelfAnnounce" type="text" inputmode="numeric" placeholder="TEAM NUMBER" bind:value={$MatchDataArray[$MatchDataArray.length - 1].teamNumber} />
+<input autocomplete="off" id="teamNumber" class="hoverSelfAnnounce" type="text" inputmode="numeric" placeholder="TEAM NUMBER" bind:value={$SelectedMatchDataEntry.teamNumber} />
 
 <label for="" class="left-column">STARTING POSITION:</label>
-<Selector options={startingPositions} bind:value={$MatchDataArray[$MatchDataArray.length - 1].startingPosition} />
+<Selector options={startingPositions} bind:value={$SelectedMatchDataEntry.startingPosition} />
 
 <div class="sectionHeader error">
 	{#key formError}

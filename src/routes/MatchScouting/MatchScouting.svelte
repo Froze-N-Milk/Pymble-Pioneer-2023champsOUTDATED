@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { MatchDataArray, selectedIndex } from '../Utils/stores.js';
+	import { MatchDataArray, selectedIndex, SelectedMatchDataEntry } from '../Utils/stores.js';
     import { pageIndex } from "../Utils/stores";
     import Auto from "./Auto/auto.svelte";
     import Prematch from "./PreMatch/prematch.svelte";
@@ -13,10 +13,12 @@
 		Submission
 	];
 
+	$: selectedPage = pageOptions[$pageIndex];
+	$: $SelectedMatchDataEntry = $MatchDataArray.filter(array => array.matchNumber === $MatchDataArray[$selectedIndex].matchNumber)[0] ?? $MatchDataArray[0];
+	
+	$: console.log($SelectedMatchDataEntry);
+	$: console.log($selectedIndex);
 
-	$:selectedPage = pageOptions[$pageIndex];
-
-	$: SelectedMatchDataEntry = $MatchDataArray.filter(array => array.matchNumber === $MatchDataArray[$selectedIndex].matchNumber)[0] ?? $MatchDataArray[0];
 
 	function incrementPageIndex() {
 		if($pageIndex < pageOptions.length - 1) {
@@ -24,8 +26,8 @@
 		}
 	}
 	$:onLastPage = $pageIndex === pageOptions.length - 1;
-	$:allowAdvance = $MatchDataArray[$MatchDataArray.length - 1].scouterName !== "" && $MatchDataArray[$MatchDataArray.length - 1].teamNumber !== "" && $MatchDataArray[$MatchDataArray.length - 1].teamNumber !== "" && $MatchDataArray[$MatchDataArray.length - 1].matchNumber !== 0 && $MatchDataArray[$MatchDataArray.length - 1].matchNumber !== "" && $MatchDataArray[$MatchDataArray.length - 1].startingPosition !== 0;
-	$:console.log($MatchDataArray);
+
+	$:allowAdvance = $SelectedMatchDataEntry.scouterName !== "" && $SelectedMatchDataEntry.teamNumber !== "" && $SelectedMatchDataEntry.teamNumber !== "" && $SelectedMatchDataEntry.matchNumber !== 0 && $SelectedMatchDataEntry.matchNumber !== "" && $SelectedMatchDataEntry.startingPosition !== 0;
 
 	function decrementPageIndex() {
 		if($pageIndex > 0) {
@@ -87,7 +89,7 @@
 </style>
 
 <form>
-	<svelte:component this={selectedPage} {SelectedMatchDataEntry} />
+	<svelte:component this={selectedPage} />
 </form>
 
 <div class="navbar">

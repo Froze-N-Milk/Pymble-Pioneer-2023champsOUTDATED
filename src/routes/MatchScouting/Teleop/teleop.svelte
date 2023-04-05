@@ -4,8 +4,8 @@
 	import ScoringCollector from "../../Utils/ScoringCollector.svelte";
     import Selector from '../../Utils/Selector.svelte';
     import type { MatchDataEntry } from "../../Utils/stores";
+	import { SelectedMatchDataEntry } from "../../Utils/stores";
 
-	export let SelectedMatchDataEntry: MatchDataEntry;
 
 	const scoringRangeStart: (keyof MatchDataEntry)[] = [
 		"teleopTopCones",
@@ -53,22 +53,22 @@
 
 	<p class="sectionHeader">SCORING:</p>
 
-	<ScoringCollector {SelectedMatchDataEntry} data={scoringRangeStart} />
+	<ScoringCollector data={scoringRangeStart} />
 
 	<p class="sectionHeader">COLLECTING:</p>
 
-	<PickupCollector {SelectedMatchDataEntry} data={pickupRangeStart} />
+	<PickupCollector data={pickupRangeStart} />
 
-	<FoulCollector {SelectedMatchDataEntry} />
+	<FoulCollector />
 
 	<p class="sectionHeader">PARKING:</p>
 	<label for="" class="left-column">ATTEMPED TO ENAGAGE:</label>
-	<button class="hoverSelfAnnounce" style:--background={SelectedMatchDataEntry.teleopEngageAttempt ? "#D62246" : "#20201D"} on:click|preventDefault={() => SelectedMatchDataEntry.teleopEngageAttempt = !SelectedMatchDataEntry.teleopEngageAttempt}></button>
+	<button class="hoverSelfAnnounce" style:--background={$SelectedMatchDataEntry.teleopEngageAttempt ? "#D62246" : "#20201D"} on:click|preventDefault={() => $SelectedMatchDataEntry.teleopEngageAttempt = !$SelectedMatchDataEntry.teleopEngageAttempt}></button>
 
 	<label for="" class="left-column">PARKING:</label>
-	<Selector {options} bind:value={SelectedMatchDataEntry.teleopParking}/>
+	<Selector {options} bind:value={$SelectedMatchDataEntry.teleopParking}/>
 
 	<p class="sectionHeader">COMMENTS:</p>
 
-	<textarea class="sectionHeader hoverSelfAnnounce" rows="8" bind:value={SelectedMatchDataEntry.teleopComment}></textarea>
+	<textarea class="sectionHeader hoverSelfAnnounce" rows="8" bind:value={$SelectedMatchDataEntry.teleopComment}></textarea>
 </div>
