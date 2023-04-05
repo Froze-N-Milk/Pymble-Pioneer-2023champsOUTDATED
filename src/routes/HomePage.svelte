@@ -63,7 +63,7 @@
 		<button class="hoverSelfAnnounce" style:--background="#20201D" on:click={() => $ScoutingPage = MatchScouting}></button>
 		
 		<div style="width: 2px;"/>
-		<input type="file" name="match-uploader" id="match-uploader">
+		<input type="file" name="match-uploader" id="match-uploader" bind:files={matchDataFile}>
 		<label for="match-uploader" class="uploader hoverSelfAnnounce"> ^ </label>
 	</div>
 
