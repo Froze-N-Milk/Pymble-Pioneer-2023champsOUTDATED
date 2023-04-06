@@ -25,7 +25,7 @@
 		height: calc(1.75rem + 2px);
 		width: calc(7rem - 1px);
 		border: none;
-		background: #20201D;
+		background: var(--background);
 		color: snow;
 		margin: none;
 		text-align: center;
@@ -143,7 +143,7 @@
 		
 		<div style="width: 2px;"/>
 		<input type="file" name="pit-uploader" id="pit-uploader" bind:files={pitScoutingFile}>
-		<label for="pit-uploader" class="uploader hoverSelfAnnounce"> ^ </label>
+		<label for="pit-uploader" class="uploader hoverSelfAnnounce" style:--background={pitScoutingFile ? "#5386E4" :"#20201D" }> ^ </label>
 	</div>
 
 	<label for="" class="left-column">MATCH SCOUTING:</label>
@@ -151,8 +151,8 @@
 		<button class="hoverSelfAnnounce" style:--background="#20201D" on:click={() => {$ScoutingPage = MatchScouting; importMatchData();}}></button>
 		
 		<div style="width: 2px;"/>
-		<input type="file" name="match-uploader" id="match-uploader" bind:files={matchDataFile}>
-		<label for="match-uploader" class="uploader hoverSelfAnnounce"> ^ </label>
+		<input type="file" name="match-uploader" id="match-uploader"  bind:files={matchDataFile}>
+		<label for="match-uploader" class="uploader hoverSelfAnnounce" style:--background={matchDataFile ? "#5386E4" :"#20201D" }> ^ </label>
 	</div>
 
 	<p class="sectionHeader">SETTINGS</p>
