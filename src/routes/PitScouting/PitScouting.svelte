@@ -29,7 +29,7 @@
 	});
 
 	let formError: string;
-	let selectedIndex = 0;
+	let selectedIndex = $PitScoutingArray.length - 1;
 
 	$: SelectedPitScoutingEntry = $PitScoutingArray.filter(array => array.teamNumber === $PitScoutingArray[selectedIndex].teamNumber)[0] ?? $PitScoutingArray[0];
 
@@ -89,7 +89,7 @@
 		prepDownload();
 	}
 
-	function newTeam() {
+	function newTeam(): void {
 		$PitScoutingArray.push({
 			teamNumber: "",
 			scouterName: $PitScoutingArray[$PitScoutingArray.length - 1].scouterName,

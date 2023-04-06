@@ -38,7 +38,7 @@
 </style>
 
 <script lang="ts">
-    import { downloadToggle, fileType, MatchDataArray, PitScoutingArray, ScoutingPage } from "./Utils/stores";
+    import { downloadToggle, fileType, MatchDataArray, PitScoutingArray, ScoutingPage, PitScoutingPhotosTaken, selectedIndex } from "./Utils/stores";
     import MatchScouting from "./MatchScouting/MatchScouting.svelte";
     import PitScouting from "./PitScouting/PitScouting.svelte";
 
@@ -48,12 +48,61 @@
 	let pitScoutingFile: FileList;
 
 	async function importMatchData() {
-		if(!matchDataFile) {
-			return;
-		}
+		if(!matchDataFile) {return;}
+
 		let fileJSON = JSON.parse(await matchDataFile[0].text());
+
 		if (fileJSON && Array.from(fileJSON).length >= $MatchDataArray.length) {
 			$MatchDataArray = fileJSON;
+
+			$MatchDataArray.push({
+				teamNumber: "",
+				matchNumber: Number($MatchDataArray[$MatchDataArray.length - 1].matchNumber ?? 0) + 1,
+
+				//auto
+				autoTopCones: 0,
+				autoMiddleCones: 0,
+				autoLowCones: 0,
+				autoTopCubes: 0,
+				autoMiddleCubes: 0,
+				autoLowCubes: 0,
+			
+				autoEngageAttempt: false,
+				autoParking: "",
+			
+				//teleop
+				teleopTopCones: 0,
+				teleopMiddleCones: 0,
+				teleopLowCones: 0,
+				teleopTopCubes: 0,
+				teleopMiddleCubes: 0,
+				teleopLowCubes: 0,
+
+				teleopDoubleCones: 0,
+				teleopSingleCones: 0,
+				teleopFloorCones: 0,
+				teleopDoubleCubes: 0,
+				teleopSingleCubes: 0,
+				teleopFloorCubes: 0,
+			
+				teleopEngageAttempt: false,
+				teleopParking: "",
+			
+				//fouls
+				fouls: 0,
+				techFouls: 0,
+			
+				//cycles
+				cycles: 0,
+			
+				//other
+				startingPosition: 0,
+
+				scouterName: $MatchDataArray[$MatchDataArray.length - 1].scouterName,
+				comments: ""
+			});
+		
+			$selectedIndex = $MatchDataArray.length - 1;
 		}
 	}
 
@@ -61,9 +110,28 @@
 		if(!pitScoutingFile) {
 			return;
 		}
+
 		let fileJSON = JSON.parse(await pitScoutingFile[0].text());
+
 		if (fileJSON && Array.from(fileJSON).length >= $PitScoutingArray.length) {
 			$PitScoutingArray = fileJSON;
+			$PitScoutingPhotosTaken = [];
+			for (let index = 0; index < $PitScoutingArray.length; index++) {
+				$PitScoutingPhotosTaken.push(true);
+			}
+
+			$PitScoutingArray.push({
+			teamNumber: "",
+			scouterName: $PitScoutingArray[$PitScoutingArray.length - 1].scouterName,
+			driveTrainType: "",
+			driveTrainSizeWidth: "",
+			driveTrainSizeLength: "",
+			robotWeight: "",
+			autoPaths: "",
+			comments: ""
+			});
+			
+			$PitScoutingPhotosTaken.push(false);
 		}
 	}
 </script>

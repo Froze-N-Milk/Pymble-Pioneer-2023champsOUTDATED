@@ -50,7 +50,7 @@
 
 	}
 
-	function newMatch() {
+	export function newMatch() {
 		$MatchDataArray.push({
 			teamNumber: "",
 			matchNumber: Number($MatchDataArray[$MatchDataArray.length - 1].matchNumber ?? 0) + 1,
