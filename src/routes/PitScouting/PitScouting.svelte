@@ -6,7 +6,7 @@
 	const regex = new RegExp("[0-9]");
 
 	onMount(() => {
-		document.getElementById("matchNumber")?.addEventListener("beforeinput", (event) => {
+		document.getElementById("teamNumber")?.addEventListener("beforeinput", (event) => {
 			if (event.data != null && !regex.test(event.data)) {
 				event.preventDefault();
 			}
@@ -182,7 +182,7 @@
 	<div class="sectionHeader" style="height: 1rem;"></div>
 
 	<label for="" class="left-column">PHOTOS:</label>
-	<button class="hoverSelfAnnounce" style:--background={$PitScoutingPhotosTaken[selectedIndex] ? "#5386E4" : "#20201D"} on:click={() => $PitScoutingPhotosTaken[selectedIndex] = !$PitScoutingPhotosTaken[selectedIndex]}></button>
+	<button class="hoverSelfAnnounce" style:--background={$PitScoutingPhotosTaken[selectedIndex] ? "#5386E4" : "#20201D"} on:click|preventDefault={() => $PitScoutingPhotosTaken[selectedIndex] = !$PitScoutingPhotosTaken[selectedIndex]}></button>
 
 	{#if allowAdvance}
 		<div class="sectionHeader" style="height: 1rem;"></div>
