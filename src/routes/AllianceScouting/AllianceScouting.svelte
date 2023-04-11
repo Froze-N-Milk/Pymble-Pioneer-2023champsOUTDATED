@@ -138,7 +138,11 @@
 	<label for="" class="left-column">MATCH #:</label>
 	<input autocomplete="off" class="hoverSelfAnnounce" id="teamNumber" inputmode="text" type="text" placeholder="MATCH NUMBER" bind:value={SelectedAllianceScoutingEntry.matchNumber} />
 
-	<p class="sectionHeader">TEAMS:</p>
+	<p class="sectionHeader" style="height: 1rem;"></p>
+	<p class="sectionHeader">RANKINGS:</p>
+
+	<p class="left-column">TEAMS:</p>	<p class="right-column">DEFENCE:</p>
+
 
 	<input autocomplete="off" class="hoverSelfAnnounce left-column" id="team1" inputmode="text" type="text" placeholder="TEAM #1" bind:value={SelectedAllianceScoutingEntry.teamRank1} />
 	<button class="hoverSelfAnnounce" style:--background={SelectedAllianceScoutingEntry.defence1 ? "#5386E4" : "#20201D"} on:click|preventDefault={() => SelectedAllianceScoutingEntry.defence1 = !SelectedAllianceScoutingEntry.defence1}></button>
