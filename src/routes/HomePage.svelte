@@ -43,14 +43,16 @@
 </style>
 
 <script lang="ts">
-    import { downloadToggle, fileType, MatchDataArray, PitScoutingArray, ScoutingPage, PitScoutingPhotosTaken, selectedIndex } from "./Utils/stores";
+    import { downloadToggle, fileType, MatchDataArray, PitScoutingArray, ScoutingPage, PitScoutingPhotosTaken, selectedIndex, AllianceScoutingArray } from "./Utils/stores";
     import MatchScouting from "./MatchScouting/MatchScouting.svelte";
     import PitScouting from "./PitScouting/PitScouting.svelte";
+    import AllianceScouting from "./AllianceScouting/AllianceScouting.svelte";
 
     let settingsToggle: boolean = false;
 
 	let matchDataFile: FileList;
 	let pitScoutingFile: FileList;
+	let allianceScoutingFile: FileList;
 
 	async function importMatchData() {
 		if(!matchDataFile) {return;}
@@ -139,6 +141,29 @@
 			$PitScoutingPhotosTaken.push(false);
 		}
 	}
+
+	async function importAllianceScouting() {
+		if(!allianceScoutingFile) {
+			return;
+		}
+
+		let fileJSON = JSON.parse(await allianceScoutingFile[0].text());
+
+		if (fileJSON && Array.from(fileJSON).length >= $AllianceScoutingArray.length) {
+			$AllianceScoutingArray = fileJSON;
+			$AllianceScoutingArray = [];
+
+			$AllianceScoutingArray.push({
+				matchNumber: "",
+				teamRank1: "",
+				defence1: false,
+				teamRank2: "",
+				defence2: false,
+				teamRank3: "",
+				defence3: false
+			});
+		}
+	}
 </script>
 
 <form on:submit|preventDefault>
@@ -158,6 +183,15 @@
 		<div style="width: 2px;"/>
 		<input type="file" name="match-uploader" id="match-uploader"  bind:files={matchDataFile}>
 		<label for="match-uploader" class="uploader" style:--background={matchDataFile ? "#5386E4" :"#20201D" }> ^ </label>
+	</div>
+
+	<label for="" class="left-column">ALLIANCE SCOUTING:</label>
+	<div class="line-wrapper">
+		<button class="hoverSelfAnnounce" style:--background="#20201D" on:click={() => {$ScoutingPage = AllianceScouting; importAllianceScouting();}}></button>
+		
+		<div style="width: 2px;"/>
+		<input type="file" name="match-uploader" id="match-uploader"  bind:files={allianceScoutingFile}>
+		<label for="match-uploader" class="uploader" style:--background={allianceScoutingFile ? "#5386E4" :"#20201D" }> ^ </label>
 	</div>
 
 	<p class="sectionHeader">SETTINGS</p>

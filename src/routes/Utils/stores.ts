@@ -2,16 +2,17 @@ import { writable } from "svelte/store";
 import type HomePage from "../HomePage.svelte";
 import type PitScouting from "../PitScouting/PitScouting.svelte";
 import type MatchScouting from "../MatchScouting/MatchScouting.svelte";
+import type AllianceScouting from "../AllianceScouting/AllianceScouting.svelte";
 
 export const pageIndex = writable(0);
 
 export type ScoutingPageOptions = 
-	HomePage |
-	MatchScouting |
-	PitScouting;
+	typeof HomePage |
+	typeof MatchScouting |
+	typeof PitScouting |
+	typeof AllianceScouting;
 
-
-export const ScoutingPage = writable<typeof HomePage | typeof MatchScouting | typeof PitScouting>();
+export const ScoutingPage = writable<ScoutingPageOptions>();
 
 export type MatchDataEntry = {
 	teamNumber: number | string;
@@ -140,3 +141,23 @@ export const PitScoutingArray = writable<PitScoutingEntry[]>([{
 export const PitScoutingPhotosTaken = writable<boolean[]>([
 	false
 ])
+
+export type AllianceScoutingEntry = {
+	matchNumber: number | string;
+	teamRank1: number | string;
+	defence1: boolean;
+	teamRank2: number | string;
+	defence2: boolean;
+	teamRank3: number | string;
+	defence3: boolean;
+}
+
+export const AllianceScoutingArray = writable<AllianceScoutingEntry[]>([{
+	matchNumber: "",
+	teamRank1: "",
+	defence1: false,
+	teamRank2: "",
+	defence2: false,
+	teamRank3: "",
+	defence3: false
+}])

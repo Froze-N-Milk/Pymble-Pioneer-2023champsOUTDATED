@@ -154,7 +154,7 @@
 
 <h2 class="sectionHeader">PIT SCOUTING</h2>
 
-<form>
+<form on:submit|preventDefault>
 	<label for="" class="left-column">SCOUT NAME:</label>
 	<input autocomplete="off" class="hoverSelfAnnounce" inputmode="text" type="text" placeholder="SCOUT NAME" bind:value={SelectedPitScoutingEntry.scouterName} />
 
