@@ -1,6 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { AllianceScoutingArray, fileType } from "../Utils/stores";
+    import { fade } from "svelte/transition";
 
 	let selectedIndex = $AllianceScoutingArray.length - 1;
 	$: SelectedAllianceScoutingEntry = $AllianceScoutingArray.filter(array => array.matchNumber === $AllianceScoutingArray[selectedIndex].matchNumber)[0] ?? $AllianceScoutingArray[0];;
@@ -156,12 +157,12 @@
 	<button class="hoverSelfAnnounce" style:--background={SelectedAllianceScoutingEntry.defence3 ? "#5386E4" : "#20201D"} on:click|preventDefault={() => SelectedAllianceScoutingEntry.defence3 = !SelectedAllianceScoutingEntry.defence3}></button>
 
 	{#if allowAdvance}
-		<div class="sectionHeader" style="height: 1rem;"></div>
-		<a class="buttonLookAlike" id="downloader" {href} download={downloadname} target="_self" on:click={prepDownload}>
+		<div class="sectionHeader" style="height: 1rem;" transition:fade|local></div>
+		<a transition:fade|local class="buttonLookAlike" id="downloader" {href} download={downloadname} target="_self" on:click={prepDownload}>
 			<div style="padding-top: calc(1rem);">DOWNLOAD</div>
 		</a>
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<div class="buttonLookAlike" on:click={newTeam}>
+		<div transition:fade|local class="buttonLookAlike" on:click={newTeam}>
 			<div style="padding-top: calc(1rem);">NEW MATCH</div>
 		</div>
 	{/if}
