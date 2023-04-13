@@ -85,6 +85,8 @@
 			downloadname = "AllianceScoutingMatches" + $AllianceScoutingArray[1].matchNumber + "to" + $AllianceScoutingArray[$AllianceScoutingArray.length - 1].matchNumber + ".json";
 		}
 	}
+
+	$: allowAdvance = SelectedAllianceScoutingEntry.matchNumber !== "";
 </script>
 
 <style>
@@ -138,7 +140,7 @@
 	<label for="" class="left-column">MATCH #:</label>
 	<input autocomplete="off" class="hoverSelfAnnounce" id="teamNumber" inputmode="text" type="text" placeholder="MATCH NUMBER" bind:value={SelectedAllianceScoutingEntry.matchNumber} />
 
-	<p class="sectionHeader" style="height: 1rem;"></p>
+	<div class="sectionHeader" style="height: 1rem;"></div>
 	<p class="sectionHeader">RANKINGS:</p>
 
 	<p class="left-column">TEAMS:</p>	<p class="right-column">DEFENCE:</p>
@@ -153,14 +155,16 @@
 	<input autocomplete="off" class="hoverSelfAnnounce left-column" id="team3" inputmode="text" type="text" placeholder="TEAM #3" bind:value={SelectedAllianceScoutingEntry.teamRank3} />
 	<button class="hoverSelfAnnounce" style:--background={SelectedAllianceScoutingEntry.defence3 ? "#5386E4" : "#20201D"} on:click|preventDefault={() => SelectedAllianceScoutingEntry.defence3 = !SelectedAllianceScoutingEntry.defence3}></button>
 
-	<div class="sectionHeader" style="height: 1rem;"></div>
+	{#if allowAdvance}
+		<div class="sectionHeader" style="height: 1rem;"></div>
 		<a class="buttonLookAlike" id="downloader" {href} download={downloadname} target="_self" on:click={prepDownload}>
 			<div style="padding-top: calc(1rem);">DOWNLOAD</div>
 		</a>
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div class="buttonLookAlike" on:click={newTeam}>
-			<div style="padding-top: calc(1rem);">NEW TEAM</div>
+			<div style="padding-top: calc(1rem);">NEW MATCH</div>
 		</div>
+	{/if}
 </form>
 
 <div class="navbar">
