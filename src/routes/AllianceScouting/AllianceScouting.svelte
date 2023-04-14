@@ -33,7 +33,7 @@
 
 	function newTeam(): void {
 		$AllianceScoutingArray.push({
-			matchNumber: "",
+			matchNumber: Number($AllianceScoutingArray[$AllianceScoutingArray.length - 1].matchNumber) + 1,
 			teamRank1: "",
 			defence1: false,
 			teamRank2: "",
@@ -47,12 +47,29 @@
 
 	$: arrayIndexes = Array.from(Array($AllianceScoutingArray.length),(x,i)=>i);
 
-	let urlContent;
-	let content = "";
-	let href: string;
-	let downloadname: string;
+	let urlContent1;
+	let urlContent2;
+	let urlContent3;
+	let href1: string;
+	let href2: string;
+	let href3: string;
+
+	let downloadname1: string;
+	let downloadname2: string;
+	let downloadname3: string;
+
+	type individualisedArray = {
+		matchNumber: string | number, 
+		teamNumber: string | number, 
+		defence: boolean,
+		rank: number
+	}
 
 	function prepDownload() {
+		let rank1Array: individualisedArray[] = [];
+		let rank2Array: individualisedArray[] = [];
+		let rank3Array: individualisedArray[] = [];
+
 		$AllianceScoutingArray.forEach(array => {
 			array.matchNumber = Number(array.matchNumber);
 			array.teamRank1 = Number(array.teamRank1);
@@ -60,34 +77,84 @@
 			array.teamRank3 = Number(array.teamRank3);
 		});
 
+		$AllianceScoutingArray.forEach(array => {
+			rank1Array.push({matchNumber: array.matchNumber, teamNumber: array.teamRank1, defence: array.defence1, rank: 1});
+			rank2Array.push({matchNumber: array.matchNumber, teamNumber: array.teamRank2, defence: array.defence2, rank: 2});
+			rank3Array.push({matchNumber: array.matchNumber, teamNumber: array.teamRank3, defence: array.defence3, rank: 3});
+		});
+
 		if($fileType) {
 			
-			let csv: string = "";
+			let csv1: string = "";
 
-			let keys = Object.keys($AllianceScoutingArray[0]);
+			let keys1 = Object.keys(rank1Array[0]);
 
 			// Build header
-			csv += keys.join(",") + "\n";
+			csv1 += keys1.join(",") + "\n";
 
 			// Add the rows
-			$AllianceScoutingArray.forEach((obj: any) => {
-				csv += keys.map(k => obj[k]).join(",") + "\n";
+			rank1Array.forEach((obj: any) => {
+				csv1 += keys1.map(k => obj[k]).join(",") + "\n";
 			});
 			
-			urlContent = "data:text/csv;charset=utf-8," + csv;
-			content = csv;
-			href = urlContent;
-			downloadname = "AllianceScoutingMatches" + $AllianceScoutingArray[1].matchNumber + "to" + $AllianceScoutingArray[$AllianceScoutingArray.length - 1].matchNumber + ".csv";
+			urlContent1 = "data:text/csv;charset=utf-8," + csv1;
+			href1 = urlContent1;
+			downloadname1 = "Rank1AllianceScoutingMatches" + rank1Array[0].matchNumber + "to" + rank1Array[rank1Array.length - 1].matchNumber + ".csv";
+		
+			let csv2: string = "";
+
+			let keys2 = Object.keys(rank2Array[0]);
+
+			// Build header
+			csv2 += keys2.join(",") + "\n";
+
+			// Add the rows
+			rank2Array.forEach((obj: any) => {
+				csv2 += keys2.map(k => obj[k]).join(",") + "\n";
+			});
+			
+			urlContent2 = "data:text/csv;charset=utf-8," + csv2;
+			href2 = urlContent2;
+			downloadname2 = "Rank2AllianceScoutingMatches" + rank2Array[0].matchNumber + "to" + rank2Array[rank3Array.length - 1].matchNumber + ".csv";
+
+			let csv3: string = "";
+
+			let keys3 = Object.keys(rank3Array[0]);
+
+			// Build header
+			csv3 += keys3.join(",") + "\n";
+
+			// Add the rows
+			rank3Array.forEach((obj: any) => {
+				csv3 += keys3.map(k => obj[k]).join(",") + "\n";
+			});
+			
+			urlContent3 = "data:text/csv;charset=utf-8," + csv3;
+			href3 = urlContent3;
+			downloadname3 = "Rank3AllianceScoutingMatches" + rank3Array[0].matchNumber + "to" + rank3Array[rank3Array.length - 1].matchNumber + ".csv";
+
 		}
 		else {
-			urlContent = "data:text/json;charset=utf-8," + JSON.stringify($AllianceScoutingArray);
-			content = JSON.stringify($AllianceScoutingArray[$AllianceScoutingArray.length - 1]);
-			href = urlContent;
-			downloadname = "AllianceScoutingMatches" + $AllianceScoutingArray[1].matchNumber + "to" + $AllianceScoutingArray[$AllianceScoutingArray.length - 1].matchNumber + ".json";
+			urlContent1 = "data:text/json;charset=utf-8," + JSON.stringify(rank1Array);
+			href1 = urlContent1;
+			downloadname1 = "Rank1AllianceScoutingMatches" + rank1Array[0].matchNumber + "to" + rank1Array[rank1Array.length - 1].matchNumber + ".json";
+		
+			urlContent2 = "data:text/json;charset=utf-8," + JSON.stringify(rank2Array);
+			href2 = urlContent1;
+			downloadname2 = "Rank2AllianceScoutingMatches" + rank2Array[0].matchNumber + "to" + rank2Array[rank2Array.length - 1].matchNumber + ".json";
+
+			urlContent3 = "data:text/json;charset=utf-8," + JSON.stringify(rank3Array);
+			href3 = urlContent3;
+			downloadname3 = "Rank3AllianceScoutingMatches" + rank3Array[0].matchNumber + "to" + rank3Array[rank3Array.length - 1].matchNumber + ".json";
+
 		}
 	}
 
 	$: allowAdvance = SelectedAllianceScoutingEntry.matchNumber !== "";
+
+	let download1: HTMLAnchorElement;
+	let download2: HTMLAnchorElement;
+	let download3: HTMLAnchorElement;
 </script>
 
 <style>
@@ -158,9 +225,25 @@
 
 	{#if allowAdvance}
 		<div class="sectionHeader" style="height: 1rem;" transition:fade|local></div>
-		<a transition:fade|local class="buttonLookAlike" id="downloader" {href} download={downloadname} target="_self" on:click={prepDownload}>
-			<div style="padding-top: calc(1rem);">DOWNLOAD</div>
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<a transition:fade|local class="buttonLookAlike" id="downloader" on:click={() => {prepDownload(); download1.click(); download2.click(); download3.click();}}>
+			<div style="padding-top: calc(1rem);">DOWNLOAD ALL</div>
 		</a>
+		<div class="sectionHeader" style="height: 2rem;" transition:fade|local></div>
+
+
+		<a transition:fade|local class="buttonLookAlike" id="downloader" href={href1} download={downloadname1} target="_self" on:click={prepDownload} bind:this={download1}>
+			<div style="padding-top: calc(1rem);">DOWNLOAD RANK 1</div>
+		</a>
+		<a transition:fade|local class="buttonLookAlike" id="downloader" href={href2} download={downloadname2} target="_self" on:click={prepDownload} bind:this={download2}>
+			<div style="padding-top: calc(1rem);">DOWNLOAD RANK 2</div>
+		</a>
+		<a transition:fade|local class="buttonLookAlike" id="downloader" href={href3} download={downloadname3} target="_self" on:click={prepDownload} bind:this={download3}>
+			<div style="padding-top: calc(1rem);">DOWNLOAD RANK 3</div>
+		</a>
+		<div class="sectionHeader" style="height: 2rem;" transition:fade|local></div>
+
+
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div transition:fade|local class="buttonLookAlike" on:click={newTeam}>
 			<div style="padding-top: calc(1rem);">NEW MATCH</div>
