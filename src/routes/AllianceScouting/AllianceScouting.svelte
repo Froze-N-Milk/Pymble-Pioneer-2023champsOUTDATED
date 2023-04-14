@@ -42,7 +42,9 @@
 			defence3: false
 		});
 
+		$AllianceScoutingArray = $AllianceScoutingArray;
 		selectedIndex = $AllianceScoutingArray.length - 1;
+
 	}
 
 	$: arrayIndexes = Array.from(Array($AllianceScoutingArray.length),(x,i)=>i);
