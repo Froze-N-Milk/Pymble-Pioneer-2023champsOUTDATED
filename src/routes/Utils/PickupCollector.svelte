@@ -5,26 +5,29 @@
 
     export let data: (keyof MatchDataEntry)[];
 
+    let cubeColour = "#c112c1";
+    let coneColour = "#ffff00";
+
 </script>
 
 <label for="" class="left-column">DOUBLE SUBSTATION CONES:</label>
-<ScoreCounter bind:count={$SelectedMatchDataEntry[data[0]]} />
+<ScoreCounter bind:count={$SelectedMatchDataEntry[data[0]]} borderColour={coneColour} backgroundColourHover={coneColour} hoverTextColour={"#151513"}/>
 
 <label for="" class="left-column">DOUBLE SUBSTATION CUBES:</label>
-<ScoreCounter bind:count={$SelectedMatchDataEntry[data[1]]} />
+<ScoreCounter bind:count={$SelectedMatchDataEntry[data[1]]} borderColour={cubeColour} backgroundColourHover={cubeColour}/>
 
 <div class="sectionHeader"></div>
 
 <label for="" class="left-column">SINGLE SUBSTATION CONES:</label>
-<ScoreCounter bind:count={$SelectedMatchDataEntry[data[2]]} />
+<ScoreCounter bind:count={$SelectedMatchDataEntry[data[2]]} borderColour={coneColour} backgroundColourHover={coneColour} hoverTextColour={"#151513"}/>
 
 <label for="" class="left-column">SINGLE SUBSTATION CUBES:</label>
-<ScoreCounter bind:count={$SelectedMatchDataEntry[data[3]]} />
+<ScoreCounter bind:count={$SelectedMatchDataEntry[data[3]]} borderColour={cubeColour} backgroundColourHover={cubeColour}/>
 
 <div class="sectionHeader"></div>
 
 <label for="" class="left-column">FLOOR CONES:</label>
-<ScoreCounter bind:count={$SelectedMatchDataEntry[data[4]]} />
+<ScoreCounter bind:count={$SelectedMatchDataEntry[data[4]]} borderColour={coneColour} backgroundColourHover={coneColour} hoverTextColour={"#151513"}/>
 
 <label for="" class="left-column">FLOOR CUBES:</label>
-<ScoreCounter bind:count={$SelectedMatchDataEntry[data[5]]} />
+<ScoreCounter bind:count={$SelectedMatchDataEntry[data[5]]} borderColour={cubeColour} backgroundColourHover={cubeColour}/>

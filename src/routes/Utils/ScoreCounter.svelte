@@ -12,18 +12,22 @@
 	}
 
 	$:disabled = !(count > 0);
-	
+
+	export let borderColour: string = "#151513";
+	export let backgroundColourHover: string = "#5386E4";
+	export let hoverTextColour: string = "#fffafa";
 </script>
 
 <style>
 	.wrapper {
 		display: inline-flex;
+		margin: 2px;
 		border: none;
-		margin: none;
 		overflow: hidden;
-		max-width: 14rem;
+		max-width: calc(14rem + 6px);
 		min-width: none;
-		max-height: calc(3rem + 2px);
+		max-height: calc(3rem + 4px);
+		outline: 2px solid var(--borderColour);
 	}
 
 	.contents {
@@ -34,7 +38,7 @@
 		max-width: 8rem;
 		min-width: calc(3rem + 2px);;
 		border: none;
-  		outline: 1px solid #151513;
+		outline: 1px solid #151513;
 		background: #20201D;
 		color: snow;
 		text-align: center;
@@ -44,20 +48,20 @@
 		padding: none;
 		height: calc(3rem + 2px);
 		border: none;
-		outline: 1px solid #151513;
 		background: #20201D;
+		outline: 1px solid #151513;
 		color: snow;
-		margin: none;
 		aspect-ratio: 1/1;
 	}
 
 	button:hover {
-		background: #5386E4;
+		background: var(--backgroundColourHover);
 		cursor: pointer;
+		color: var(--hoverTextColour);
 	}
 
 	button:disabled {
-		color: rgba(255, 250, 250, 0);
+		color: #fffafa00;
 		background: #20201D;
 		cursor: default;
 	}
@@ -65,8 +69,10 @@
 </style>
 
 
-<div class="wrapper">
-	<button on:click|preventDefault={decrement} {disabled}>-</button>
+<div class="wrapper" style:--borderColour={borderColour}>
+	
+	<button style:--hoverTextColour={hoverTextColour} style:--backgroundColourHover={backgroundColourHover} on:click|preventDefault={decrement} {disabled}>-</button>
 	<input inputmode="numeric" readonly class="contents" bind:value={count} min=0/>
-	<button on:click|preventDefault={increment} >+</button>
+	<button style:--hoverTextColour={hoverTextColour} style:--backgroundColourHover={backgroundColourHover} on:click|preventDefault={increment} >+</button>
+	
 </div>
