@@ -5,8 +5,8 @@
 
     export let data: (keyof MatchDataEntry)[];
 
-    let cubeColour = "#c112c1";
-    let coneColour = "#ffff00";
+    let cubeColour = "#cb9cf2";
+    let coneColour = "#ffc857";
 
 </script>
 
