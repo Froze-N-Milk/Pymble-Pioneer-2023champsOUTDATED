@@ -142,7 +142,7 @@
 			downloadname1 = "Rank1AllianceScoutingMatches" + rank1Array[0].matchNumber + "to" + rank1Array[rank1Array.length - 1].matchNumber + ".json";
 		
 			urlContent2 = "data:text/json;charset=utf-8," + JSON.stringify(rank2Array);
-			href2 = urlContent1;
+			href2 = urlContent2;
 			downloadname2 = "Rank2AllianceScoutingMatches" + rank2Array[0].matchNumber + "to" + rank2Array[rank2Array.length - 1].matchNumber + ".json";
 
 			urlContent3 = "data:text/json;charset=utf-8," + JSON.stringify(rank3Array);
