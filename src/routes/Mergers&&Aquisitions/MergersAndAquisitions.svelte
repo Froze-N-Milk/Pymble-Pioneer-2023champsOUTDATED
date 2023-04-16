@@ -2,8 +2,7 @@
 	let matchDataFiles: FileList;
 	let allianceDataFiles: FileList;
 
-	let downloader: HTMLAnchorElement;
-
+	let mergedObjectArray: any[];
 	let href: string;
 	let downloadname: string;
 
@@ -12,7 +11,7 @@
 			return;
 		}
 
-		let mergedObjectArray: any[] = [];
+		mergedObjectArray = [];
 
 		for(let i = 0; i < matchDataFiles.length; i++) {
 			let JSONobjectArrayMatchData: object[] = Array.from(JSON.parse(await matchDataFiles[i].text()));
@@ -28,16 +27,11 @@
 				let JSONobjectArrayAllianceData: any[] = Array.from(JSON.parse(await allianceDataFiles[i].text()));
 
 				JSONobjectArrayAllianceData.forEach(allianceDataEntry => {
-					console.log(allianceDataEntry.matchNumber + " match number");
-					console.log(allianceDataEntry.teamNumber + " team number");
-
 
 					let filteredforMatchAndTeam;
 					for(let j = 0; j < mergedObjectArray.length; j++) {
 						if(mergedObjectArray[j].teamNumber === allianceDataEntry.teamNumber && mergedObjectArray[j].matchNumber === allianceDataEntry.matchNumber) {
 							filteredforMatchAndTeam = i;
-							console.log(i + " success at finding matching team and match number");
-
 							break;
 						}
 					}
@@ -45,14 +39,20 @@
 					if(filteredforMatchAndTeam !== null && filteredforMatchAndTeam !== undefined) {
 						Object.defineProperties(mergedObjectArray[filteredforMatchAndTeam], {
 							defence: {
-								value: allianceDataEntry.defence
+								value: allianceDataEntry.defence,
+								enumerable: true
 							},
 							rank: {
-								value: allianceDataEntry.rank
+								value: allianceDataEntry.rank,
+								enumerable: true
 							}
 						});
-						console.log("success");
-						console.log(mergedObjectArray);
+
+						mergedObjectArray[filteredforMatchAndTeam].comments = 
+							"Match scouting comments:\n"
+							+ mergedObjectArray[filteredforMatchAndTeam].comments
+							+ "\n\nAlliance scouting comments:\n"
+							+ allianceDataEntry.comments;
 					}
 				
 				});
@@ -63,7 +63,6 @@
 		href = "data:text/json;charset=utf-8," + JSON.stringify(mergedObjectArray);
 	}
 
-	$: prepDownload();
 </script>
 
 <style>
@@ -129,7 +128,7 @@
 	<div class="sectionHeader" style="height: 3rem;"></div>
 
 	<button class="sectionHeader hoverSelfAnnounce" on:click={prepDownload}> MERGE </button>
-	<a class="buttonLookAlike sectionHeader hoverSelfAnnounce" id="downloader" {href} download={downloadname} target="_self" on:click={prepDownload} bind:this={downloader}>
+	<a class="buttonLookAlike sectionHeader hoverSelfAnnounce" id="downloader" {href} download={downloadname} target="_self" on:click={prepDownload}>
 		<div style="padding-top: calc(1rem + 1px);">DOWNLOAD</div>
 	</a>
 </form>

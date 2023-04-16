@@ -148,18 +148,24 @@ export type AllianceScoutingEntry = {
 	matchNumber: number | string;
 	teamRank1: number | string;
 	defence1: boolean;
+	comments1: string;
 	teamRank2: number | string;
 	defence2: boolean;
+	comments2: string;
 	teamRank3: number | string;
 	defence3: boolean;
+	comments3: string;
 }
 
 export const AllianceScoutingArray = writable<AllianceScoutingEntry[]>([{
 	matchNumber: "",
 	teamRank1: "",
 	defence1: false,
+	comments1: "",
 	teamRank2: "",
 	defence2: false,
+	comments2: "",
 	teamRank3: "",
-	defence3: false
+	defence3: false,
+	comments3: ""
 }])

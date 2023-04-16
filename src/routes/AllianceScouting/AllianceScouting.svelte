@@ -4,7 +4,7 @@
     import { fade } from "svelte/transition";
 
 	let selectedIndex = $AllianceScoutingArray.length - 1;
-	$: SelectedAllianceScoutingEntry = $AllianceScoutingArray.filter(array => array.matchNumber === $AllianceScoutingArray[selectedIndex].matchNumber)[0] ?? $AllianceScoutingArray[0];;
+	$: SelectedAllianceScoutingEntry = $AllianceScoutingArray.filter(array => array.matchNumber === $AllianceScoutingArray[selectedIndex].matchNumber)[0] ?? $AllianceScoutingArray[0];
 
 	const regex = new RegExp("[0-9]");
 
@@ -36,10 +36,13 @@
 			matchNumber: Number($AllianceScoutingArray[$AllianceScoutingArray.length - 1].matchNumber) + 1,
 			teamRank1: "",
 			defence1: false,
+			comments1: "",
 			teamRank2: "",
 			defence2: false,
+			comments2: "",
 			teamRank3: "",
-			defence3: false
+			defence3: false,
+			comments3: "",
 		});
 
 		$AllianceScoutingArray = $AllianceScoutingArray;
@@ -64,7 +67,8 @@
 		matchNumber: string | number, 
 		teamNumber: string | number, 
 		defence: boolean,
-		rank: number
+		rank: number,
+		comments: string
 	}
 
 	function prepDownload() {
@@ -80,9 +84,9 @@
 		});
 
 		$AllianceScoutingArray.forEach(array => {
-			rank1Array.push({matchNumber: array.matchNumber, teamNumber: array.teamRank1, defence: array.defence1, rank: 1});
-			rank2Array.push({matchNumber: array.matchNumber, teamNumber: array.teamRank2, defence: array.defence2, rank: 2});
-			rank3Array.push({matchNumber: array.matchNumber, teamNumber: array.teamRank3, defence: array.defence3, rank: 3});
+			rank1Array.push({matchNumber: array.matchNumber, teamNumber: array.teamRank1, defence: array.defence1, rank: 1, comments: array.comments1});
+			rank2Array.push({matchNumber: array.matchNumber, teamNumber: array.teamRank2, defence: array.defence2, rank: 2, comments: array.comments2});
+			rank3Array.push({matchNumber: array.matchNumber, teamNumber: array.teamRank3, defence: array.defence3, rank: 3, comments: array.comments3});
 		});
 
 		if($fileType) {
@@ -224,6 +228,18 @@
 
 	<input autocomplete="off" class="hoverSelfAnnounce left-column" id="team3" inputmode="text" type="text" placeholder="TEAM #3" bind:value={SelectedAllianceScoutingEntry.teamRank3} />
 	<button class="hoverSelfAnnounce" style:--background={SelectedAllianceScoutingEntry.defence3 ? "#5386E4" : "#20201D"} on:click|preventDefault={() => SelectedAllianceScoutingEntry.defence3 = !SelectedAllianceScoutingEntry.defence3}></button>
+
+	<div class="sectionHeader" style="height: 3rem;"></div>
+	<div class="sectionHeader" style="height: 1rem;">Comments for team {SelectedAllianceScoutingEntry.teamRank1 ? SelectedAllianceScoutingEntry.teamRank1 : "rank 1"}:</div>
+	<textarea class="sectionHeader hoverSelfAnnounce" rows="8" bind:value={SelectedAllianceScoutingEntry.comments1}></textarea>
+	
+	<div class="sectionHeader" style="height: 3rem;"></div>
+	<div class="sectionHeader" style="height: 1rem;">Comments for team {SelectedAllianceScoutingEntry.teamRank2 ? SelectedAllianceScoutingEntry.teamRank2 : "rank 2"}:</div>
+	<textarea class="sectionHeader hoverSelfAnnounce" rows="8" bind:value={SelectedAllianceScoutingEntry.comments2}></textarea>
+	
+	<div class="sectionHeader" style="height: 3rem;"></div>
+	<div class="sectionHeader" style="height: 1rem;">Comments for team {SelectedAllianceScoutingEntry.teamRank3 ? SelectedAllianceScoutingEntry.teamRank3 : "rank 3"}:</div>
+	<textarea class="sectionHeader hoverSelfAnnounce" rows="8" bind:value={SelectedAllianceScoutingEntry.comments3}></textarea>
 
 	{#if allowAdvance}
 		<div class="sectionHeader" style="height: 1rem;" transition:fade|local></div>

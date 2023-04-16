@@ -158,10 +158,13 @@
 				matchNumber: "",
 				teamRank1: "",
 				defence1: false,
+				comments1: "",
 				teamRank2: "",
 				defence2: false,
+				comments2: "",
 				teamRank3: "",
-				defence3: false
+				defence3: false,
+				comments3: "",
 			});
 		}
 	}
