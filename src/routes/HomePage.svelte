@@ -43,6 +43,7 @@
 </style>
 
 <script lang="ts">
+	import MergersAndAquisitions from './Mergers&&Aquisitions/MergersAndAquisitions.svelte';
     import { downloadToggle, fileType, MatchDataArray, PitScoutingArray, ScoutingPage, PitScoutingPhotosTaken, selectedIndex, AllianceScoutingArray } from "./Utils/stores";
     import MatchScouting from "./MatchScouting/MatchScouting.svelte";
     import PitScouting from "./PitScouting/PitScouting.svelte";
@@ -205,6 +206,10 @@
 	<label for="" class="left-column">{$fileType ? "CSV" : "JSON"}</label>
 	<!-- $fileType = !$fileType; for the next one -->
 	<button class="hoverSelfAnnounce" style:--background={$fileType ? "#20201D" : "#5386E4"} on:click|preventDefault={() => {}}></button> 
+	
+	<label for="" class="left-column">MERGERS && AQUISITIONS:</label>
+	<button class="hoverSelfAnnounce" style:--background={"#20201D"} on:click|preventDefault={() => $ScoutingPage = MergersAndAquisitions}></button>
+
 	{/if}
 </form>
 

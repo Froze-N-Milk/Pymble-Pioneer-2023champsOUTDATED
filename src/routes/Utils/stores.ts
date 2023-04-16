@@ -3,6 +3,7 @@ import type HomePage from "../HomePage.svelte";
 import type PitScouting from "../PitScouting/PitScouting.svelte";
 import type MatchScouting from "../MatchScouting/MatchScouting.svelte";
 import type AllianceScouting from "../AllianceScouting/AllianceScouting.svelte";
+import type MergersAndAquisitions from "../Mergers&&Aquisitions/MergersAndAquisitions.svelte";
 
 export const pageIndex = writable(0);
 
@@ -10,7 +11,8 @@ export type ScoutingPageOptions =
 	typeof HomePage |
 	typeof MatchScouting |
 	typeof PitScouting |
-	typeof AllianceScouting;
+	typeof AllianceScouting |
+	typeof MergersAndAquisitions;
 
 export const ScoutingPage = writable<ScoutingPageOptions>();
 
