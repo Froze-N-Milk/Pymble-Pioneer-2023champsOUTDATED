@@ -61,6 +61,7 @@
 
 		downloadname = "mergedJSONfiles" + Date.now() + ".json";
 		href = "data:text/json;charset=utf-8," + JSON.stringify(mergedObjectArray);
+		alert("Merge finished");
 	}
 
 </script>
@@ -127,8 +128,8 @@
 
 	<div class="sectionHeader" style="height: 3rem;"></div>
 
-	<button class="sectionHeader hoverSelfAnnounce" on:click={prepDownload}> MERGE </button>
-	<a class="buttonLookAlike sectionHeader hoverSelfAnnounce" id="downloader" {href} download={downloadname} target="_self" on:click={prepDownload}>
+	<button class="sectionHeader hoverSelfAnnounce" on:click={prepDownload} > MERGE </button>
+	<a class="buttonLookAlike sectionHeader hoverSelfAnnounce" id="downloader" {href} download={downloadname} target="_self" >
 		<div style="padding-top: calc(1rem + 1px);">DOWNLOAD</div>
 	</a>
 </form>
