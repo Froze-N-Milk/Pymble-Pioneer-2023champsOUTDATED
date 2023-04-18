@@ -51,13 +51,13 @@
 <div style="display: contents;">
 	<h2 class="sectionHeader">TELEOP</h2>
 
-	<p class="sectionHeader">SCORING:</p>
-
-	<ScoringCollector data={scoringRange} />
-
 	<p class="sectionHeader">COLLECTING:</p>
 
 	<PickupCollector data={pickupRange} />
+
+	<p class="sectionHeader">SCORING:</p>
+
+	<ScoringCollector data={scoringRange} />
 
 	<FoulCollector />
 
