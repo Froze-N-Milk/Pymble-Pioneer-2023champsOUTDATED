@@ -52,7 +52,7 @@
 <input autocomplete="off" class="hoverSelfAnnounce" inputmode="text" type="text" placeholder="SCOUT NAME" bind:value={$SelectedMatchDataEntry.scouterName} />
 
 <label for="" class="left-column">MATCH #:</label>
-<input autocomplete="off" id="matchNumber" class="hoverSelfAnnounce" type="text" inputmode="numeric" placeholder="MATCH NUMBER" bind:value={$SelectedMatchDataEntry.matchNumber} on:keypress={() => $matchDataArrayIndexes = Array.from(Array($MatchDataArray.length),(x,i)=>i)}/>
+<input autocomplete="off" id="matchNumber" class="hoverSelfAnnounce" type="text" inputmode="numeric" placeholder="MATCH NUMBER" bind:value={$SelectedMatchDataEntry.matchNumber} on:input={() => $matchDataArrayIndexes = Array.from(Array($MatchDataArray.length),(x,i)=>i)}/>
 
 <label for="" class="left-column">TEAM #:</label>
 <input autocomplete="off" id="teamNumber" class="hoverSelfAnnounce" type="text" inputmode="numeric" placeholder="TEAM NUMBER" bind:value={$SelectedMatchDataEntry.teamNumber} />

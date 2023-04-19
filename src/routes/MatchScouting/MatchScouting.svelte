@@ -90,7 +90,7 @@
 	}
 </style>
 
-<form>
+<form on:submit|preventDefault>
 	<svelte:component this={selectedPage} />
 </form>
 
