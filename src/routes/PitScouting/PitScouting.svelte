@@ -164,13 +164,13 @@
 	<label for="" class="left-column">DRIVE TRAIN TYPE :</label>
 	<Selector options={["TANK", "SWERVE", "MECANUM", "OTHER"]} bind:value={SelectedPitScoutingEntry.driveTrainType} />
 
-	<label for="" class="left-column">DRIVE TRAIN WIDTH (in):</label>
+	<label for="" class="left-column">DRIVE TRAIN WIDTH INCL. BUMPERS (in):</label>
 	<input autocomplete="off" id="width" class="hoverSelfAnnounce" type="text" inputmode="numeric" placeholder="WIDTH" bind:value={SelectedPitScoutingEntry.driveTrainSizeWidth} />
 
-	<label for="" class="left-column">DRIVE TRAIN LENGTH (in):</label>
+	<label for="" class="left-column">DRIVE TRAIN LENGTH INCL. BUMPERS (in):</label>
 	<input autocomplete="off" id="length" class="hoverSelfAnnounce" type="text" inputmode="numeric" placeholder="LENGTH" bind:value={SelectedPitScoutingEntry.driveTrainSizeLength} />
 
-	<label for="" class="left-column">ROBOT WEIGHT INCL. BATTERY (lb):</label>
+	<label for="" class="left-column">ROBOT WEIGHT INCL. BATTERY AND BUMPERS (lb):</label>
 	<input autocomplete="off" id="weight" class="hoverSelfAnnounce" type="text" inputmode="numeric" placeholder="WEIGHT" bind:value={SelectedPitScoutingEntry.robotWeight} />
 
 	<p class="sectionHeader">AUTO PATHS:</p>
