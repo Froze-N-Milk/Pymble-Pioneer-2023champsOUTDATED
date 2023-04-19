@@ -17,7 +17,9 @@
 		$MatchDataArray.forEach(array => {
 
 			let validMatch = (array.teamNumber !== "" && array.matchNumber !== "" && array.scouterName !== "" && array.startingPosition !== 0);
+			console.log(array.matchNumber + "match" + validMatch.toString());
 			validDownload = validDownload && validMatch;
+			console.log(array.matchNumber + "download" + validDownload.toString());
 
 			if(!validMatch) {
 				confirm("Issue found with match number " + array.matchNumber + "\nThe team number is: " + array.teamNumber + "\nThe scouter's name is: " + array.scouterName + "\nThe starting position (should NOT be 0) is: " + array.startingPosition + "\nPress OK to delete this match (if you have just imported this file to change an older match and then redownloaded, you may need to delete an extra match that was automatically added)\nPress cancel to continue editing the matchData)");
