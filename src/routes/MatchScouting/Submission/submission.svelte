@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { selectedIndex } from '../../Utils/stores.js';
-	import { downloadToggle, fileType, MatchDataArray, pageIndex } from '../../Utils/stores.js';
+	import { downloadToggle, fileType, MatchDataArray, pageIndex, SelectedMatchDataEntry } from '../../Utils/stores.js';
 	import { QRCode } from "@bonosoft/sveltekit-qrcode";
 
 	let content = "";
@@ -14,15 +14,22 @@
 	let validDownload: boolean;
 
 	function prepDownload() {
-		$MatchDataArray.forEach(array => {
+		validDownload = true;
+		$MatchDataArray.forEach(match => {
 
-			let validMatch = (array.teamNumber !== "" && array.matchNumber !== "" && array.scouterName !== "" && array.startingPosition !== 0);
-			console.log(array.matchNumber + "match" + validMatch.toString());
+			let validMatch = (match.teamNumber !== "" && match.matchNumber !== "" && match.scouterName !== "" && match.startingPosition !== 0);
+			console.log(match.matchNumber + "match" + validMatch.toString());
 			validDownload = validDownload && validMatch;
-			console.log(array.matchNumber + "download" + validDownload.toString());
+			console.log(match.matchNumber + "download" + validDownload.toString());
 
 			if(!validMatch) {
-				confirm("Issue found with match number " + array.matchNumber + "\nThe team number is: " + array.teamNumber + "\nThe scouter's name is: " + array.scouterName + "\nThe starting position (should NOT be 0) is: " + array.startingPosition + "\nPress OK to delete this match (if you have just imported this file to change an older match and then redownloaded, you may need to delete an extra match that was automatically added)\nPress cancel to continue editing the matchData)");
+				if(confirm("Issue found with match number " + match.matchNumber + "\nThe team number is: " + match.teamNumber + "\nThe scouter's name is: " + match.scouterName + "\nThe starting position (should NOT be 0) is: " + match.startingPosition + "\nPress OK to delete this match (if you have just imported this file to change an older match and then redownloaded, you may need to delete an extra match that was automatically added)\nPress cancel to continue editing the matchData")) {
+					$MatchDataArray.splice($MatchDataArray.indexOf(match), 1);
+				}
+				else {
+					$pageIndex = 0;
+					$selectedIndex = $MatchDataArray.indexOf(match);
+				}
 			}
 
 		});
@@ -154,6 +161,7 @@
 		padding-top: none;
 		padding-bottom: none;
 		cursor: pointer;
+		border: none;
 	}
 
 	.qrcodewrapper {
@@ -190,4 +198,5 @@
 	<h2 class="sectionHeader error">
 		DOWNLOAD ERROR
 	</h2>
+	<button on:click={() => prepDownload()} class="buttonLookAlike sectionHeader hoverSelfAnnounce">RETRY</button>
 {/if}
