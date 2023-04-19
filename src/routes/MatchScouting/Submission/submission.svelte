@@ -11,41 +11,58 @@
 
 	$:prepDownload();
 
+	let validDownload: boolean;
+
 	function prepDownload() {
+		$MatchDataArray.forEach(array => {
+
+			let validMatch = (array.teamNumber !== "" && array.matchNumber !== "" && array.scouterName !== "" && array.startingPosition !== 0);
+			validDownload = validDownload && validMatch;
+
+			if(!validMatch) {
+				confirm("Issue found with match number " + array.matchNumber + "\nThe team number is: " + array.teamNumber + "\nThe scouter's name is: " + array.scouterName + "\nThe starting position (should NOT be 0) is: " + array.startingPosition + "\nPress OK to delete this match (if you have just imported this file to change an older match and then redownloaded, you may need to delete an extra match that was automatically added)\nPress cancel to continue editing the matchData)");
+			}
+
+		});
+
 		$MatchDataArray.forEach(array => {
 			array.teamNumber = Number(array.teamNumber);
 			array.matchNumber = Number(array.matchNumber);
 
 			array.cycles = array.autoTopCones + array.autoMiddleCones + array.autoLowCones + array.autoTopCubes + array.autoMiddleCubes + array.autoLowCubes + 
 				array.teleopTopCones + array.teleopMiddleCones + array.teleopLowCones + array.teleopTopCubes + array.teleopMiddleCubes + array.teleopLowCubes;
+
+			
 		});
 
 		let urlContent;
 
-		if($fileType) {
-			
-			let csv: string = "";
+		if(validDownload) {
+			if($fileType) {
+				
+				let csv: string = "";
 
-			let keys = Object.keys($MatchDataArray[0]);
+				let keys = Object.keys($MatchDataArray[0]);
 
-			// Build header
-			csv += keys.join(",") + "\n";
+				// Build header
+				csv += keys.join(",") + "\n";
 
-			// Add the rows
-			$MatchDataArray.forEach((obj: any) => {
-				csv += keys.map(k => obj[k]).join(",") + "\n";
-			});
-			
-			urlContent = "data:text/csv;charset=utf-8," + csv;
-			content = csv;
-			href = urlContent;
-			downloadname = "Matches" + $MatchDataArray[0].matchNumber + "To" + $MatchDataArray[$MatchDataArray.length - 1].matchNumber + "ScoutedBy" + $MatchDataArray[$MatchDataArray.length - 1].scouterName + ".csv";
-		}
-		else {
-			urlContent = "data:text/json;charset=utf-8," + JSON.stringify($MatchDataArray);
-			content = JSON.stringify($MatchDataArray[$MatchDataArray.length - 1]);
-			href = urlContent;
-			downloadname = "Matches" + $MatchDataArray[0].matchNumber + "To" + $MatchDataArray[$MatchDataArray.length - 1].matchNumber + "ScoutedBy" + $MatchDataArray[$MatchDataArray.length - 1].scouterName + ".json";
+				// Add the rows
+				$MatchDataArray.forEach((obj: any) => {
+					csv += keys.map(k => obj[k]).join(",") + "\n";
+				});
+				
+				urlContent = "data:text/csv;charset=utf-8," + csv;
+				content = csv;
+				href = urlContent;
+				downloadname = "Matches" + $MatchDataArray[0].matchNumber + "To" + $MatchDataArray[$MatchDataArray.length - 1].matchNumber + "ScoutedBy" + $MatchDataArray[$MatchDataArray.length - 1].scouterName + ".csv";
+			}
+			else {
+				urlContent = "data:text/json;charset=utf-8," + JSON.stringify($MatchDataArray);
+				content = JSON.stringify($MatchDataArray[$MatchDataArray.length - 1]);
+				href = urlContent;
+				downloadname = "Matches" + $MatchDataArray[0].matchNumber + "To" + $MatchDataArray[$MatchDataArray.length - 1].matchNumber + "ScoutedBy" + $MatchDataArray[$MatchDataArray.length - 1].scouterName + ".json";
+			}
 		}
 
 	}
@@ -105,10 +122,10 @@
 
 	}
 
-	function downloadFile(node: HTMLAnchorElement) {
+	function downloadFile(link: HTMLAnchorElement) {
 		prepDownload();
-		if($downloadToggle) {
-			node.click();
+		if($downloadToggle && validDownload) {
+			link.click();
 		}
 	}	
 </script>
@@ -144,21 +161,31 @@
 		/* margin-left: calc(50% - 18.5rem); */
 		margin: auto;
 	}
+
+	.error {
+		color: red;
+	}
 </style>
 
-<h2 class="sectionHeader">
-	SUBMISSION
-</h2>
+{#if validDownload}
+	<h2 class="sectionHeader">
+		SUBMISSION
+	</h2>
 
-{#if content.length < 3000}
-	<div class="sectionHeader qrcodewrapper">
-		<QRCode {content} errorCorrection="L" responsive="true" bgcolor="#151513" color="snow" padding="0"></QRCode>
+	{#if content.length < 3000}
+		<div class="sectionHeader qrcodewrapper">
+			<QRCode {content} errorCorrection="L" responsive="true" bgcolor="#151513" color="snow" padding="0"></QRCode>
+		</div>
+	{/if}
+	<a class="buttonLookAlike" id="downloader" {href} download={downloadname} target="_self" use:downloadFile >
+		<div style="padding-top: calc(1rem);">DOWNLOAD</div>
+	</a>
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<div class="buttonLookAlike" on:click={newMatch}>
+		<div style="padding-top: calc(1rem);">NEW MATCH</div>
 	</div>
+{:else}
+	<h2 class="sectionHeader error">
+		DOWNLOAD ERROR
+	</h2>
 {/if}
-<a class="buttonLookAlike" id="downloader" {href} download={downloadname} target="_self" use:downloadFile >
-	<div style="padding-top: calc(1rem);">DOWNLOAD</div>
-</a>
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="buttonLookAlike" on:click={newMatch}>
-	<div style="padding-top: calc(1rem);">NEW MATCH</div>
-</div>
