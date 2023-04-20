@@ -43,6 +43,7 @@
 </style>
 
 <script lang="ts">
+	import { AllianceScoutingTempValuesArray } from './Utils/stores';
 	import MergersAndAquisitions from './Mergers&&Aquisitions/MergersAndAquisitions.svelte';
     import { downloadToggle, fileType, MatchDataArray, PitScoutingArray, ScoutingPage, PitScoutingPhotosTaken, selectedIndex, AllianceScoutingArray } from "./Utils/stores";
     import MatchScouting from "./MatchScouting/MatchScouting.svelte";
@@ -151,8 +152,8 @@
 		let fileJSON = JSON.parse(await allianceScoutingFile[0].text());
 
 		if (fileJSON && Array.from(fileJSON).length >= $AllianceScoutingArray.length) {
-			$AllianceScoutingArray = fileJSON;
 			$AllianceScoutingArray = [];
+			$AllianceScoutingArray = fileJSON;
 
 			$AllianceScoutingArray.push({
 				matchNumber: "",
@@ -166,6 +167,18 @@
 				defence3: false,
 				comments3: "",
 			});
+
+			$AllianceScoutingTempValuesArray = [];
+			$AllianceScoutingArray.forEach(match => {
+				$AllianceScoutingTempValuesArray.push({
+					teamNumber1: match.teamRank1,
+					team1Comment: match.comments1,
+					teamNumber2: match.teamRank2,
+					team2Comment: match.comments2,
+					teamNumber3: match.teamRank3,
+					team3Comment: match.comments3,
+				})
+			})
 		}
 	}
 </script>

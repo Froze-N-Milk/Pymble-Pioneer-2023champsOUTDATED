@@ -1,10 +1,12 @@
 <script lang="ts">
+	import { AllianceScoutingTempValuesArray } from '../Utils/stores';
     import { onMount } from "svelte";
     import { AllianceScoutingArray, fileType } from "../Utils/stores";
     import { fade } from "svelte/transition";
 
 	let selectedIndex = $AllianceScoutingArray.length - 1;
 	$: SelectedAllianceScoutingEntry = $AllianceScoutingArray.filter(array => array.matchNumber === $AllianceScoutingArray[selectedIndex].matchNumber)[0] ?? $AllianceScoutingArray[0];
+	$: SelectedAllianceScoutingTempValues = $AllianceScoutingTempValuesArray[selectedIndex];
 
 	const regex = new RegExp("[0-9]");
 
@@ -45,9 +47,18 @@
 			comments3: "",
 		});
 
+		$AllianceScoutingTempValuesArray.push({
+			teamNumber1: "",
+			team1Comment: "",
+			teamNumber2: "",
+			team2Comment: "",
+			teamNumber3: "",
+			team3Comment: ""
+		})
+
+		$AllianceScoutingTempValuesArray = $AllianceScoutingTempValuesArray;
 		$AllianceScoutingArray = $AllianceScoutingArray;
 		selectedIndex = $AllianceScoutingArray.length - 1;
-
 	}
 
 	$: arrayIndexes = Array.from(Array($AllianceScoutingArray.length),(x,i)=>i);
@@ -71,10 +82,53 @@
 		comments: string
 	}
 
+	$: {
+		console.log(SelectedAllianceScoutingEntry.teamRank1);
+		console.log(SelectedAllianceScoutingEntry.teamRank2);
+		console.log(SelectedAllianceScoutingEntry.teamRank3);
+
+	}
+
 	function prepDownload() {
 		let rank1Array: individualisedArray[] = [];
 		let rank2Array: individualisedArray[] = [];
 		let rank3Array: individualisedArray[] = [];
+
+		for(let i: number = 0; i < $AllianceScoutingArray.length; i++) {
+			switch($AllianceScoutingArray[i].teamRank1) {
+				case $AllianceScoutingTempValuesArray[i].teamNumber1:
+					$AllianceScoutingArray[i].comments1 = $AllianceScoutingTempValuesArray[i].team1Comment;
+					break;
+				case $AllianceScoutingTempValuesArray[i].teamNumber2:
+					$AllianceScoutingArray[i].comments1 = $AllianceScoutingTempValuesArray[i].team2Comment;
+					break;
+				case $AllianceScoutingTempValuesArray[i].teamNumber3:
+					$AllianceScoutingArray[i].comments1 = $AllianceScoutingTempValuesArray[i].team3Comment;
+					break;
+			}
+			switch($AllianceScoutingArray[i].teamRank2) {
+				case $AllianceScoutingTempValuesArray[i].teamNumber1:
+					$AllianceScoutingArray[i].comments2 = $AllianceScoutingTempValuesArray[i].team1Comment;
+					break;
+				case $AllianceScoutingTempValuesArray[i].teamNumber2:
+					$AllianceScoutingArray[i].comments2 = $AllianceScoutingTempValuesArray[i].team2Comment;
+					break;
+				case $AllianceScoutingTempValuesArray[i].teamNumber3:
+					$AllianceScoutingArray[i].comments2 = $AllianceScoutingTempValuesArray[i].team3Comment;
+					break;
+			}
+			switch($AllianceScoutingArray[i].teamRank3) {
+				case $AllianceScoutingTempValuesArray[i].teamNumber1:
+					$AllianceScoutingArray[i].comments3 = $AllianceScoutingTempValuesArray[i].team1Comment;
+					break;
+				case $AllianceScoutingTempValuesArray[i].teamNumber2:
+					$AllianceScoutingArray[i].comments3 = $AllianceScoutingTempValuesArray[i].team2Comment;
+					break;
+				case $AllianceScoutingTempValuesArray[i].teamNumber3:
+					$AllianceScoutingArray[i].comments3 = $AllianceScoutingTempValuesArray[i].team3Comment;
+					break;
+			}
+		}
 
 		$AllianceScoutingArray.forEach(array => {
 			array.matchNumber = Number(array.matchNumber);
@@ -82,6 +136,8 @@
 			array.teamRank2 = Number(array.teamRank2);
 			array.teamRank3 = Number(array.teamRank3);
 		});
+
+		$AllianceScoutingArray = $AllianceScoutingArray;
 
 		$AllianceScoutingArray.forEach(array => {
 			rank1Array.push({matchNumber: array.matchNumber, teamNumber: array.teamRank1, defence: array.defence1, rank: 1, comments: array.comments1});
@@ -172,15 +228,14 @@
 	}
 
 	.buttonLookAlike {
-		grid-column: 1/3;
 		outline: none;
 		border: none;
 		background: #20201D;
 		color: snow;
 		height: calc(3rem);
-		aspect-ratio: 5/1;
+		width: 14rem;
 		align-items: center;
-		margin: auto;
+		margin: none;
 		text-align: center;
 		overflow: hidden;
 		padding-top: none;
@@ -207,6 +262,10 @@
 		margin: none;
 		outline: 1px solid #151513;
 	}
+	
+	.center {
+		margin: auto;
+	}
 </style>
 
 
@@ -217,53 +276,113 @@
 	<div class="sectionHeader" style="height: 1rem;"></div>
 	<p class="sectionHeader">RANKINGS:</p>
 
-	<p class="left-column">TEAMS:</p>	<p class="right-column">DEFENCE:</p>
+	<p class="sectionHeader">TEAMS:</p>
 
 
-	<input autocomplete="off" class="hoverSelfAnnounce left-column" id="team1" inputmode="text" type="text" placeholder="TEAM #1" bind:value={SelectedAllianceScoutingEntry.teamRank1} />
+	<input autocomplete="off" class="hoverSelfAnnounce sectionHeader center" id="team1" inputmode="text" type="text" placeholder="TEAM 1" bind:value={SelectedAllianceScoutingTempValues.teamNumber1} />
+
+	<input autocomplete="off" class="hoverSelfAnnounce sectionHeader center" id="team2" inputmode="text" type="text" placeholder="TEAM 2" bind:value={SelectedAllianceScoutingTempValues.teamNumber2} />
+
+	<input autocomplete="off" class="hoverSelfAnnounce sectionHeader center" id="team3" inputmode="text" type="text" placeholder="TEAM 3" bind:value={SelectedAllianceScoutingTempValues.teamNumber3} />
+
+	<div class="sectionHeader" style="height: 3rem;"></div>
+	<div class="sectionHeader" style="height: 1rem;">Comments for team {SelectedAllianceScoutingTempValues.teamNumber1 ? SelectedAllianceScoutingTempValues.teamNumber1 : "1"}:</div>
+	<textarea class="sectionHeader hoverSelfAnnounce" rows="8" bind:value={SelectedAllianceScoutingTempValues.team1Comment}></textarea>
+	
+	<div class="sectionHeader" style="height: 3rem;"></div>
+	<div class="sectionHeader" style="height: 1rem;">Comments for team {SelectedAllianceScoutingTempValues.teamNumber2 ? SelectedAllianceScoutingTempValues.teamNumber2 : "2"}:</div>
+	<textarea class="sectionHeader hoverSelfAnnounce" rows="8" bind:value={SelectedAllianceScoutingTempValues.team2Comment}></textarea>
+	
+	<div class="sectionHeader" style="height: 3rem;"></div>
+	<div class="sectionHeader" style="height: 1rem;">Comments for team {SelectedAllianceScoutingTempValues.teamNumber3 ? SelectedAllianceScoutingTempValues.teamNumber3 : "3"}:</div>
+	<textarea class="sectionHeader hoverSelfAnnounce" rows="8" bind:value={SelectedAllianceScoutingTempValues.team3Comment}></textarea>
+
+	<p class="left-column">RANKINGS:</p>	<p class="right-column">DEFENCE:</p>
+
+	<select class="buttonLookAlike hoverSelfAnnounce left-column" bind:value={SelectedAllianceScoutingEntry.teamRank1}>
+		<option value=""></option>
+		{#if Number(SelectedAllianceScoutingTempValues.teamNumber1) !== Number(SelectedAllianceScoutingEntry.teamRank2) && Number(SelectedAllianceScoutingTempValues.teamNumber1) !== Number(SelectedAllianceScoutingEntry.teamRank3)}
+			<option value={Number(SelectedAllianceScoutingTempValues.teamNumber1)}>
+				{Number(SelectedAllianceScoutingTempValues.teamNumber1) ?? ""}
+			</option>
+		{/if}
+		{#if Number(SelectedAllianceScoutingTempValues.teamNumber2) !== Number(SelectedAllianceScoutingEntry.teamRank2) && Number(SelectedAllianceScoutingTempValues.teamNumber2) !== Number(SelectedAllianceScoutingEntry.teamRank3)}
+			<option value={Number(SelectedAllianceScoutingTempValues.teamNumber2)}>
+				{Number(SelectedAllianceScoutingTempValues.teamNumber2) ?? ""}
+			</option>
+		{/if}
+		{#if Number(SelectedAllianceScoutingTempValues.teamNumber3) !== Number(SelectedAllianceScoutingEntry.teamRank2) && Number(SelectedAllianceScoutingTempValues.teamNumber3) !== Number(SelectedAllianceScoutingEntry.teamRank3)}
+			<option value={Number(SelectedAllianceScoutingTempValues.teamNumber3)}>
+				{Number(SelectedAllianceScoutingTempValues.teamNumber3) ?? ""}
+			</option>
+		{/if}
+	</select>	
 	<button class="hoverSelfAnnounce" style:--background={SelectedAllianceScoutingEntry.defence1 ? "#5386E4" : "#20201D"} on:click|preventDefault={() => SelectedAllianceScoutingEntry.defence1 = !SelectedAllianceScoutingEntry.defence1}></button>
 
-	<input autocomplete="off" class="hoverSelfAnnounce left-column" id="team2" inputmode="text" type="text" placeholder="TEAM #2" bind:value={SelectedAllianceScoutingEntry.teamRank2} />
+	<select class="buttonLookAlike hoverSelfAnnounce left-column" bind:value={SelectedAllianceScoutingEntry.teamRank2}>
+		<option value=""></option>
+		{#if Number(SelectedAllianceScoutingTempValues.teamNumber1) !== Number(SelectedAllianceScoutingEntry.teamRank3) && Number(SelectedAllianceScoutingTempValues.teamNumber1) !== Number(SelectedAllianceScoutingEntry.teamRank1)}
+			<option value={Number(SelectedAllianceScoutingTempValues.teamNumber1)}>
+				{Number(SelectedAllianceScoutingTempValues.teamNumber1) ?? ""}
+			</option>
+		{/if}
+		{#if Number(SelectedAllianceScoutingTempValues.teamNumber2) !== Number(SelectedAllianceScoutingEntry.teamRank3) && Number(SelectedAllianceScoutingTempValues.teamNumber2) !== Number(SelectedAllianceScoutingEntry.teamRank1)}
+			<option value={Number(SelectedAllianceScoutingTempValues.teamNumber2)}>
+				{Number(SelectedAllianceScoutingTempValues.teamNumber2) ?? ""}
+			</option>
+		{/if}
+		{#if Number(SelectedAllianceScoutingTempValues.teamNumber3) !== Number(SelectedAllianceScoutingEntry.teamRank3) && Number(SelectedAllianceScoutingTempValues.teamNumber3) !== Number(SelectedAllianceScoutingEntry.teamRank1)}
+			<option value={Number(SelectedAllianceScoutingTempValues.teamNumber3)}>
+				{Number(SelectedAllianceScoutingTempValues.teamNumber3) ?? ""}
+			</option>
+		{/if}
+	</select>		
 	<button class="hoverSelfAnnounce" style:--background={SelectedAllianceScoutingEntry.defence2 ? "#5386E4" : "#20201D"} on:click|preventDefault={() => SelectedAllianceScoutingEntry.defence2 = !SelectedAllianceScoutingEntry.defence2}></button>
 
-	<input autocomplete="off" class="hoverSelfAnnounce left-column" id="team3" inputmode="text" type="text" placeholder="TEAM #3" bind:value={SelectedAllianceScoutingEntry.teamRank3} />
+	<select class="buttonLookAlike hoverSelfAnnounce left-column" bind:value={SelectedAllianceScoutingEntry.teamRank3}>
+		<option value=""></option>
+		{#if Number(SelectedAllianceScoutingTempValues.teamNumber1) !== Number(SelectedAllianceScoutingEntry.teamRank2) && Number(SelectedAllianceScoutingTempValues.teamNumber1) !== Number(SelectedAllianceScoutingEntry.teamRank1)}
+			<option value={Number(SelectedAllianceScoutingTempValues.teamNumber1)}>
+				{Number(SelectedAllianceScoutingTempValues.teamNumber1) ?? ""}
+			</option>
+		{/if}
+		{#if Number(SelectedAllianceScoutingTempValues.teamNumber2) !== Number(SelectedAllianceScoutingEntry.teamRank2) && Number(SelectedAllianceScoutingTempValues.teamNumber2) !== Number(SelectedAllianceScoutingEntry.teamRank1)}
+			<option value={Number(SelectedAllianceScoutingTempValues.teamNumber2)}>
+				{Number(SelectedAllianceScoutingTempValues.teamNumber2) ?? ""}
+			</option>
+		{/if}
+		{#if Number(SelectedAllianceScoutingTempValues.teamNumber3) !== Number(SelectedAllianceScoutingEntry.teamRank2) && Number(SelectedAllianceScoutingTempValues.teamNumber3) !== Number(SelectedAllianceScoutingEntry.teamRank1)}
+			<option value={Number(SelectedAllianceScoutingTempValues.teamNumber3)}>
+				{Number(SelectedAllianceScoutingTempValues.teamNumber3) ?? ""}
+			</option>
+		{/if}
+	</select>	
 	<button class="hoverSelfAnnounce" style:--background={SelectedAllianceScoutingEntry.defence3 ? "#5386E4" : "#20201D"} on:click|preventDefault={() => SelectedAllianceScoutingEntry.defence3 = !SelectedAllianceScoutingEntry.defence3}></button>
 
-	<div class="sectionHeader" style="height: 3rem;"></div>
-	<div class="sectionHeader" style="height: 1rem;">Comments for team {SelectedAllianceScoutingEntry.teamRank1 ? SelectedAllianceScoutingEntry.teamRank1 : "rank 1"}:</div>
-	<textarea class="sectionHeader hoverSelfAnnounce" rows="8" bind:value={SelectedAllianceScoutingEntry.comments1}></textarea>
-	
-	<div class="sectionHeader" style="height: 3rem;"></div>
-	<div class="sectionHeader" style="height: 1rem;">Comments for team {SelectedAllianceScoutingEntry.teamRank2 ? SelectedAllianceScoutingEntry.teamRank2 : "rank 2"}:</div>
-	<textarea class="sectionHeader hoverSelfAnnounce" rows="8" bind:value={SelectedAllianceScoutingEntry.comments2}></textarea>
-	
-	<div class="sectionHeader" style="height: 3rem;"></div>
-	<div class="sectionHeader" style="height: 1rem;">Comments for team {SelectedAllianceScoutingEntry.teamRank3 ? SelectedAllianceScoutingEntry.teamRank3 : "rank 3"}:</div>
-	<textarea class="sectionHeader hoverSelfAnnounce" rows="8" bind:value={SelectedAllianceScoutingEntry.comments3}></textarea>
 
 	{#if allowAdvance}
 		<div class="sectionHeader" style="height: 1rem;" transition:fade|local></div>
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<a transition:fade|local class="buttonLookAlike" id="downloader" on:click={() => {prepDownload(); download1.click(); download2.click(); download3.click();}}>
+		<a transition:fade|local class="buttonLookAlike center sectionHeader hoverSelfAnnounce" id="downloader" on:click={() => {prepDownload(); download1.click(); download2.click(); download3.click();}}>
 			<div style="padding-top: calc(1rem);">DOWNLOAD ALL</div>
 		</a>
 		<div class="sectionHeader" style="height: 2rem;" transition:fade|local></div>
 
 
-		<a transition:fade|local class="buttonLookAlike" id="downloader" href={href1} download={downloadname1} target="_self" on:click={prepDownload} bind:this={download1}>
+		<a transition:fade|local class="buttonLookAlike center sectionHeader hoverSelfAnnounce" id="downloader" href={href1} download={downloadname1} target="_self" on:click={prepDownload} bind:this={download1}>
 			<div style="padding-top: calc(1rem);">DOWNLOAD RANK 1</div>
 		</a>
-		<a transition:fade|local class="buttonLookAlike" id="downloader" href={href2} download={downloadname2} target="_self" on:click={prepDownload} bind:this={download2}>
+		<a transition:fade|local class="buttonLookAlike center sectionHeader hoverSelfAnnounce" id="downloader" href={href2} download={downloadname2} target="_self" on:click={prepDownload} bind:this={download2}>
 			<div style="padding-top: calc(1rem);">DOWNLOAD RANK 2</div>
 		</a>
-		<a transition:fade|local class="buttonLookAlike" id="downloader" href={href3} download={downloadname3} target="_self" on:click={prepDownload} bind:this={download3}>
+		<a transition:fade|local class="buttonLookAlike center sectionHeader hoverSelfAnnounce" id="downloader" href={href3} download={downloadname3} target="_self" on:click={prepDownload} bind:this={download3}>
 			<div style="padding-top: calc(1rem);">DOWNLOAD RANK 3</div>
 		</a>
 		<div class="sectionHeader" style="height: 2rem;" transition:fade|local></div>
 
 
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<div transition:fade|local class="buttonLookAlike" on:click={newTeam}>
+		<div transition:fade|local class="buttonLookAlike center sectionHeader hoverSelfAnnounce" on:click={newTeam}>
 			<div style="padding-top: calc(1rem);">NEW MATCH</div>
 		</div>
 	{/if}

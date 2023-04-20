@@ -144,6 +144,24 @@ export const PitScoutingPhotosTaken = writable<boolean[]>([
 	false
 ])
 
+export type AllianceScoutingTempValues = {
+	teamNumber1: number | string;
+	team1Comment: string;
+	teamNumber2: number | string;
+	team2Comment: string;
+	teamNumber3: number | string;
+	team3Comment: string;
+}
+
+export const AllianceScoutingTempValuesArray = writable<AllianceScoutingTempValues[]>([{
+	teamNumber1: "",
+	team1Comment: "",
+	teamNumber2: "",
+	team2Comment: "",
+	teamNumber3: "",
+	team3Comment: ""
+}])
+
 export type AllianceScoutingEntry = {
 	matchNumber: number | string;
 	teamRank1: number | string;
