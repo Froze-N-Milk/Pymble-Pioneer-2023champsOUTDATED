@@ -25,17 +25,29 @@
 			let JSONobjectArrayAllianceData: any[] = [];
 
 			for(let i = 0; i < allianceDataFiles.length; i++)  {
-				JSONobjectArrayAllianceData.push(Array.from(JSON.parse(await allianceDataFiles[i].text())));
+				let tempJSONArray = Array.from(JSON.parse(await allianceDataFiles[i].text()));
+				tempJSONArray.forEach(match => {
+					JSONobjectArrayAllianceData.push(match);
+				});
 			}
 
 			console.log(JSONobjectArrayAllianceData);
-				
+			console.log(JSONobjectArrayAllianceData[0]);
+			console.log("\n\nbreak");
+
 			JSONobjectArrayAllianceData.forEach(allianceDataEntry => {
 
 				let filteredforMatchAndTeamIndex;
-				for(let j = 0; j < mergedObjectArray.length; j++) {
-					if(Number(mergedObjectArray[j].teamNumber) === Number(allianceDataEntry.teamNumber) && Number(mergedObjectArray[j].matchNumber) === Number(allianceDataEntry.matchNumber)) {
-						filteredforMatchAndTeamIndex = j;
+
+				for(let i = 0; i < mergedObjectArray.length; i++) {
+					// console.log(Number(mergedObjectArray[i].teamNumber));
+					console.log(Number(allianceDataEntry.teamNumber));
+					console.log(Number(allianceDataEntry.matchNumber));
+					console.log(allianceDataEntry.comments);
+
+					if(Number(mergedObjectArray[i].teamNumber) === Number(allianceDataEntry.teamNumber) && Number(mergedObjectArray[i].matchNumber) === Number(allianceDataEntry.matchNumber)) {
+						console.log("success");
+						filteredforMatchAndTeamIndex = i;
 						break;
 					}
 				}
