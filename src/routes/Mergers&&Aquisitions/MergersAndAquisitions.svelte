@@ -25,8 +25,10 @@
 			let JSONobjectArrayAllianceData: any[] = [];
 
 			for(let i = 0; i < allianceDataFiles.length; i++)  {
-				JSONobjectArrayAllianceData.push(JSON.parse(await allianceDataFiles[i].text()));
+				JSONobjectArrayAllianceData.push(Array.from(JSON.parse(await allianceDataFiles[i].text())));
 			}
+
+			console.log(JSONobjectArrayAllianceData);
 				
 			JSONobjectArrayAllianceData.forEach(allianceDataEntry => {
 
