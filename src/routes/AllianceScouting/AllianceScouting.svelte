@@ -4,6 +4,8 @@
     import { AllianceScoutingArray, fileType } from "../Utils/stores";
     import { fade } from "svelte/transition";
 
+	let allianceColourRED = true;
+
 	let selectedIndex = $AllianceScoutingArray.length - 1;
 	$: SelectedAllianceScoutingEntry = $AllianceScoutingArray.filter(array => array.matchNumber === $AllianceScoutingArray[selectedIndex].matchNumber)[0] ?? $AllianceScoutingArray[0];
 	$: SelectedAllianceScoutingTempValues = $AllianceScoutingTempValuesArray[selectedIndex];
@@ -136,6 +138,8 @@
 			rank3Array.push({matchNumber: array.matchNumber, teamNumber: array.teamRank3, defence: array.defence3, rank: 3, comments: array.comments3});
 		});
 
+		let allianceColour = allianceColourRED ? "RED" : "BLUE";
+
 		if($fileType) {
 			
 			let csv1: string = "";
@@ -152,7 +156,7 @@
 			
 			urlContent1 = "data:text/csv;charset=utf-8," + csv1;
 			href1 = urlContent1;
-			downloadname1 = "Rank1AllianceScoutingMatches" + rank1Array[0].matchNumber + "to" + rank1Array[rank1Array.length - 1].matchNumber + ".csv";
+			downloadname1 = allianceColour + "Rank1AllianceScoutingMatches" + rank1Array[0].matchNumber + "to" + rank1Array[rank1Array.length - 1].matchNumber + ".csv";
 		
 			let csv2: string = "";
 
@@ -168,7 +172,7 @@
 			
 			urlContent2 = "data:text/csv;charset=utf-8," + csv2;
 			href2 = urlContent2;
-			downloadname2 = "Rank2AllianceScoutingMatches" + rank2Array[0].matchNumber + "to" + rank2Array[rank3Array.length - 1].matchNumber + ".csv";
+			downloadname2 = allianceColour + "Rank2AllianceScoutingMatches" + rank2Array[0].matchNumber + "to" + rank2Array[rank3Array.length - 1].matchNumber + ".csv";
 
 			let csv3: string = "";
 
@@ -184,21 +188,21 @@
 			
 			urlContent3 = "data:text/csv;charset=utf-8," + csv3;
 			href3 = urlContent3;
-			downloadname3 = "Rank3AllianceScoutingMatches" + rank3Array[0].matchNumber + "to" + rank3Array[rank3Array.length - 1].matchNumber + ".csv";
+			downloadname3 = allianceColour + "Rank3AllianceScoutingMatches" + rank3Array[0].matchNumber + "to" + rank3Array[rank3Array.length - 1].matchNumber + ".csv";
 
 		}
 		else {
 			urlContent1 = "data:text/json;charset=utf-8," + JSON.stringify(rank1Array);
 			href1 = urlContent1;
-			downloadname1 = "Rank1AllianceScoutingMatches" + rank1Array[0].matchNumber + "to" + rank1Array[rank1Array.length - 1].matchNumber + ".json";
+			downloadname1 = allianceColour + "Rank1AllianceScoutingMatches" + rank1Array[0].matchNumber + "to" + rank1Array[rank1Array.length - 1].matchNumber + ".json";
 		
 			urlContent2 = "data:text/json;charset=utf-8," + JSON.stringify(rank2Array);
 			href2 = urlContent2;
-			downloadname2 = "Rank2AllianceScoutingMatches" + rank2Array[0].matchNumber + "to" + rank2Array[rank2Array.length - 1].matchNumber + ".json";
+			downloadname2 = allianceColour + "Rank2AllianceScoutingMatches" + rank2Array[0].matchNumber + "to" + rank2Array[rank2Array.length - 1].matchNumber + ".json";
 
 			urlContent3 = "data:text/json;charset=utf-8," + JSON.stringify(rank3Array);
 			href3 = urlContent3;
-			downloadname3 = "Rank3AllianceScoutingMatches" + rank3Array[0].matchNumber + "to" + rank3Array[rank3Array.length - 1].matchNumber + ".json";
+			downloadname3 = allianceColour + "Rank3AllianceScoutingMatches" + rank3Array[0].matchNumber + "to" + rank3Array[rank3Array.length - 1].matchNumber + ".json";
 
 		}
 	}
@@ -257,12 +261,19 @@
 	.center {
 		margin: auto;
 	}
+
+	button:hover {
+		cursor: pointer;
+	}
 </style>
 
 
 <form on:submit|preventDefault>
 	<label for="" class="left-column">MATCH #:</label>
 	<input autocomplete="off" class="hoverSelfAnnounce" id="teamNumber" inputmode="text" type="text" placeholder="MATCH NUMBER" bind:value={SelectedAllianceScoutingEntry.matchNumber} />
+	<label for="" class="left-column">ALLIANCE COLOUR:</label>
+	<button style:--background={allianceColourRED ? "#D62246" : "#5386E4"} on:click|preventDefault={() => allianceColourRED = !allianceColourRED}></button>
+
 
 	<div class="sectionHeader" style="height: 1rem;"></div>
 	<p class="sectionHeader">RANKINGS:</p>

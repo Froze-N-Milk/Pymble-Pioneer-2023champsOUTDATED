@@ -30,7 +30,7 @@
 
 					let filteredforMatchAndTeam;
 					for(let j = 0; j < mergedObjectArray.length; j++) {
-						if(mergedObjectArray[j].teamNumber === allianceDataEntry.teamNumber && mergedObjectArray[j].matchNumber === allianceDataEntry.matchNumber) {
+						if(Number(mergedObjectArray[j].teamNumber) === Number(allianceDataEntry.teamNumber) && Number(mergedObjectArray[j].matchNumber) === Number(allianceDataEntry.matchNumber)) {
 							filteredforMatchAndTeam = i;
 							break;
 						}
@@ -40,11 +40,13 @@
 						Object.defineProperties(mergedObjectArray[filteredforMatchAndTeam], {
 							defence: {
 								value: allianceDataEntry.defence,
-								enumerable: true
+								enumerable: true,
+								writable: true
 							},
 							rank: {
-								value: allianceDataEntry.rank,
-								enumerable: true
+								value: Number(allianceDataEntry.rank),
+								enumerable: true,
+								writable: true
 							}
 						});
 
