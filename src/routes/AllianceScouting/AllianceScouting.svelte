@@ -94,42 +94,6 @@
 		let rank2Array: individualisedArray[] = [];
 		let rank3Array: individualisedArray[] = [];
 
-		for(let i: number = 0; i < $AllianceScoutingArray.length; i++) {
-			switch($AllianceScoutingArray[i].teamRank1) {
-				case $AllianceScoutingTempValuesArray[i].teamNumber1:
-					$AllianceScoutingArray[i].comments1 = $AllianceScoutingTempValuesArray[i].team1Comment;
-					break;
-				case $AllianceScoutingTempValuesArray[i].teamNumber2:
-					$AllianceScoutingArray[i].comments1 = $AllianceScoutingTempValuesArray[i].team2Comment;
-					break;
-				case $AllianceScoutingTempValuesArray[i].teamNumber3:
-					$AllianceScoutingArray[i].comments1 = $AllianceScoutingTempValuesArray[i].team3Comment;
-					break;
-			}
-			switch($AllianceScoutingArray[i].teamRank2) {
-				case $AllianceScoutingTempValuesArray[i].teamNumber1:
-					$AllianceScoutingArray[i].comments2 = $AllianceScoutingTempValuesArray[i].team1Comment;
-					break;
-				case $AllianceScoutingTempValuesArray[i].teamNumber2:
-					$AllianceScoutingArray[i].comments2 = $AllianceScoutingTempValuesArray[i].team2Comment;
-					break;
-				case $AllianceScoutingTempValuesArray[i].teamNumber3:
-					$AllianceScoutingArray[i].comments2 = $AllianceScoutingTempValuesArray[i].team3Comment;
-					break;
-			}
-			switch($AllianceScoutingArray[i].teamRank3) {
-				case $AllianceScoutingTempValuesArray[i].teamNumber1:
-					$AllianceScoutingArray[i].comments3 = $AllianceScoutingTempValuesArray[i].team1Comment;
-					break;
-				case $AllianceScoutingTempValuesArray[i].teamNumber2:
-					$AllianceScoutingArray[i].comments3 = $AllianceScoutingTempValuesArray[i].team2Comment;
-					break;
-				case $AllianceScoutingTempValuesArray[i].teamNumber3:
-					$AllianceScoutingArray[i].comments3 = $AllianceScoutingTempValuesArray[i].team3Comment;
-					break;
-			}
-		}
-
 		$AllianceScoutingArray.forEach(array => {
 			array.matchNumber = Number(array.matchNumber);
 			array.teamRank1 = Number(array.teamRank1);
@@ -137,7 +101,41 @@
 			array.teamRank3 = Number(array.teamRank3);
 		});
 
-		$AllianceScoutingArray = $AllianceScoutingArray;
+		for(let i: number = 0; i < $AllianceScoutingArray.length; i++) {
+			switch(Number($AllianceScoutingArray[i].teamRank1)) {
+				case Number($AllianceScoutingTempValuesArray[i].teamNumber1):
+					$AllianceScoutingArray[i].comments1 = $AllianceScoutingTempValuesArray[i].team1Comment;
+					break;
+				case Number($AllianceScoutingTempValuesArray[i].teamNumber2):
+					$AllianceScoutingArray[i].comments1 = $AllianceScoutingTempValuesArray[i].team2Comment;
+					break;
+				case Number($AllianceScoutingTempValuesArray[i].teamNumber3):
+					$AllianceScoutingArray[i].comments1 = $AllianceScoutingTempValuesArray[i].team3Comment;
+					break;
+			}
+			switch(Number($AllianceScoutingArray[i].teamRank2)) {
+				case Number($AllianceScoutingTempValuesArray[i].teamNumber1):
+					$AllianceScoutingArray[i].comments2 = $AllianceScoutingTempValuesArray[i].team1Comment;
+					break;
+				case Number($AllianceScoutingTempValuesArray[i].teamNumber2):
+					$AllianceScoutingArray[i].comments2 = $AllianceScoutingTempValuesArray[i].team2Comment;
+					break;
+				case Number($AllianceScoutingTempValuesArray[i].teamNumber3):
+					$AllianceScoutingArray[i].comments2 = $AllianceScoutingTempValuesArray[i].team3Comment;
+					break;
+			}
+			switch(Number($AllianceScoutingArray[i].teamRank3)) {
+				case Number($AllianceScoutingTempValuesArray[i].teamNumber1):
+					$AllianceScoutingArray[i].comments3 = $AllianceScoutingTempValuesArray[i].team1Comment;
+					break;
+				case Number($AllianceScoutingTempValuesArray[i].teamNumber2):
+					$AllianceScoutingArray[i].comments3 = $AllianceScoutingTempValuesArray[i].team2Comment;
+					break;
+				case Number($AllianceScoutingTempValuesArray[i].teamNumber3):
+					$AllianceScoutingArray[i].comments3 = $AllianceScoutingTempValuesArray[i].team3Comment;
+					break;
+			}
+		}
 
 		$AllianceScoutingArray.forEach(array => {
 			rank1Array.push({matchNumber: array.matchNumber, teamNumber: array.teamRank1, defence: array.defence1, rank: 1, comments: array.comments1});
