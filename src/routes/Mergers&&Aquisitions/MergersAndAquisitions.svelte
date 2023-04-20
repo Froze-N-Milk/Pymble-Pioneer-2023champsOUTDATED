@@ -22,43 +22,45 @@
 		}
 
 		if(allianceDataFiles){
+			let JSONobjectArrayAllianceData: any[] = [];
+
 			for(let i = 0; i < allianceDataFiles.length; i++)  {
-				
-				let JSONobjectArrayAllianceData: any[] = Array.from(JSON.parse(await allianceDataFiles[i].text()));
-
-				JSONobjectArrayAllianceData.forEach(allianceDataEntry => {
-
-					let filteredforMatchAndTeam;
-					for(let j = 0; j < mergedObjectArray.length; j++) {
-						if(Number(mergedObjectArray[j].teamNumber) === Number(allianceDataEntry.teamNumber) && Number(mergedObjectArray[j].matchNumber) === Number(allianceDataEntry.matchNumber)) {
-							filteredforMatchAndTeam = i;
-							break;
-						}
-					}
-					
-					if(filteredforMatchAndTeam !== null && filteredforMatchAndTeam !== undefined) {
-						Object.defineProperties(mergedObjectArray[filteredforMatchAndTeam], {
-							defence: {
-								value: allianceDataEntry.defence,
-								enumerable: true,
-								writable: true
-							},
-							rank: {
-								value: Number(allianceDataEntry.rank),
-								enumerable: true,
-								writable: true
-							}
-						});
-
-						mergedObjectArray[filteredforMatchAndTeam].comments = 
-							"Match scouting comments:\n"
-							+ mergedObjectArray[filteredforMatchAndTeam].comments
-							+ "\n\nAlliance scouting comments:\n"
-							+ allianceDataEntry.comments;
-					}
-				
-				});
+				JSONobjectArrayAllianceData.push(JSON.parse(await allianceDataFiles[i].text()));
 			}
+				
+			JSONobjectArrayAllianceData.forEach(allianceDataEntry => {
+
+				let filteredforMatchAndTeamIndex;
+				for(let j = 0; j < mergedObjectArray.length; j++) {
+					if(Number(mergedObjectArray[j].teamNumber) === Number(allianceDataEntry.teamNumber) && Number(mergedObjectArray[j].matchNumber) === Number(allianceDataEntry.matchNumber)) {
+						filteredforMatchAndTeamIndex = j;
+						break;
+					}
+				}
+				
+				if(filteredforMatchAndTeamIndex !== null && filteredforMatchAndTeamIndex !== undefined) {
+					Object.defineProperties(mergedObjectArray[filteredforMatchAndTeamIndex], {
+						defence: {
+							value: allianceDataEntry.defence,
+							enumerable: true,
+							writable: true
+						},
+						rank: {
+							value: Number(allianceDataEntry.rank),
+							enumerable: true,
+							writable: true
+						}
+					});
+
+					mergedObjectArray[filteredforMatchAndTeamIndex].comments = 
+						"Match scouting comments:\n"
+						+ mergedObjectArray[filteredforMatchAndTeamIndex].comments
+						+ "\n\nAlliance scouting comments:\n"
+						+ allianceDataEntry.comments;
+				}
+			
+			});
+		
 		}
 
 		downloadname = "mergedJSONfiles" + Date.now() + ".json";
