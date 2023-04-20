@@ -82,13 +82,6 @@
 		comments: string
 	}
 
-	$: {
-		console.log(SelectedAllianceScoutingEntry.teamRank1);
-		console.log(SelectedAllianceScoutingEntry.teamRank2);
-		console.log(SelectedAllianceScoutingEntry.teamRank3);
-
-	}
-
 	function prepDownload() {
 		let rank1Array: individualisedArray[] = [];
 		let rank2Array: individualisedArray[] = [];
